@@ -42,18 +42,22 @@ namespace volePSI
 			mG = 0,
 			mSsp = 40;
 		DenseType mDt = GF128;
+		double Rate = 0.0;
+		double overlapRate = 0.0;
+		int hybridFlag = 0;
+		std::vector<int> Mode = {3,3};
 
 		PaxosParam() = default;
 		PaxosParam(const PaxosParam&) = default;
 		PaxosParam& operator=(const PaxosParam&) = default;
 
-		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128)
+		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.0, double overlap = 0.0, std::vector<int> mode = {3,3}, int hybflag = 0)
 		{
-			init(numItems, weight, ssp, dt);
+			init(numItems, weight, ssp, dt, rate, overlap, mode, hybflag);
 		}
 
 		// computes the paxos parameters based the parameters.
-		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128);
+		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.0, double overlap = 0.0, std::vector<int> mode = {3,3}, int hybflag = 0);
 
 		// the size of the paxos data structure.
 		u64 size() const
@@ -70,9 +74,15 @@ namespace volePSI
 	class Paxos : public PaxosParam, public oc::TimerAdapter
 	{
 	public:
+		// For hybrid
+		
+
 
 		// the number of items to be encoded.
 		IdxType mNumItems = 0;
+
+		u64 threshold = (0xffffffff) * Rate;
+		u64 Count = 0;
 
 		// the encoding/decoding seed.
 		block mSeed;

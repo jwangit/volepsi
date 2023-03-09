@@ -1,0 +1,4148 @@
+n = 1024
+firstTableSize = 267
+secondTableSize = 1065
+pos = 187
+mSparseSize = 1252
+paxos init method
+Hasher init method
+start setInput
+1024
+1024
+This is the buildRow32
+i = 0
+c = 1065, colWeights[c] = 1
+c = 7, colWeights[c] = 1
+c = 268, colWeights[c] = 1
+i = 0
+c = 1080, colWeights[c] = 1
+c = 179, colWeights[c] = 1
+c = 1117, colWeights[c] = 1
+i = 0
+c = 448, colWeights[c] = 1
+c = 180, colWeights[c] = 1
+c = 675, colWeights[c] = 1
+i = 0
+c = 349, colWeights[c] = 1
+c = 546, colWeights[c] = 1
+c = 623, colWeights[c] = 1
+i = 0
+c = 803, colWeights[c] = 1
+c = 1234, colWeights[c] = 1
+c = 238, colWeights[c] = 1
+i = 0
+c = 12, colWeights[c] = 1
+c = 1249, colWeights[c] = 1
+c = 292, colWeights[c] = 1
+i = 0
+c = 781, colWeights[c] = 1
+c = 879, colWeights[c] = 1
+c = 217, colWeights[c] = 1
+i = 0
+c = 1163, colWeights[c] = 1
+c = 776, colWeights[c] = 1
+c = 60, colWeights[c] = 1
+i = 0
+c = 479, colWeights[c] = 1
+c = 335, colWeights[c] = 1
+c = 179, colWeights[c] = 2
+i = 0
+c = 827, colWeights[c] = 1
+c = 150, colWeights[c] = 1
+c = 698, colWeights[c] = 1
+i = 0
+c = 1172, colWeights[c] = 1
+c = 587, colWeights[c] = 1
+c = 943, colWeights[c] = 1
+i = 0
+c = 397, colWeights[c] = 1
+c = 1082, colWeights[c] = 1
+c = 701, colWeights[c] = 1
+i = 0
+c = 1004, colWeights[c] = 1
+c = 97, colWeights[c] = 1
+c = 239, colWeights[c] = 1
+i = 0
+c = 128, colWeights[c] = 1
+c = 529, colWeights[c] = 1
+c = 1242, colWeights[c] = 1
+i = 0
+c = 1090, colWeights[c] = 1
+c = 703, colWeights[c] = 1
+c = 719, colWeights[c] = 1
+i = 0
+c = 104, colWeights[c] = 1
+c = 771, colWeights[c] = 1
+c = 1135, colWeights[c] = 1
+i = 0
+c = 919, colWeights[c] = 1
+c = 1146, colWeights[c] = 1
+c = 1060, colWeights[c] = 1
+i = 0
+c = 250, colWeights[c] = 1
+c = 549, colWeights[c] = 1
+c = 202, colWeights[c] = 1
+i = 0
+c = 1135, colWeights[c] = 2
+c = 145, colWeights[c] = 1
+c = 90, colWeights[c] = 1
+i = 0
+c = 1050, colWeights[c] = 1
+c = 958, colWeights[c] = 1
+c = 459, colWeights[c] = 1
+i = 0
+c = 462, colWeights[c] = 1
+c = 959, colWeights[c] = 1
+c = 1110, colWeights[c] = 1
+i = 0
+c = 64, colWeights[c] = 1
+c = 14, colWeights[c] = 1
+c = 262, colWeights[c] = 1
+i = 0
+c = 440, colWeights[c] = 1
+c = 597, colWeights[c] = 1
+c = 688, colWeights[c] = 1
+i = 0
+c = 688, colWeights[c] = 2
+c = 680, colWeights[c] = 1
+c = 1140, colWeights[c] = 1
+i = 0
+c = 561, colWeights[c] = 1
+c = 1036, colWeights[c] = 1
+c = 1004, colWeights[c] = 2
+i = 0
+c = 8, colWeights[c] = 1
+c = 888, colWeights[c] = 1
+c = 1092, colWeights[c] = 1
+i = 0
+c = 137, colWeights[c] = 1
+c = 1155, colWeights[c] = 1
+c = 382, colWeights[c] = 1
+i = 0
+c = 967, colWeights[c] = 1
+c = 53, colWeights[c] = 1
+c = 1019, colWeights[c] = 1
+i = 0
+c = 334, colWeights[c] = 1
+c = 732, colWeights[c] = 1
+c = 673, colWeights[c] = 1
+i = 0
+c = 1038, colWeights[c] = 1
+c = 209, colWeights[c] = 1
+c = 31, colWeights[c] = 1
+i = 0
+c = 502, colWeights[c] = 1
+c = 66, colWeights[c] = 1
+c = 147, colWeights[c] = 1
+i = 0
+c = 155, colWeights[c] = 1
+c = 361, colWeights[c] = 1
+c = 557, colWeights[c] = 1
+This is the buildRow32
+i = 32
+c = 1045, colWeights[c] = 1
+c = 1116, colWeights[c] = 1
+c = 718, colWeights[c] = 1
+i = 32
+c = 92, colWeights[c] = 1
+c = 803, colWeights[c] = 2
+c = 206, colWeights[c] = 1
+i = 32
+c = 490, colWeights[c] = 1
+c = 891, colWeights[c] = 1
+c = 1219, colWeights[c] = 1
+i = 32
+c = 397, colWeights[c] = 2
+c = 1068, colWeights[c] = 1
+c = 774, colWeights[c] = 1
+i = 32
+c = 561, colWeights[c] = 2
+c = 683, colWeights[c] = 1
+c = 374, colWeights[c] = 1
+i = 32
+c = 1245, colWeights[c] = 1
+c = 1110, colWeights[c] = 2
+c = 1119, colWeights[c] = 1
+i = 32
+c = 167, colWeights[c] = 1
+c = 766, colWeights[c] = 1
+c = 799, colWeights[c] = 1
+i = 32
+c = 158, colWeights[c] = 1
+c = 485, colWeights[c] = 1
+c = 49, colWeights[c] = 1
+i = 32
+c = 569, colWeights[c] = 1
+c = 877, colWeights[c] = 1
+c = 1225, colWeights[c] = 1
+i = 32
+c = 352, colWeights[c] = 1
+c = 878, colWeights[c] = 1
+c = 193, colWeights[c] = 1
+i = 32
+c = 925, colWeights[c] = 1
+c = 967, colWeights[c] = 2
+c = 808, colWeights[c] = 1
+i = 32
+c = 387, colWeights[c] = 1
+c = 952, colWeights[c] = 1
+c = 1167, colWeights[c] = 1
+i = 32
+c = 821, colWeights[c] = 1
+c = 681, colWeights[c] = 1
+c = 589, colWeights[c] = 1
+i = 32
+c = 446, colWeights[c] = 1
+c = 10, colWeights[c] = 1
+c = 398, colWeights[c] = 1
+i = 32
+c = 367, colWeights[c] = 1
+c = 631, colWeights[c] = 1
+c = 933, colWeights[c] = 1
+i = 32
+c = 221, colWeights[c] = 1
+c = 478, colWeights[c] = 1
+c = 921, colWeights[c] = 1
+i = 32
+c = 572, colWeights[c] = 1
+c = 1102, colWeights[c] = 1
+c = 286, colWeights[c] = 1
+i = 32
+c = 791, colWeights[c] = 1
+c = 357, colWeights[c] = 1
+c = 382, colWeights[c] = 2
+i = 32
+c = 1056, colWeights[c] = 1
+c = 369, colWeights[c] = 1
+c = 57, colWeights[c] = 1
+i = 32
+c = 535, colWeights[c] = 1
+c = 267, colWeights[c] = 1
+c = 710, colWeights[c] = 1
+i = 32
+c = 917, colWeights[c] = 1
+c = 230, colWeights[c] = 1
+c = 1211, colWeights[c] = 1
+i = 32
+c = 820, colWeights[c] = 1
+c = 774, colWeights[c] = 2
+c = 450, colWeights[c] = 1
+i = 32
+c = 586, colWeights[c] = 1
+c = 822, colWeights[c] = 1
+c = 1191, colWeights[c] = 1
+i = 32
+c = 165, colWeights[c] = 1
+c = 26, colWeights[c] = 1
+c = 382, colWeights[c] = 3
+i = 32
+c = 1008, colWeights[c] = 1
+c = 546, colWeights[c] = 2
+c = 470, colWeights[c] = 1
+i = 32
+c = 448, colWeights[c] = 2
+c = 769, colWeights[c] = 1
+c = 1118, colWeights[c] = 1
+i = 32
+c = 490, colWeights[c] = 2
+c = 454, colWeights[c] = 1
+c = 420, colWeights[c] = 1
+i = 32
+c = 157, colWeights[c] = 1
+c = 1082, colWeights[c] = 2
+c = 972, colWeights[c] = 1
+i = 32
+c = 835, colWeights[c] = 1
+c = 1158, colWeights[c] = 1
+c = 741, colWeights[c] = 1
+i = 32
+c = 878, colWeights[c] = 2
+c = 1108, colWeights[c] = 1
+c = 255, colWeights[c] = 1
+i = 32
+c = 1235, colWeights[c] = 1
+c = 190, colWeights[c] = 1
+c = 51, colWeights[c] = 1
+i = 32
+c = 1103, colWeights[c] = 1
+c = 459, colWeights[c] = 2
+c = 116, colWeights[c] = 1
+This is the buildRow32
+i = 64
+c = 1083, colWeights[c] = 1
+c = 969, colWeights[c] = 1
+c = 1226, colWeights[c] = 1
+i = 64
+c = 606, colWeights[c] = 1
+c = 197, colWeights[c] = 1
+c = 194, colWeights[c] = 1
+i = 64
+c = 70, colWeights[c] = 1
+c = 1141, colWeights[c] = 1
+c = 627, colWeights[c] = 1
+i = 64
+c = 952, colWeights[c] = 2
+c = 892, colWeights[c] = 1
+c = 676, colWeights[c] = 1
+i = 64
+c = 808, colWeights[c] = 2
+c = 480, colWeights[c] = 1
+c = 868, colWeights[c] = 1
+i = 64
+c = 581, colWeights[c] = 1
+c = 1223, colWeights[c] = 1
+c = 790, colWeights[c] = 1
+i = 64
+c = 585, colWeights[c] = 1
+c = 955, colWeights[c] = 1
+c = 884, colWeights[c] = 1
+i = 64
+c = 78, colWeights[c] = 1
+c = 645, colWeights[c] = 1
+c = 197, colWeights[c] = 2
+i = 64
+c = 305, colWeights[c] = 1
+c = 655, colWeights[c] = 1
+c = 144, colWeights[c] = 1
+i = 64
+c = 726, colWeights[c] = 1
+c = 611, colWeights[c] = 1
+c = 540, colWeights[c] = 1
+i = 64
+c = 687, colWeights[c] = 1
+c = 676, colWeights[c] = 2
+c = 1225, colWeights[c] = 2
+i = 64
+c = 58, colWeights[c] = 1
+c = 611, colWeights[c] = 2
+c = 618, colWeights[c] = 1
+i = 64
+c = 705, colWeights[c] = 1
+c = 421, colWeights[c] = 1
+c = 741, colWeights[c] = 2
+i = 64
+c = 978, colWeights[c] = 1
+c = 386, colWeights[c] = 1
+c = 174, colWeights[c] = 1
+i = 64
+c = 203, colWeights[c] = 1
+c = 356, colWeights[c] = 1
+c = 976, colWeights[c] = 1
+i = 64
+c = 59, colWeights[c] = 1
+c = 280, colWeights[c] = 1
+c = 712, colWeights[c] = 1
+i = 64
+c = 1243, colWeights[c] = 1
+c = 372, colWeights[c] = 1
+c = 565, colWeights[c] = 1
+i = 64
+c = 534, colWeights[c] = 1
+c = 206, colWeights[c] = 2
+c = 735, colWeights[c] = 1
+i = 64
+c = 800, colWeights[c] = 1
+c = 342, colWeights[c] = 1
+c = 75, colWeights[c] = 1
+i = 64
+c = 1096, colWeights[c] = 1
+c = 257, colWeights[c] = 1
+c = 1122, colWeights[c] = 1
+i = 64
+c = 845, colWeights[c] = 1
+c = 145, colWeights[c] = 2
+c = 1187, colWeights[c] = 1
+i = 64
+c = 453, colWeights[c] = 1
+c = 37, colWeights[c] = 1
+c = 1059, colWeights[c] = 1
+i = 64
+c = 705, colWeights[c] = 2
+c = 525, colWeights[c] = 1
+c = 149, colWeights[c] = 1
+i = 64
+c = 556, colWeights[c] = 1
+c = 425, colWeights[c] = 1
+c = 135, colWeights[c] = 1
+i = 64
+c = 39, colWeights[c] = 1
+c = 606, colWeights[c] = 2
+c = 1027, colWeights[c] = 1
+i = 64
+c = 41, colWeights[c] = 1
+c = 285, colWeights[c] = 1
+c = 182, colWeights[c] = 1
+i = 64
+c = 23, colWeights[c] = 1
+c = 75, colWeights[c] = 2
+c = 96, colWeights[c] = 1
+i = 64
+c = 1154, colWeights[c] = 1
+c = 267, colWeights[c] = 2
+c = 1135, colWeights[c] = 3
+i = 64
+c = 1237, colWeights[c] = 1
+c = 562, colWeights[c] = 1
+c = 568, colWeights[c] = 1
+i = 64
+c = 523, colWeights[c] = 1
+c = 1166, colWeights[c] = 1
+c = 1188, colWeights[c] = 1
+i = 64
+c = 935, colWeights[c] = 1
+c = 1237, colWeights[c] = 2
+c = 1035, colWeights[c] = 1
+i = 64
+c = 521, colWeights[c] = 1
+c = 911, colWeights[c] = 1
+c = 32, colWeights[c] = 1
+This is the buildRow32
+i = 96
+c = 1056, colWeights[c] = 2
+c = 1140, colWeights[c] = 2
+c = 1198, colWeights[c] = 1
+i = 96
+c = 323, colWeights[c] = 1
+c = 267, colWeights[c] = 3
+c = 644, colWeights[c] = 1
+i = 96
+c = 22, colWeights[c] = 1
+c = 207, colWeights[c] = 1
+c = 1104, colWeights[c] = 1
+i = 96
+c = 53, colWeights[c] = 2
+c = 731, colWeights[c] = 1
+c = 326, colWeights[c] = 1
+i = 96
+c = 614, colWeights[c] = 1
+c = 1113, colWeights[c] = 1
+c = 1028, colWeights[c] = 1
+i = 96
+c = 830, colWeights[c] = 1
+c = 27, colWeights[c] = 1
+c = 740, colWeights[c] = 1
+i = 96
+c = 610, colWeights[c] = 1
+c = 962, colWeights[c] = 1
+c = 34, colWeights[c] = 1
+i = 96
+c = 237, colWeights[c] = 1
+c = 412, colWeights[c] = 1
+c = 67, colWeights[c] = 1
+i = 96
+c = 555, colWeights[c] = 1
+c = 730, colWeights[c] = 1
+c = 885, colWeights[c] = 1
+i = 96
+c = 882, colWeights[c] = 1
+c = 1028, colWeights[c] = 2
+c = 949, colWeights[c] = 1
+i = 96
+c = 911, colWeights[c] = 2
+c = 137, colWeights[c] = 2
+c = 284, colWeights[c] = 1
+i = 96
+c = 835, colWeights[c] = 2
+c = 397, colWeights[c] = 3
+c = 38, colWeights[c] = 1
+i = 96
+c = 233, colWeights[c] = 1
+c = 1143, colWeights[c] = 1
+c = 159, colWeights[c] = 1
+i = 96
+c = 653, colWeights[c] = 1
+c = 358, colWeights[c] = 1
+c = 1242, colWeights[c] = 2
+i = 96
+c = 886, colWeights[c] = 1
+c = 881, colWeights[c] = 1
+c = 1205, colWeights[c] = 1
+i = 96
+c = 181, colWeights[c] = 1
+c = 139, colWeights[c] = 1
+c = 1220, colWeights[c] = 1
+i = 96
+c = 720, colWeights[c] = 1
+c = 633, colWeights[c] = 1
+c = 438, colWeights[c] = 1
+i = 96
+c = 538, colWeights[c] = 1
+c = 1121, colWeights[c] = 1
+c = 720, colWeights[c] = 2
+i = 96
+c = 405, colWeights[c] = 1
+c = 1202, colWeights[c] = 1
+c = 417, colWeights[c] = 1
+i = 96
+c = 360, colWeights[c] = 1
+c = 906, colWeights[c] = 1
+c = 999, colWeights[c] = 1
+i = 96
+c = 722, colWeights[c] = 1
+c = 1156, colWeights[c] = 1
+c = 296, colWeights[c] = 1
+i = 96
+c = 996, colWeights[c] = 1
+c = 652, colWeights[c] = 1
+c = 956, colWeights[c] = 1
+i = 96
+c = 930, colWeights[c] = 1
+c = 603, colWeights[c] = 1
+c = 1134, colWeights[c] = 1
+i = 96
+c = 612, colWeights[c] = 1
+c = 553, colWeights[c] = 1
+c = 724, colWeights[c] = 1
+i = 96
+c = 639, colWeights[c] = 1
+c = 229, colWeights[c] = 1
+c = 877, colWeights[c] = 2
+i = 96
+c = 869, colWeights[c] = 1
+c = 93, colWeights[c] = 1
+c = 1155, colWeights[c] = 2
+i = 96
+c = 946, colWeights[c] = 1
+c = 60, colWeights[c] = 2
+c = 548, colWeights[c] = 1
+i = 96
+c = 1069, colWeights[c] = 1
+c = 627, colWeights[c] = 2
+c = 404, colWeights[c] = 1
+i = 96
+c = 133, colWeights[c] = 1
+c = 143, colWeights[c] = 1
+c = 700, colWeights[c] = 1
+i = 96
+c = 274, colWeights[c] = 1
+c = 1203, colWeights[c] = 1
+c = 938, colWeights[c] = 1
+i = 96
+c = 970, colWeights[c] = 1
+c = 371, colWeights[c] = 1
+c = 542, colWeights[c] = 1
+i = 96
+c = 55, colWeights[c] = 1
+c = 1169, colWeights[c] = 1
+c = 120, colWeights[c] = 1
+This is the buildRow32
+i = 128
+c = 980, colWeights[c] = 1
+c = 1161, colWeights[c] = 1
+c = 338, colWeights[c] = 1
+i = 128
+c = 169, colWeights[c] = 1
+c = 1202, colWeights[c] = 2
+c = 1097, colWeights[c] = 1
+i = 128
+c = 956, colWeights[c] = 2
+c = 450, colWeights[c] = 2
+c = 21, colWeights[c] = 1
+i = 128
+c = 313, colWeights[c] = 1
+c = 905, colWeights[c] = 1
+c = 481, colWeights[c] = 1
+i = 128
+c = 898, colWeights[c] = 1
+c = 813, colWeights[c] = 1
+c = 388, colWeights[c] = 1
+i = 128
+c = 656, colWeights[c] = 1
+c = 1011, colWeights[c] = 1
+c = 1200, colWeights[c] = 1
+i = 128
+c = 436, colWeights[c] = 1
+c = 594, colWeights[c] = 1
+c = 166, colWeights[c] = 1
+i = 128
+c = 1185, colWeights[c] = 1
+c = 910, colWeights[c] = 1
+c = 801, colWeights[c] = 1
+i = 128
+c = 684, colWeights[c] = 1
+c = 966, colWeights[c] = 1
+c = 925, colWeights[c] = 2
+i = 128
+c = 984, colWeights[c] = 1
+c = 895, colWeights[c] = 1
+c = 1155, colWeights[c] = 3
+i = 128
+c = 33, colWeights[c] = 1
+c = 1146, colWeights[c] = 2
+c = 76, colWeights[c] = 1
+i = 128
+c = 85, colWeights[c] = 1
+c = 948, colWeights[c] = 1
+c = 1237, colWeights[c] = 3
+i = 128
+c = 248, colWeights[c] = 1
+c = 1198, colWeights[c] = 2
+c = 654, colWeights[c] = 1
+i = 128
+c = 890, colWeights[c] = 1
+c = 55, colWeights[c] = 2
+c = 176, colWeights[c] = 1
+i = 128
+c = 427, colWeights[c] = 1
+c = 1058, colWeights[c] = 1
+c = 540, colWeights[c] = 2
+i = 128
+c = 298, colWeights[c] = 1
+c = 464, colWeights[c] = 1
+c = 385, colWeights[c] = 1
+i = 128
+c = 88, colWeights[c] = 1
+c = 953, colWeights[c] = 1
+c = 736, colWeights[c] = 1
+i = 128
+c = 442, colWeights[c] = 1
+c = 426, colWeights[c] = 1
+c = 277, colWeights[c] = 1
+i = 128
+c = 342, colWeights[c] = 2
+c = 660, colWeights[c] = 1
+c = 569, colWeights[c] = 2
+i = 128
+c = 779, colWeights[c] = 1
+c = 283, colWeights[c] = 1
+c = 749, colWeights[c] = 1
+i = 128
+c = 962, colWeights[c] = 2
+c = 150, colWeights[c] = 2
+c = 116, colWeights[c] = 2
+i = 128
+c = 725, colWeights[c] = 1
+c = 413, colWeights[c] = 1
+c = 52, colWeights[c] = 1
+i = 128
+c = 412, colWeights[c] = 2
+c = 6, colWeights[c] = 1
+c = 593, colWeights[c] = 1
+i = 128
+c = 662, colWeights[c] = 1
+c = 565, colWeights[c] = 2
+c = 327, colWeights[c] = 1
+i = 128
+c = 293, colWeights[c] = 1
+c = 1176, colWeights[c] = 1
+c = 713, colWeights[c] = 1
+i = 128
+c = 138, colWeights[c] = 1
+c = 282, colWeights[c] = 1
+c = 476, colWeights[c] = 1
+i = 128
+c = 1139, colWeights[c] = 1
+c = 781, colWeights[c] = 2
+c = 63, colWeights[c] = 1
+i = 128
+c = 486, colWeights[c] = 1
+c = 239, colWeights[c] = 2
+c = 604, colWeights[c] = 1
+i = 128
+c = 255, colWeights[c] = 2
+c = 86, colWeights[c] = 1
+c = 430, colWeights[c] = 1
+i = 128
+c = 1040, colWeights[c] = 1
+c = 426, colWeights[c] = 2
+c = 31, colWeights[c] = 2
+i = 128
+c = 938, colWeights[c] = 2
+c = 1014, colWeights[c] = 1
+c = 358, colWeights[c] = 2
+i = 128
+c = 158, colWeights[c] = 2
+c = 196, colWeights[c] = 1
+c = 27, colWeights[c] = 2
+This is the buildRow32
+i = 160
+c = 697, colWeights[c] = 1
+c = 220, colWeights[c] = 1
+c = 11, colWeights[c] = 1
+i = 160
+c = 68, colWeights[c] = 1
+c = 544, colWeights[c] = 1
+c = 145, colWeights[c] = 3
+i = 160
+c = 592, colWeights[c] = 1
+c = 486, colWeights[c] = 2
+c = 1124, colWeights[c] = 1
+i = 160
+c = 836, colWeights[c] = 1
+c = 596, colWeights[c] = 1
+c = 913, colWeights[c] = 1
+i = 160
+c = 356, colWeights[c] = 2
+c = 415, colWeights[c] = 1
+c = 797, colWeights[c] = 1
+i = 160
+c = 227, colWeights[c] = 1
+c = 280, colWeights[c] = 2
+c = 357, colWeights[c] = 2
+i = 160
+c = 1062, colWeights[c] = 1
+c = 895, colWeights[c] = 2
+c = 450, colWeights[c] = 3
+i = 160
+c = 389, colWeights[c] = 1
+c = 500, colWeights[c] = 1
+c = 39, colWeights[c] = 2
+i = 160
+c = 362, colWeights[c] = 1
+c = 1198, colWeights[c] = 3
+c = 855, colWeights[c] = 1
+i = 160
+c = 1173, colWeights[c] = 1
+c = 222, colWeights[c] = 1
+c = 161, colWeights[c] = 1
+i = 160
+c = 746, colWeights[c] = 1
+c = 334, colWeights[c] = 2
+c = 293, colWeights[c] = 2
+i = 160
+c = 350, colWeights[c] = 1
+c = 43, colWeights[c] = 1
+c = 1228, colWeights[c] = 1
+i = 160
+c = 351, colWeights[c] = 1
+c = 649, colWeights[c] = 1
+c = 304, colWeights[c] = 1
+i = 160
+c = 693, colWeights[c] = 1
+c = 836, colWeights[c] = 2
+c = 199, colWeights[c] = 1
+i = 160
+c = 401, colWeights[c] = 1
+c = 202, colWeights[c] = 2
+c = 874, colWeights[c] = 1
+i = 160
+c = 650, colWeights[c] = 1
+c = 262, colWeights[c] = 2
+c = 159, colWeights[c] = 2
+i = 160
+c = 587, colWeights[c] = 2
+c = 1029, colWeights[c] = 1
+c = 482, colWeights[c] = 1
+i = 160
+c = 405, colWeights[c] = 2
+c = 284, colWeights[c] = 2
+c = 109, colWeights[c] = 1
+i = 160
+c = 376, colWeights[c] = 1
+c = 1095, colWeights[c] = 1
+c = 1047, colWeights[c] = 1
+i = 160
+c = 541, colWeights[c] = 1
+c = 1155, colWeights[c] = 4
+c = 674, colWeights[c] = 1
+i = 160
+c = 759, colWeights[c] = 1
+c = 1165, colWeights[c] = 1
+c = 361, colWeights[c] = 2
+i = 160
+c = 1118, colWeights[c] = 2
+c = 1112, colWeights[c] = 1
+c = 690, colWeights[c] = 1
+i = 160
+c = 423, colWeights[c] = 1
+c = 1169, colWeights[c] = 2
+c = 447, colWeights[c] = 1
+i = 160
+c = 292, colWeights[c] = 2
+c = 28, colWeights[c] = 1
+c = 786, colWeights[c] = 1
+i = 160
+c = 908, colWeights[c] = 1
+c = 736, colWeights[c] = 2
+c = 105, colWeights[c] = 1
+i = 160
+c = 512, colWeights[c] = 1
+c = 738, colWeights[c] = 1
+c = 1177, colWeights[c] = 1
+i = 160
+c = 180, colWeights[c] = 2
+c = 713, colWeights[c] = 2
+c = 1166, colWeights[c] = 2
+i = 160
+c = 922, colWeights[c] = 1
+c = 954, colWeights[c] = 1
+c = 328, colWeights[c] = 1
+i = 160
+c = 70, colWeights[c] = 2
+c = 97, colWeights[c] = 2
+c = 680, colWeights[c] = 2
+i = 160
+c = 662, colWeights[c] = 2
+c = 615, colWeights[c] = 1
+c = 1106, colWeights[c] = 1
+i = 160
+c = 573, colWeights[c] = 1
+c = 244, colWeights[c] = 1
+c = 629, colWeights[c] = 1
+i = 160
+c = 1172, colWeights[c] = 2
+c = 213, colWeights[c] = 1
+c = 120, colWeights[c] = 2
+This is the buildRow32
+i = 192
+c = 172, colWeights[c] = 1
+c = 485, colWeights[c] = 2
+c = 784, colWeights[c] = 1
+i = 192
+c = 371, colWeights[c] = 2
+c = 291, colWeights[c] = 1
+c = 554, colWeights[c] = 1
+i = 192
+c = 944, colWeights[c] = 1
+c = 85, colWeights[c] = 2
+c = 1108, colWeights[c] = 2
+i = 192
+c = 139, colWeights[c] = 2
+c = 408, colWeights[c] = 1
+c = 128, colWeights[c] = 2
+i = 192
+c = 1000, colWeights[c] = 1
+c = 174, colWeights[c] = 2
+c = 197, colWeights[c] = 3
+i = 192
+c = 624, colWeights[c] = 1
+c = 312, colWeights[c] = 1
+c = 398, colWeights[c] = 2
+i = 192
+c = 353, colWeights[c] = 1
+c = 1209, colWeights[c] = 1
+c = 1155, colWeights[c] = 5
+i = 192
+c = 591, colWeights[c] = 1
+c = 1052, colWeights[c] = 1
+c = 1029, colWeights[c] = 2
+i = 192
+c = 976, colWeights[c] = 2
+c = 671, colWeights[c] = 1
+c = 211, colWeights[c] = 1
+i = 192
+c = 728, colWeights[c] = 1
+c = 1190, colWeights[c] = 1
+c = 298, colWeights[c] = 2
+i = 192
+c = 258, colWeights[c] = 1
+c = 723, colWeights[c] = 1
+c = 587, colWeights[c] = 3
+i = 192
+c = 649, colWeights[c] = 2
+c = 1215, colWeights[c] = 1
+c = 677, colWeights[c] = 1
+i = 192
+c = 1104, colWeights[c] = 2
+c = 8, colWeights[c] = 2
+c = 83, colWeights[c] = 1
+i = 192
+c = 634, colWeights[c] = 1
+c = 778, colWeights[c] = 1
+c = 1079, colWeights[c] = 1
+i = 192
+c = 578, colWeights[c] = 1
+c = 335, colWeights[c] = 2
+c = 388, colWeights[c] = 2
+i = 192
+c = 163, colWeights[c] = 1
+c = 1125, colWeights[c] = 1
+c = 373, colWeights[c] = 1
+i = 192
+c = 729, colWeights[c] = 1
+c = 708, colWeights[c] = 1
+c = 904, colWeights[c] = 1
+i = 192
+c = 1001, colWeights[c] = 1
+c = 360, colWeights[c] = 2
+c = 536, colWeights[c] = 1
+i = 192
+c = 198, colWeights[c] = 1
+c = 764, colWeights[c] = 1
+c = 737, colWeights[c] = 1
+i = 192
+c = 1175, colWeights[c] = 1
+c = 780, colWeights[c] = 1
+c = 1073, colWeights[c] = 1
+i = 192
+c = 415, colWeights[c] = 2
+c = 823, colWeights[c] = 1
+c = 630, colWeights[c] = 1
+i = 192
+c = 279, colWeights[c] = 1
+c = 1096, colWeights[c] = 2
+c = 33, colWeights[c] = 2
+i = 192
+c = 935, colWeights[c] = 2
+c = 264, colWeights[c] = 1
+c = 551, colWeights[c] = 1
+i = 192
+c = 715, colWeights[c] = 1
+c = 607, colWeights[c] = 1
+c = 920, colWeights[c] = 1
+i = 192
+c = 558, colWeights[c] = 1
+c = 329, colWeights[c] = 1
+c = 51, colWeights[c] = 2
+i = 192
+c = 37, colWeights[c] = 2
+c = 547, colWeights[c] = 1
+c = 651, colWeights[c] = 1
+i = 192
+c = 964, colWeights[c] = 1
+c = 1150, colWeights[c] = 1
+c = 640, colWeights[c] = 1
+i = 192
+c = 886, colWeights[c] = 2
+c = 79, colWeights[c] = 1
+c = 872, colWeights[c] = 1
+i = 192
+c = 453, colWeights[c] = 2
+c = 291, colWeights[c] = 2
+c = 531, colWeights[c] = 1
+i = 192
+c = 141, colWeights[c] = 1
+c = 398, colWeights[c] = 3
+c = 543, colWeights[c] = 1
+i = 192
+c = 120, colWeights[c] = 3
+c = 351, colWeights[c] = 2
+c = 249, colWeights[c] = 1
+i = 192
+c = 1129, colWeights[c] = 1
+c = 1105, colWeights[c] = 1
+c = 856, colWeights[c] = 1
+This is the buildRow32
+i = 224
+c = 66, colWeights[c] = 2
+c = 131, colWeights[c] = 1
+c = 505, colWeights[c] = 1
+i = 224
+c = 992, colWeights[c] = 1
+c = 175, colWeights[c] = 1
+c = 437, colWeights[c] = 1
+i = 224
+c = 768, colWeights[c] = 1
+c = 531, colWeights[c] = 2
+c = 190, colWeights[c] = 2
+i = 224
+c = 1178, colWeights[c] = 1
+c = 914, colWeights[c] = 1
+c = 986, colWeights[c] = 1
+i = 224
+c = 433, colWeights[c] = 1
+c = 1140, colWeights[c] = 3
+c = 784, colWeights[c] = 2
+i = 224
+c = 412, colWeights[c] = 3
+c = 864, colWeights[c] = 1
+c = 67, colWeights[c] = 2
+i = 224
+c = 502, colWeights[c] = 2
+c = 989, colWeights[c] = 1
+c = 1014, colWeights[c] = 2
+i = 224
+c = 781, colWeights[c] = 3
+c = 245, colWeights[c] = 1
+c = 392, colWeights[c] = 1
+i = 224
+c = 889, colWeights[c] = 1
+c = 467, colWeights[c] = 1
+c = 200, colWeights[c] = 1
+i = 224
+c = 1103, colWeights[c] = 2
+c = 239, colWeights[c] = 3
+c = 695, colWeights[c] = 1
+i = 224
+c = 231, colWeights[c] = 1
+c = 88, colWeights[c] = 2
+c = 416, colWeights[c] = 1
+i = 224
+c = 1154, colWeights[c] = 2
+c = 832, colWeights[c] = 1
+c = 0, colWeights[c] = 1
+i = 224
+c = 138, colWeights[c] = 2
+c = 643, colWeights[c] = 1
+c = 942, colWeights[c] = 1
+i = 224
+c = 472, colWeights[c] = 1
+c = 601, colWeights[c] = 1
+c = 500, colWeights[c] = 2
+i = 224
+c = 536, colWeights[c] = 2
+c = 12, colWeights[c] = 2
+c = 819, colWeights[c] = 1
+i = 224
+c = 994, colWeights[c] = 1
+c = 682, colWeights[c] = 1
+c = 991, colWeights[c] = 1
+i = 224
+c = 612, colWeights[c] = 2
+c = 65, colWeights[c] = 1
+c = 116, colWeights[c] = 3
+i = 224
+c = 142, colWeights[c] = 1
+c = 711, colWeights[c] = 1
+c = 319, colWeights[c] = 1
+i = 224
+c = 14, colWeights[c] = 2
+c = 876, colWeights[c] = 1
+c = 1004, colWeights[c] = 3
+i = 224
+c = 1019, colWeights[c] = 2
+c = 1030, colWeights[c] = 1
+c = 1251, colWeights[c] = 1
+i = 224
+c = 791, colWeights[c] = 2
+c = 974, colWeights[c] = 1
+c = 553, colWeights[c] = 2
+i = 224
+c = 206, colWeights[c] = 3
+c = 674, colWeights[c] = 2
+c = 588, colWeights[c] = 1
+i = 224
+c = 864, colWeights[c] = 2
+c = 183, colWeights[c] = 1
+c = 719, colWeights[c] = 2
+i = 224
+c = 105, colWeights[c] = 2
+c = 37, colWeights[c] = 3
+c = 609, colWeights[c] = 1
+i = 224
+c = 372, colWeights[c] = 2
+c = 924, colWeights[c] = 1
+c = 219, colWeights[c] = 1
+i = 224
+c = 237, colWeights[c] = 2
+c = 341, colWeights[c] = 1
+c = 48, colWeights[c] = 1
+i = 224
+c = 872, colWeights[c] = 2
+c = 136, colWeights[c] = 1
+c = 645, colWeights[c] = 2
+i = 224
+c = 991, colWeights[c] = 2
+c = 943, colWeights[c] = 2
+c = 199, colWeights[c] = 2
+i = 224
+c = 322, colWeights[c] = 1
+c = 171, colWeights[c] = 1
+c = 603, colWeights[c] = 2
+i = 224
+c = 273, colWeights[c] = 1
+c = 1248, colWeights[c] = 1
+c = 381, colWeights[c] = 1
+i = 224
+c = 1033, colWeights[c] = 1
+c = 227, colWeights[c] = 2
+c = 283, colWeights[c] = 2
+i = 224
+c = 1130, colWeights[c] = 1
+c = 550, colWeights[c] = 1
+c = 1146, colWeights[c] = 3
+This is the buildRow32
+i = 256
+c = 131, colWeights[c] = 2
+c = 527, colWeights[c] = 1
+c = 682, colWeights[c] = 2
+i = 256
+c = 1221, colWeights[c] = 1
+c = 804, colWeights[c] = 1
+c = 157, colWeights[c] = 2
+i = 256
+c = 1191, colWeights[c] = 2
+c = 560, colWeights[c] = 1
+c = 443, colWeights[c] = 1
+i = 256
+c = 51, colWeights[c] = 3
+c = 494, colWeights[c] = 1
+c = 220, colWeights[c] = 2
+i = 256
+c = 462, colWeights[c] = 2
+c = 533, colWeights[c] = 1
+c = 591, colWeights[c] = 2
+i = 256
+c = 168, colWeights[c] = 1
+c = 808, colWeights[c] = 3
+c = 1149, colWeights[c] = 1
+i = 256
+c = 1148, colWeights[c] = 1
+c = 857, colWeights[c] = 1
+c = 313, colWeights[c] = 2
+i = 256
+c = 762, colWeights[c] = 1
+c = 845, colWeights[c] = 2
+c = 533, colWeights[c] = 2
+i = 256
+c = 931, colWeights[c] = 1
+c = 428, colWeights[c] = 1
+c = 210, colWeights[c] = 1
+i = 256
+c = 1213, colWeights[c] = 1
+c = 337, colWeights[c] = 1
+c = 50, colWeights[c] = 1
+i = 256
+c = 1158, colWeights[c] = 2
+c = 1161, colWeights[c] = 2
+c = 252, colWeights[c] = 1
+i = 256
+c = 297, colWeights[c] = 1
+c = 748, colWeights[c] = 1
+c = 1048, colWeights[c] = 1
+i = 256
+c = 1147, colWeights[c] = 1
+c = 1098, colWeights[c] = 1
+c = 814, colWeights[c] = 1
+i = 256
+c = 199, colWeights[c] = 3
+c = 433, colWeights[c] = 2
+c = 548, colWeights[c] = 2
+i = 256
+c = 202, colWeights[c] = 3
+c = 54, colWeights[c] = 1
+c = 308, colWeights[c] = 1
+i = 256
+c = 55, colWeights[c] = 3
+c = 1075, colWeights[c] = 1
+c = 183, colWeights[c] = 2
+i = 256
+c = 365, colWeights[c] = 1
+c = 218, colWeights[c] = 1
+c = 391, colWeights[c] = 1
+i = 256
+c = 1174, colWeights[c] = 1
+c = 99, colWeights[c] = 1
+c = 240, colWeights[c] = 1
+i = 256
+c = 450, colWeights[c] = 4
+c = 866, colWeights[c] = 1
+c = 602, colWeights[c] = 1
+i = 256
+c = 306, colWeights[c] = 1
+c = 1192, colWeights[c] = 1
+c = 320, colWeights[c] = 1
+i = 256
+c = 797, colWeights[c] = 2
+c = 468, colWeights[c] = 1
+c = 200, colWeights[c] = 2
+i = 256
+c = 217, colWeights[c] = 2
+c = 887, colWeights[c] = 1
+c = 640, colWeights[c] = 2
+i = 256
+c = 1056, colWeights[c] = 3
+c = 765, colWeights[c] = 1
+c = 611, colWeights[c] = 3
+i = 256
+c = 738, colWeights[c] = 2
+c = 767, colWeights[c] = 1
+c = 805, colWeights[c] = 1
+i = 256
+c = 852, colWeights[c] = 1
+c = 350, colWeights[c] = 2
+c = 1202, colWeights[c] = 3
+i = 256
+c = 175, colWeights[c] = 2
+c = 266, colWeights[c] = 1
+c = 506, colWeights[c] = 1
+i = 256
+c = 1110, colWeights[c] = 3
+c = 452, colWeights[c] = 1
+c = 944, colWeights[c] = 2
+i = 256
+c = 958, colWeights[c] = 2
+c = 354, colWeights[c] = 1
+c = 305, colWeights[c] = 2
+i = 256
+c = 724, colWeights[c] = 2
+c = 1180, colWeights[c] = 1
+c = 1096, colWeights[c] = 3
+i = 256
+c = 795, colWeights[c] = 1
+c = 311, colWeights[c] = 1
+c = 72, colWeights[c] = 1
+i = 256
+c = 187, colWeights[c] = 1
+c = 702, colWeights[c] = 1
+c = 1033, colWeights[c] = 2
+i = 256
+c = 142, colWeights[c] = 2
+c = 388, colWeights[c] = 3
+c = 1122, colWeights[c] = 2
+This is the buildRow32
+i = 288
+c = 806, colWeights[c] = 1
+c = 769, colWeights[c] = 2
+c = 72, colWeights[c] = 2
+i = 288
+c = 71, colWeights[c] = 1
+c = 323, colWeights[c] = 2
+c = 914, colWeights[c] = 2
+i = 288
+c = 953, colWeights[c] = 2
+c = 27, colWeights[c] = 3
+c = 34, colWeights[c] = 2
+i = 288
+c = 178, colWeights[c] = 1
+c = 236, colWeights[c] = 1
+c = 810, colWeights[c] = 1
+i = 288
+c = 208, colWeights[c] = 1
+c = 62, colWeights[c] = 1
+c = 35, colWeights[c] = 1
+i = 288
+c = 298, colWeights[c] = 3
+c = 266, colWeights[c] = 2
+c = 1112, colWeights[c] = 2
+i = 288
+c = 184, colWeights[c] = 1
+c = 157, colWeights[c] = 3
+c = 1015, colWeights[c] = 1
+i = 288
+c = 1244, colWeights[c] = 1
+c = 266, colWeights[c] = 3
+c = 707, colWeights[c] = 1
+i = 288
+c = 48, colWeights[c] = 2
+c = 454, colWeights[c] = 2
+c = 94, colWeights[c] = 1
+i = 288
+c = 1109, colWeights[c] = 1
+c = 164, colWeights[c] = 1
+c = 290, colWeights[c] = 1
+i = 288
+c = 882, colWeights[c] = 2
+c = 106, colWeights[c] = 1
+c = 605, colWeights[c] = 1
+i = 288
+c = 606, colWeights[c] = 3
+c = 1007, colWeights[c] = 1
+c = 729, colWeights[c] = 2
+i = 288
+c = 1112, colWeights[c] = 3
+c = 1157, colWeights[c] = 1
+c = 840, colWeights[c] = 1
+i = 288
+c = 1129, colWeights[c] = 2
+c = 280, colWeights[c] = 3
+c = 282, colWeights[c] = 2
+i = 288
+c = 665, colWeights[c] = 1
+c = 946, colWeights[c] = 2
+c = 408, colWeights[c] = 2
+i = 288
+c = 555, colWeights[c] = 2
+c = 208, colWeights[c] = 2
+c = 102, colWeights[c] = 1
+i = 288
+c = 1217, colWeights[c] = 1
+c = 483, colWeights[c] = 1
+c = 954, colWeights[c] = 2
+i = 288
+c = 175, colWeights[c] = 3
+c = 601, colWeights[c] = 2
+c = 1036, colWeights[c] = 2
+i = 288
+c = 989, colWeights[c] = 2
+c = 465, colWeights[c] = 1
+c = 592, colWeights[c] = 2
+i = 288
+c = 571, colWeights[c] = 1
+c = 670, colWeights[c] = 1
+c = 841, colWeights[c] = 1
+i = 288
+c = 108, colWeights[c] = 1
+c = 684, colWeights[c] = 2
+c = 1084, colWeights[c] = 1
+i = 288
+c = 370, colWeights[c] = 1
+c = 729, colWeights[c] = 3
+c = 19, colWeights[c] = 1
+i = 288
+c = 688, colWeights[c] = 3
+c = 1234, colWeights[c] = 2
+c = 493, colWeights[c] = 1
+i = 288
+c = 382, colWeights[c] = 4
+c = 637, colWeights[c] = 1
+c = 663, colWeights[c] = 1
+i = 288
+c = 462, colWeights[c] = 3
+c = 270, colWeights[c] = 1
+c = 953, colWeights[c] = 3
+i = 288
+c = 118, colWeights[c] = 1
+c = 1088, colWeights[c] = 1
+c = 248, colWeights[c] = 2
+i = 288
+c = 470, colWeights[c] = 2
+c = 433, colWeights[c] = 3
+c = 1084, colWeights[c] = 2
+i = 288
+c = 1007, colWeights[c] = 2
+c = 57, colWeights[c] = 2
+c = 335, colWeights[c] = 3
+i = 288
+c = 838, colWeights[c] = 1
+c = 239, colWeights[c] = 4
+c = 837, colWeights[c] = 1
+i = 288
+c = 1125, colWeights[c] = 2
+c = 1090, colWeights[c] = 2
+c = 214, colWeights[c] = 1
+i = 288
+c = 142, colWeights[c] = 3
+c = 770, colWeights[c] = 1
+c = 968, colWeights[c] = 1
+i = 288
+c = 163, colWeights[c] = 2
+c = 429, colWeights[c] = 1
+c = 267, colWeights[c] = 4
+This is the buildRow32
+i = 320
+c = 638, colWeights[c] = 1
+c = 711, colWeights[c] = 2
+c = 767, colWeights[c] = 2
+i = 320
+c = 944, colWeights[c] = 3
+c = 904, colWeights[c] = 2
+c = 819, colWeights[c] = 2
+i = 320
+c = 1225, colWeights[c] = 3
+c = 1044, colWeights[c] = 1
+c = 699, colWeights[c] = 1
+i = 320
+c = 128, colWeights[c] = 3
+c = 230, colWeights[c] = 2
+c = 498, colWeights[c] = 1
+i = 320
+c = 944, colWeights[c] = 4
+c = 655, colWeights[c] = 2
+c = 185, colWeights[c] = 1
+i = 320
+c = 565, colWeights[c] = 3
+c = 390, colWeights[c] = 1
+c = 1102, colWeights[c] = 2
+i = 320
+c = 799, colWeights[c] = 2
+c = 0, colWeights[c] = 2
+c = 970, colWeights[c] = 2
+i = 320
+c = 1207, colWeights[c] = 1
+c = 563, colWeights[c] = 1
+c = 183, colWeights[c] = 3
+i = 320
+c = 549, colWeights[c] = 2
+c = 1108, colWeights[c] = 3
+c = 872, colWeights[c] = 3
+i = 320
+c = 61, colWeights[c] = 1
+c = 563, colWeights[c] = 2
+c = 129, colWeights[c] = 1
+i = 320
+c = 276, colWeights[c] = 1
+c = 226, colWeights[c] = 1
+c = 745, colWeights[c] = 1
+i = 320
+c = 428, colWeights[c] = 2
+c = 518, colWeights[c] = 1
+c = 279, colWeights[c] = 2
+i = 320
+c = 654, colWeights[c] = 2
+c = 201, colWeights[c] = 1
+c = 270, colWeights[c] = 2
+i = 320
+c = 990, colWeights[c] = 1
+c = 24, colWeights[c] = 1
+c = 259, colWeights[c] = 1
+i = 320
+c = 719, colWeights[c] = 3
+c = 174, colWeights[c] = 3
+c = 355, colWeights[c] = 1
+i = 320
+c = 710, colWeights[c] = 2
+c = 396, colWeights[c] = 1
+c = 1016, colWeights[c] = 1
+i = 320
+c = 224, colWeights[c] = 1
+c = 1135, colWeights[c] = 4
+c = 1025, colWeights[c] = 1
+i = 320
+c = 630, colWeights[c] = 2
+c = 307, colWeights[c] = 1
+c = 544, colWeights[c] = 2
+i = 320
+c = 984, colWeights[c] = 2
+c = 1201, colWeights[c] = 1
+c = 1167, colWeights[c] = 2
+i = 320
+c = 629, colWeights[c] = 2
+c = 965, colWeights[c] = 1
+c = 1151, colWeights[c] = 1
+i = 320
+c = 675, colWeights[c] = 2
+c = 1179, colWeights[c] = 1
+c = 1222, colWeights[c] = 1
+i = 320
+c = 421, colWeights[c] = 2
+c = 1014, colWeights[c] = 3
+c = 912, colWeights[c] = 1
+i = 320
+c = 921, colWeights[c] = 2
+c = 382, colWeights[c] = 5
+c = 561, colWeights[c] = 3
+i = 320
+c = 703, colWeights[c] = 2
+c = 63, colWeights[c] = 2
+c = 1113, colWeights[c] = 2
+i = 320
+c = 211, colWeights[c] = 2
+c = 112, colWeights[c] = 1
+c = 397, colWeights[c] = 4
+i = 320
+c = 633, colWeights[c] = 2
+c = 246, colWeights[c] = 1
+c = 165, colWeights[c] = 2
+i = 320
+c = 427, colWeights[c] = 2
+c = 1243, colWeights[c] = 2
+c = 572, colWeights[c] = 2
+i = 320
+c = 40, colWeights[c] = 1
+c = 591, colWeights[c] = 3
+c = 483, colWeights[c] = 2
+i = 320
+c = 820, colWeights[c] = 2
+c = 402, colWeights[c] = 1
+c = 41, colWeights[c] = 2
+i = 320
+c = 1176, colWeights[c] = 2
+c = 253, colWeights[c] = 1
+c = 375, colWeights[c] = 1
+i = 320
+c = 182, colWeights[c] = 2
+c = 934, colWeights[c] = 1
+c = 778, colWeights[c] = 2
+i = 320
+c = 845, colWeights[c] = 3
+c = 700, colWeights[c] = 2
+c = 1175, colWeights[c] = 2
+This is the buildRow32
+i = 352
+c = 840, colWeights[c] = 2
+c = 394, colWeights[c] = 1
+c = 1118, colWeights[c] = 3
+i = 352
+c = 43, colWeights[c] = 2
+c = 631, colWeights[c] = 2
+c = 578, colWeights[c] = 2
+i = 352
+c = 1045, colWeights[c] = 2
+c = 2, colWeights[c] = 1
+c = 36, colWeights[c] = 1
+i = 352
+c = 843, colWeights[c] = 1
+c = 78, colWeights[c] = 2
+c = 784, colWeights[c] = 3
+i = 352
+c = 820, colWeights[c] = 3
+c = 823, colWeights[c] = 2
+c = 667, colWeights[c] = 1
+i = 352
+c = 897, colWeights[c] = 1
+c = 674, colWeights[c] = 3
+c = 938, colWeights[c] = 3
+i = 352
+c = 965, colWeights[c] = 2
+c = 192, colWeights[c] = 1
+c = 380, colWeights[c] = 1
+i = 352
+c = 993, colWeights[c] = 1
+c = 351, colWeights[c] = 3
+c = 190, colWeights[c] = 3
+i = 352
+c = 58, colWeights[c] = 2
+c = 435, colWeights[c] = 1
+c = 582, colWeights[c] = 1
+i = 352
+c = 40, colWeights[c] = 2
+c = 962, colWeights[c] = 3
+c = 360, colWeights[c] = 3
+i = 352
+c = 178, colWeights[c] = 2
+c = 314, colWeights[c] = 1
+c = 641, colWeights[c] = 1
+i = 352
+c = 834, colWeights[c] = 1
+c = 3, colWeights[c] = 1
+c = 1119, colWeights[c] = 2
+i = 352
+c = 257, colWeights[c] = 2
+c = 887, colWeights[c] = 2
+c = 104, colWeights[c] = 2
+i = 352
+c = 1088, colWeights[c] = 2
+c = 365, colWeights[c] = 2
+c = 680, colWeights[c] = 3
+i = 352
+c = 275, colWeights[c] = 1
+c = 298, colWeights[c] = 4
+c = 359, colWeights[c] = 1
+i = 352
+c = 176, colWeights[c] = 2
+c = 121, colWeights[c] = 1
+c = 982, colWeights[c] = 1
+i = 352
+c = 594, colWeights[c] = 2
+c = 296, colWeights[c] = 2
+c = 150, colWeights[c] = 3
+i = 352
+c = 233, colWeights[c] = 2
+c = 896, colWeights[c] = 1
+c = 1083, colWeights[c] = 2
+i = 352
+c = 744, colWeights[c] = 1
+c = 364, colWeights[c] = 1
+c = 92, colWeights[c] = 2
+i = 352
+c = 468, colWeights[c] = 2
+c = 1247, colWeights[c] = 1
+c = 857, colWeights[c] = 2
+i = 352
+c = 1052, colWeights[c] = 2
+c = 881, colWeights[c] = 2
+c = 243, colWeights[c] = 1
+i = 352
+c = 355, colWeights[c] = 2
+c = 993, colWeights[c] = 2
+c = 701, colWeights[c] = 2
+i = 352
+c = 836, colWeights[c] = 3
+c = 468, colWeights[c] = 3
+c = 238, colWeights[c] = 2
+i = 352
+c = 1233, colWeights[c] = 1
+c = 93, colWeights[c] = 2
+c = 619, colWeights[c] = 1
+i = 352
+c = 1129, colWeights[c] = 3
+c = 265, colWeights[c] = 1
+c = 609, colWeights[c] = 2
+i = 352
+c = 345, colWeights[c] = 1
+c = 179, colWeights[c] = 3
+c = 768, colWeights[c] = 2
+i = 352
+c = 384, colWeights[c] = 1
+c = 1147, colWeights[c] = 2
+c = 1120, colWeights[c] = 1
+i = 352
+c = 1054, colWeights[c] = 1
+c = 96, colWeights[c] = 2
+c = 1053, colWeights[c] = 1
+i = 352
+c = 371, colWeights[c] = 3
+c = 800, colWeights[c] = 2
+c = 986, colWeights[c] = 2
+i = 352
+c = 152, colWeights[c] = 1
+c = 549, colWeights[c] = 3
+c = 516, colWeights[c] = 1
+i = 352
+c = 198, colWeights[c] = 2
+c = 1068, colWeights[c] = 2
+c = 94, colWeights[c] = 2
+i = 352
+c = 1124, colWeights[c] = 2
+c = 173, colWeights[c] = 1
+c = 952, colWeights[c] = 3
+This is the buildRow32
+i = 384
+c = 1231, colWeights[c] = 1
+c = 989, colWeights[c] = 3
+c = 1173, colWeights[c] = 2
+i = 384
+c = 1164, colWeights[c] = 1
+c = 456, colWeights[c] = 1
+c = 813, colWeights[c] = 2
+i = 384
+c = 1193, colWeights[c] = 1
+c = 897, colWeights[c] = 2
+c = 806, colWeights[c] = 2
+i = 384
+c = 1237, colWeights[c] = 4
+c = 1129, colWeights[c] = 4
+c = 936, colWeights[c] = 1
+i = 384
+c = 427, colWeights[c] = 3
+c = 1109, colWeights[c] = 2
+c = 183, colWeights[c] = 4
+i = 384
+c = 1250, colWeights[c] = 1
+c = 1063, colWeights[c] = 1
+c = 905, colWeights[c] = 2
+i = 384
+c = 127, colWeights[c] = 1
+c = 623, colWeights[c] = 2
+c = 447, colWeights[c] = 2
+i = 384
+c = 638, colWeights[c] = 2
+c = 540, colWeights[c] = 3
+c = 652, colWeights[c] = 2
+i = 384
+c = 180, colWeights[c] = 3
+c = 1078, colWeights[c] = 1
+c = 592, colWeights[c] = 3
+i = 384
+c = 424, colWeights[c] = 1
+c = 308, colWeights[c] = 2
+c = 297, colWeights[c] = 2
+i = 384
+c = 353, colWeights[c] = 2
+c = 1099, colWeights[c] = 1
+c = 344, colWeights[c] = 1
+i = 384
+c = 1165, colWeights[c] = 2
+c = 59, colWeights[c] = 2
+c = 1221, colWeights[c] = 2
+i = 384
+c = 225, colWeights[c] = 1
+c = 214, colWeights[c] = 2
+c = 658, colWeights[c] = 1
+i = 384
+c = 144, colWeights[c] = 2
+c = 150, colWeights[c] = 4
+c = 41, colWeights[c] = 3
+i = 384
+c = 421, colWeights[c] = 3
+c = 496, colWeights[c] = 1
+c = 971, colWeights[c] = 1
+i = 384
+c = 529, colWeights[c] = 2
+c = 571, colWeights[c] = 2
+c = 516, colWeights[c] = 2
+i = 384
+c = 540, colWeights[c] = 4
+c = 964, colWeights[c] = 2
+c = 1008, colWeights[c] = 2
+i = 384
+c = 32, colWeights[c] = 2
+c = 176, colWeights[c] = 3
+c = 381, colWeights[c] = 2
+i = 384
+c = 825, colWeights[c] = 1
+c = 128, colWeights[c] = 4
+c = 757, colWeights[c] = 1
+i = 384
+c = 590, colWeights[c] = 1
+c = 36, colWeights[c] = 2
+c = 991, colWeights[c] = 3
+i = 384
+c = 1217, colWeights[c] = 2
+c = 239, colWeights[c] = 5
+c = 924, colWeights[c] = 2
+i = 384
+c = 772, colWeights[c] = 1
+c = 149, colWeights[c] = 2
+c = 554, colWeights[c] = 2
+i = 384
+c = 484, colWeights[c] = 1
+c = 1201, colWeights[c] = 2
+c = 463, colWeights[c] = 1
+i = 384
+c = 402, colWeights[c] = 2
+c = 640, colWeights[c] = 3
+c = 22, colWeights[c] = 2
+i = 384
+c = 389, colWeights[c] = 2
+c = 611, colWeights[c] = 4
+c = 873, colWeights[c] = 1
+i = 384
+c = 929, colWeights[c] = 1
+c = 943, colWeights[c] = 3
+c = 444, colWeights[c] = 1
+i = 384
+c = 241, colWeights[c] = 1
+c = 993, colWeights[c] = 3
+c = 159, colWeights[c] = 3
+i = 384
+c = 56, colWeights[c] = 1
+c = 1099, colWeights[c] = 2
+c = 830, colWeights[c] = 2
+i = 384
+c = 41, colWeights[c] = 4
+c = 834, colWeights[c] = 2
+c = 1016, colWeights[c] = 2
+i = 384
+c = 89, colWeights[c] = 1
+c = 1004, colWeights[c] = 4
+c = 764, colWeights[c] = 2
+i = 384
+c = 378, colWeights[c] = 1
+c = 38, colWeights[c] = 2
+c = 397, colWeights[c] = 5
+i = 384
+c = 445, colWeights[c] = 1
+c = 1022, colWeights[c] = 1
+c = 1055, colWeights[c] = 1
+This is the buildRow32
+i = 416
+c = 624, colWeights[c] = 2
+c = 279, colWeights[c] = 3
+c = 1156, colWeights[c] = 2
+i = 416
+c = 804, colWeights[c] = 2
+c = 976, colWeights[c] = 3
+c = 395, colWeights[c] = 1
+i = 416
+c = 137, colWeights[c] = 3
+c = 355, colWeights[c] = 3
+c = 197, colWeights[c] = 4
+i = 416
+c = 829, colWeights[c] = 1
+c = 1222, colWeights[c] = 2
+c = 1186, colWeights[c] = 1
+i = 416
+c = 1033, colWeights[c] = 3
+c = 806, colWeights[c] = 3
+c = 334, colWeights[c] = 3
+i = 416
+c = 1075, colWeights[c] = 2
+c = 109, colWeights[c] = 2
+c = 439, colWeights[c] = 1
+i = 416
+c = 275, colWeights[c] = 2
+c = 880, colWeights[c] = 1
+c = 797, colWeights[c] = 3
+i = 416
+c = 713, colWeights[c] = 3
+c = 429, colWeights[c] = 2
+c = 1125, colWeights[c] = 3
+i = 416
+c = 658, colWeights[c] = 2
+c = 1141, colWeights[c] = 2
+c = 566, colWeights[c] = 1
+i = 416
+c = 908, colWeights[c] = 2
+c = 1221, colWeights[c] = 3
+c = 1211, colWeights[c] = 2
+i = 416
+c = 91, colWeights[c] = 1
+c = 697, colWeights[c] = 2
+c = 669, colWeights[c] = 1
+i = 416
+c = 826, colWeights[c] = 1
+c = 1195, colWeights[c] = 1
+c = 531, colWeights[c] = 3
+i = 416
+c = 242, colWeights[c] = 1
+c = 468, colWeights[c] = 4
+c = 502, colWeights[c] = 3
+i = 416
+c = 293, colWeights[c] = 3
+c = 1067, colWeights[c] = 1
+c = 658, colWeights[c] = 3
+i = 416
+c = 39, colWeights[c] = 3
+c = 650, colWeights[c] = 2
+c = 704, colWeights[c] = 1
+i = 416
+c = 209, colWeights[c] = 2
+c = 708, colWeights[c] = 2
+c = 727, colWeights[c] = 1
+i = 416
+c = 299, colWeights[c] = 1
+c = 375, colWeights[c] = 2
+c = 778, colWeights[c] = 3
+i = 416
+c = 53, colWeights[c] = 3
+c = 775, colWeights[c] = 1
+c = 10, colWeights[c] = 2
+i = 416
+c = 1129, colWeights[c] = 5
+c = 428, colWeights[c] = 3
+c = 785, colWeights[c] = 1
+i = 416
+c = 805, colWeights[c] = 2
+c = 680, colWeights[c] = 4
+c = 366, colWeights[c] = 1
+i = 416
+c = 68, colWeights[c] = 2
+c = 844, colWeights[c] = 1
+c = 734, colWeights[c] = 1
+i = 416
+c = 1183, colWeights[c] = 1
+c = 1013, colWeights[c] = 1
+c = 191, colWeights[c] = 1
+i = 416
+c = 1134, colWeights[c] = 2
+c = 131, colWeights[c] = 3
+c = 790, colWeights[c] = 2
+i = 416
+c = 539, colWeights[c] = 1
+c = 1145, colWeights[c] = 1
+c = 487, colWeights[c] = 1
+i = 416
+c = 421, colWeights[c] = 4
+c = 824, colWeights[c] = 1
+c = 377, colWeights[c] = 1
+i = 416
+c = 387, colWeights[c] = 2
+c = 28, colWeights[c] = 2
+c = 719, colWeights[c] = 4
+i = 416
+c = 1107, colWeights[c] = 1
+c = 338, colWeights[c] = 2
+c = 53, colWeights[c] = 4
+i = 416
+c = 236, colWeights[c] = 2
+c = 408, colWeights[c] = 3
+c = 851, colWeights[c] = 1
+i = 416
+c = 493, colWeights[c] = 2
+c = 968, colWeights[c] = 2
+c = 1202, colWeights[c] = 4
+i = 416
+c = 1044, colWeights[c] = 2
+c = 594, colWeights[c] = 3
+c = 1223, colWeights[c] = 2
+i = 416
+c = 463, colWeights[c] = 2
+c = 387, colWeights[c] = 3
+c = 730, colWeights[c] = 2
+i = 416
+c = 37, colWeights[c] = 4
+c = 928, colWeights[c] = 1
+c = 1004, colWeights[c] = 5
+This is the buildRow32
+i = 448
+c = 224, colWeights[c] = 2
+c = 438, colWeights[c] = 2
+c = 306, colWeights[c] = 2
+i = 448
+c = 1108, colWeights[c] = 4
+c = 227, colWeights[c] = 3
+c = 554, colWeights[c] = 3
+i = 448
+c = 317, colWeights[c] = 1
+c = 572, colWeights[c] = 3
+c = 61, colWeights[c] = 2
+i = 448
+c = 638, colWeights[c] = 3
+c = 675, colWeights[c] = 3
+c = 601, colWeights[c] = 3
+i = 448
+c = 622, colWeights[c] = 1
+c = 1003, colWeights[c] = 1
+c = 1093, colWeights[c] = 1
+i = 448
+c = 277, colWeights[c] = 2
+c = 309, colWeights[c] = 1
+c = 798, colWeights[c] = 1
+i = 448
+c = 267, colWeights[c] = 5
+c = 369, colWeights[c] = 2
+c = 926, colWeights[c] = 1
+i = 448
+c = 359, colWeights[c] = 2
+c = 672, colWeights[c] = 1
+c = 258, colWeights[c] = 2
+i = 448
+c = 1217, colWeights[c] = 3
+c = 1124, colWeights[c] = 3
+c = 124, colWeights[c] = 1
+i = 448
+c = 1097, colWeights[c] = 2
+c = 20, colWeights[c] = 1
+c = 831, colWeights[c] = 1
+i = 448
+c = 1244, colWeights[c] = 2
+c = 834, colWeights[c] = 3
+c = 682, colWeights[c] = 3
+i = 448
+c = 43, colWeights[c] = 3
+c = 1034, colWeights[c] = 1
+c = 1056, colWeights[c] = 4
+i = 448
+c = 541, colWeights[c] = 2
+c = 1042, colWeights[c] = 1
+c = 393, colWeights[c] = 1
+i = 448
+c = 486, colWeights[c] = 3
+c = 640, colWeights[c] = 4
+c = 876, colWeights[c] = 2
+i = 448
+c = 960, colWeights[c] = 1
+c = 968, colWeights[c] = 3
+c = 233, colWeights[c] = 3
+i = 448
+c = 769, colWeights[c] = 3
+c = 648, colWeights[c] = 1
+c = 817, colWeights[c] = 1
+i = 448
+c = 806, colWeights[c] = 4
+c = 1053, colWeights[c] = 2
+c = 794, colWeights[c] = 1
+i = 448
+c = 743, colWeights[c] = 1
+c = 531, colWeights[c] = 4
+c = 222, colWeights[c] = 2
+i = 448
+c = 105, colWeights[c] = 3
+c = 406, colWeights[c] = 1
+c = 840, colWeights[c] = 3
+i = 448
+c = 657, colWeights[c] = 1
+c = 130, colWeights[c] = 1
+c = 1129, colWeights[c] = 6
+i = 448
+c = 274, colWeights[c] = 2
+c = 614, colWeights[c] = 2
+c = 1007, colWeights[c] = 3
+i = 448
+c = 706, colWeights[c] = 1
+c = 1047, colWeights[c] = 2
+c = 42, colWeights[c] = 1
+i = 448
+c = 356, colWeights[c] = 3
+c = 941, colWeights[c] = 1
+c = 403, colWeights[c] = 1
+i = 448
+c = 1078, colWeights[c] = 2
+c = 591, colWeights[c] = 4
+c = 1021, colWeights[c] = 1
+i = 448
+c = 837, colWeights[c] = 2
+c = 1004, colWeights[c] = 6
+c = 558, colWeights[c] = 2
+i = 448
+c = 660, colWeights[c] = 2
+c = 291, colWeights[c] = 3
+c = 1143, colWeights[c] = 2
+i = 448
+c = 788, colWeights[c] = 1
+c = 462, colWeights[c] = 4
+c = 442, colWeights[c] = 2
+i = 448
+c = 544, colWeights[c] = 3
+c = 6, colWeights[c] = 2
+c = 71, colWeights[c] = 2
+i = 448
+c = 457, colWeights[c] = 1
+c = 453, colWeights[c] = 3
+c = 167, colWeights[c] = 2
+i = 448
+c = 1229, colWeights[c] = 1
+c = 1097, colWeights[c] = 3
+c = 1232, colWeights[c] = 1
+i = 448
+c = 425, colWeights[c] = 2
+c = 1122, colWeights[c] = 3
+c = 214, colWeights[c] = 3
+i = 448
+c = 849, colWeights[c] = 1
+c = 212, colWeights[c] = 1
+c = 1098, colWeights[c] = 2
+This is the buildRow32
+i = 480
+c = 331, colWeights[c] = 1
+c = 916, colWeights[c] = 1
+c = 173, colWeights[c] = 2
+i = 480
+c = 1144, colWeights[c] = 1
+c = 359, colWeights[c] = 3
+c = 262, colWeights[c] = 3
+i = 480
+c = 544, colWeights[c] = 4
+c = 1082, colWeights[c] = 3
+c = 800, colWeights[c] = 3
+i = 480
+c = 408, colWeights[c] = 4
+c = 246, colWeights[c] = 2
+c = 1179, colWeights[c] = 2
+i = 480
+c = 177, colWeights[c] = 1
+c = 1023, colWeights[c] = 1
+c = 42, colWeights[c] = 2
+i = 480
+c = 454, colWeights[c] = 3
+c = 411, colWeights[c] = 1
+c = 197, colWeights[c] = 5
+i = 480
+c = 1227, colWeights[c] = 1
+c = 195, colWeights[c] = 1
+c = 1094, colWeights[c] = 1
+i = 480
+c = 393, colWeights[c] = 2
+c = 564, colWeights[c] = 1
+c = 1073, colWeights[c] = 2
+i = 480
+c = 489, colWeights[c] = 1
+c = 663, colWeights[c] = 2
+c = 914, colWeights[c] = 3
+i = 480
+c = 199, colWeights[c] = 4
+c = 795, colWeights[c] = 2
+c = 310, colWeights[c] = 1
+i = 480
+c = 725, colWeights[c] = 2
+c = 86, colWeights[c] = 2
+c = 156, colWeights[c] = 1
+i = 480
+c = 488, colWeights[c] = 1
+c = 501, colWeights[c] = 1
+c = 570, colWeights[c] = 1
+i = 480
+c = 923, colWeights[c] = 1
+c = 347, colWeights[c] = 1
+c = 311, colWeights[c] = 2
+i = 480
+c = 503, colWeights[c] = 1
+c = 883, colWeights[c] = 1
+c = 833, colWeights[c] = 1
+i = 480
+c = 950, colWeights[c] = 1
+c = 398, colWeights[c] = 4
+c = 18, colWeights[c] = 1
+i = 480
+c = 17, colWeights[c] = 1
+c = 312, colWeights[c] = 2
+c = 191, colWeights[c] = 2
+i = 480
+c = 76, colWeights[c] = 2
+c = 1122, colWeights[c] = 4
+c = 1016, colWeights[c] = 3
+i = 480
+c = 1147, colWeights[c] = 3
+c = 426, colWeights[c] = 3
+c = 527, colWeights[c] = 2
+i = 480
+c = 1052, colWeights[c] = 3
+c = 341, colWeights[c] = 2
+c = 1100, colWeights[c] = 1
+i = 480
+c = 521, colWeights[c] = 2
+c = 213, colWeights[c] = 2
+c = 515, colWeights[c] = 1
+i = 480
+c = 1246, colWeights[c] = 1
+c = 922, colWeights[c] = 2
+c = 821, colWeights[c] = 2
+i = 480
+c = 1224, colWeights[c] = 1
+c = 792, colWeights[c] = 1
+c = 229, colWeights[c] = 2
+i = 480
+c = 289, colWeights[c] = 1
+c = 529, colWeights[c] = 3
+c = 970, colWeights[c] = 3
+i = 480
+c = 1144, colWeights[c] = 2
+c = 807, colWeights[c] = 1
+c = 797, colWeights[c] = 4
+i = 480
+c = 159, colWeights[c] = 4
+c = 228, colWeights[c] = 1
+c = 606, colWeights[c] = 4
+i = 480
+c = 102, colWeights[c] = 2
+c = 227, colWeights[c] = 4
+c = 232, colWeights[c] = 1
+i = 480
+c = 37, colWeights[c] = 5
+c = 651, colWeights[c] = 2
+c = 212, colWeights[c] = 2
+i = 480
+c = 159, colWeights[c] = 5
+c = 722, colWeights[c] = 2
+c = 1236, colWeights[c] = 1
+i = 480
+c = 899, colWeights[c] = 1
+c = 948, colWeights[c] = 2
+c = 836, colWeights[c] = 4
+i = 480
+c = 689, colWeights[c] = 1
+c = 47, colWeights[c] = 1
+c = 242, colWeights[c] = 2
+i = 480
+c = 186, colWeights[c] = 1
+c = 383, colWeights[c] = 1
+c = 921, colWeights[c] = 3
+i = 480
+c = 97, colWeights[c] = 3
+c = 1094, colWeights[c] = 2
+c = 921, colWeights[c] = 4
+This is the buildRow32
+i = 512
+c = 804, colWeights[c] = 3
+c = 190, colWeights[c] = 4
+c = 744, colWeights[c] = 2
+i = 512
+c = 902, colWeights[c] = 1
+c = 951, colWeights[c] = 1
+c = 138, colWeights[c] = 3
+i = 512
+c = 4, colWeights[c] = 1
+c = 827, colWeights[c] = 2
+c = 906, colWeights[c] = 2
+i = 512
+c = 478, colWeights[c] = 2
+c = 368, colWeights[c] = 1
+c = 390, colWeights[c] = 2
+i = 512
+c = 955, colWeights[c] = 2
+c = 69, colWeights[c] = 1
+c = 725, colWeights[c] = 3
+i = 512
+c = 892, colWeights[c] = 2
+c = 956, colWeights[c] = 3
+c = 19, colWeights[c] = 2
+i = 512
+c = 681, colWeights[c] = 2
+c = 1069, colWeights[c] = 2
+c = 1002, colWeights[c] = 1
+i = 512
+c = 1117, colWeights[c] = 2
+c = 67, colWeights[c] = 3
+c = 37, colWeights[c] = 6
+i = 512
+c = 1212, colWeights[c] = 1
+c = 399, colWeights[c] = 1
+c = 1127, colWeights[c] = 1
+i = 512
+c = 1005, colWeights[c] = 1
+c = 733, colWeights[c] = 1
+c = 199, colWeights[c] = 5
+i = 512
+c = 694, colWeights[c] = 1
+c = 583, colWeights[c] = 1
+c = 867, colWeights[c] = 1
+i = 512
+c = 190, colWeights[c] = 5
+c = 881, colWeights[c] = 3
+c = 627, colWeights[c] = 3
+i = 512
+c = 633, colWeights[c] = 3
+c = 171, colWeights[c] = 2
+c = 654, colWeights[c] = 3
+i = 512
+c = 809, colWeights[c] = 1
+c = 1064, colWeights[c] = 1
+c = 342, colWeights[c] = 3
+i = 512
+c = 945, colWeights[c] = 1
+c = 281, colWeights[c] = 1
+c = 1213, colWeights[c] = 2
+i = 512
+c = 546, colWeights[c] = 3
+c = 419, colWeights[c] = 1
+c = 1107, colWeights[c] = 2
+i = 512
+c = 956, colWeights[c] = 4
+c = 372, colWeights[c] = 3
+c = 510, colWeights[c] = 1
+i = 512
+c = 71, colWeights[c] = 3
+c = 167, colWeights[c] = 3
+c = 724, colWeights[c] = 3
+i = 512
+c = 724, colWeights[c] = 4
+c = 461, colWeights[c] = 1
+c = 331, colWeights[c] = 2
+i = 512
+c = 421, colWeights[c] = 5
+c = 1236, colWeights[c] = 2
+c = 1175, colWeights[c] = 3
+i = 512
+c = 135, colWeights[c] = 2
+c = 1152, colWeights[c] = 1
+c = 1111, colWeights[c] = 1
+i = 512
+c = 252, colWeights[c] = 2
+c = 342, colWeights[c] = 4
+c = 939, colWeights[c] = 1
+i = 512
+c = 300, colWeights[c] = 1
+c = 1234, colWeights[c] = 3
+c = 325, colWeights[c] = 1
+i = 512
+c = 345, colWeights[c] = 2
+c = 883, colWeights[c] = 2
+c = 623, colWeights[c] = 3
+i = 512
+c = 767, colWeights[c] = 3
+c = 308, colWeights[c] = 3
+c = 105, colWeights[c] = 4
+i = 512
+c = 964, colWeights[c] = 3
+c = 995, colWeights[c] = 1
+c = 460, colWeights[c] = 1
+i = 512
+c = 207, colWeights[c] = 2
+c = 1199, colWeights[c] = 1
+c = 767, colWeights[c] = 4
+i = 512
+c = 21, colWeights[c] = 2
+c = 533, colWeights[c] = 3
+c = 1200, colWeights[c] = 2
+i = 512
+c = 94, colWeights[c] = 3
+c = 773, colWeights[c] = 1
+c = 342, colWeights[c] = 5
+i = 512
+c = 898, colWeights[c] = 2
+c = 14, colWeights[c] = 3
+c = 197, colWeights[c] = 6
+i = 512
+c = 307, colWeights[c] = 2
+c = 1, colWeights[c] = 1
+c = 197, colWeights[c] = 7
+i = 512
+c = 551, colWeights[c] = 2
+c = 330, colWeights[c] = 1
+c = 895, colWeights[c] = 3
+This is the buildRow32
+i = 544
+c = 1018, colWeights[c] = 1
+c = 912, colWeights[c] = 2
+c = 1006, colWeights[c] = 1
+i = 544
+c = 197, colWeights[c] = 8
+c = 2, colWeights[c] = 2
+c = 1043, colWeights[c] = 1
+i = 544
+c = 1107, colWeights[c] = 3
+c = 35, colWeights[c] = 2
+c = 957, colWeights[c] = 1
+i = 544
+c = 827, colWeights[c] = 3
+c = 208, colWeights[c] = 3
+c = 596, colWeights[c] = 2
+i = 544
+c = 826, colWeights[c] = 2
+c = 216, colWeights[c] = 1
+c = 497, colWeights[c] = 1
+i = 544
+c = 1110, colWeights[c] = 4
+c = 1235, colWeights[c] = 2
+c = 935, colWeights[c] = 3
+i = 544
+c = 997, colWeights[c] = 1
+c = 1104, colWeights[c] = 3
+c = 889, colWeights[c] = 2
+i = 544
+c = 875, colWeights[c] = 1
+c = 450, colWeights[c] = 5
+c = 849, colWeights[c] = 2
+i = 544
+c = 325, colWeights[c] = 2
+c = 1148, colWeights[c] = 2
+c = 192, colWeights[c] = 2
+i = 544
+c = 1079, colWeights[c] = 2
+c = 263, colWeights[c] = 1
+c = 914, colWeights[c] = 4
+i = 544
+c = 53, colWeights[c] = 5
+c = 1194, colWeights[c] = 1
+c = 277, colWeights[c] = 3
+i = 544
+c = 1240, colWeights[c] = 1
+c = 190, colWeights[c] = 6
+c = 1145, colWeights[c] = 2
+i = 544
+c = 645, colWeights[c] = 3
+c = 1225, colWeights[c] = 4
+c = 530, colWeights[c] = 1
+i = 544
+c = 360, colWeights[c] = 4
+c = 216, colWeights[c] = 2
+c = 1226, colWeights[c] = 2
+i = 544
+c = 867, colWeights[c] = 2
+c = 458, colWeights[c] = 1
+c = 757, colWeights[c] = 2
+i = 544
+c = 259, colWeights[c] = 2
+c = 200, colWeights[c] = 3
+c = 519, colWeights[c] = 1
+i = 544
+c = 500, colWeights[c] = 3
+c = 1245, colWeights[c] = 2
+c = 501, colWeights[c] = 2
+i = 544
+c = 956, colWeights[c] = 5
+c = 1051, colWeights[c] = 1
+c = 69, colWeights[c] = 2
+i = 544
+c = 303, colWeights[c] = 1
+c = 911, colWeights[c] = 3
+c = 896, colWeights[c] = 2
+i = 544
+c = 712, colWeights[c] = 2
+c = 253, colWeights[c] = 2
+c = 1051, colWeights[c] = 2
+i = 544
+c = 319, colWeights[c] = 2
+c = 506, colWeights[c] = 2
+c = 1013, colWeights[c] = 2
+i = 544
+c = 399, colWeights[c] = 2
+c = 800, colWeights[c] = 4
+c = 1241, colWeights[c] = 1
+i = 544
+c = 1190, colWeights[c] = 2
+c = 627, colWeights[c] = 4
+c = 79, colWeights[c] = 2
+i = 544
+c = 1171, colWeights[c] = 1
+c = 1175, colWeights[c] = 4
+c = 818, colWeights[c] = 1
+i = 544
+c = 1086, colWeights[c] = 1
+c = 271, colWeights[c] = 1
+c = 1111, colWeights[c] = 2
+i = 544
+c = 632, colWeights[c] = 1
+c = 223, colWeights[c] = 1
+c = 1193, colWeights[c] = 2
+i = 544
+c = 594, colWeights[c] = 4
+c = 890, colWeights[c] = 2
+c = 336, colWeights[c] = 1
+i = 544
+c = 234, colWeights[c] = 1
+c = 64, colWeights[c] = 2
+c = 91, colWeights[c] = 2
+i = 544
+c = 252, colWeights[c] = 3
+c = 344, colWeights[c] = 2
+c = 810, colWeights[c] = 2
+i = 544
+c = 445, colWeights[c] = 2
+c = 427, colWeights[c] = 4
+c = 185, colWeights[c] = 2
+i = 544
+c = 1101, colWeights[c] = 1
+c = 588, colWeights[c] = 2
+c = 676, colWeights[c] = 3
+i = 544
+c = 276, colWeights[c] = 2
+c = 573, colWeights[c] = 2
+c = 868, colWeights[c] = 2
+This is the buildRow32
+i = 576
+c = 377, colWeights[c] = 2
+c = 890, colWeights[c] = 3
+c = 619, colWeights[c] = 2
+i = 576
+c = 999, colWeights[c] = 2
+c = 18, colWeights[c] = 2
+c = 243, colWeights[c] = 2
+i = 576
+c = 387, colWeights[c] = 4
+c = 226, colWeights[c] = 2
+c = 1033, colWeights[c] = 4
+i = 576
+c = 590, colWeights[c] = 2
+c = 309, colWeights[c] = 2
+c = 937, colWeights[c] = 1
+i = 576
+c = 926, colWeights[c] = 2
+c = 251, colWeights[c] = 1
+c = 1214, colWeights[c] = 1
+i = 576
+c = 778, colWeights[c] = 4
+c = 109, colWeights[c] = 3
+c = 54, colWeights[c] = 2
+i = 576
+c = 554, colWeights[c] = 4
+c = 580, colWeights[c] = 1
+c = 826, colWeights[c] = 3
+i = 576
+c = 70, colWeights[c] = 3
+c = 360, colWeights[c] = 5
+c = 980, colWeights[c] = 2
+i = 576
+c = 964, colWeights[c] = 4
+c = 1239, colWeights[c] = 1
+c = 431, colWeights[c] = 1
+i = 576
+c = 306, colWeights[c] = 3
+c = 62, colWeights[c] = 2
+c = 760, colWeights[c] = 1
+i = 576
+c = 756, colWeights[c] = 1
+c = 167, colWeights[c] = 4
+c = 594, colWeights[c] = 5
+i = 576
+c = 617, colWeights[c] = 1
+c = 918, colWeights[c] = 1
+c = 773, colWeights[c] = 2
+i = 576
+c = 11, colWeights[c] = 2
+c = 512, colWeights[c] = 2
+c = 13, colWeights[c] = 1
+i = 576
+c = 213, colWeights[c] = 3
+c = 97, colWeights[c] = 4
+c = 378, colWeights[c] = 2
+i = 576
+c = 944, colWeights[c] = 5
+c = 978, colWeights[c] = 2
+c = 771, colWeights[c] = 2
+i = 576
+c = 1139, colWeights[c] = 2
+c = 202, colWeights[c] = 4
+c = 1007, colWeights[c] = 4
+i = 576
+c = 853, colWeights[c] = 1
+c = 1126, colWeights[c] = 1
+c = 440, colWeights[c] = 2
+i = 576
+c = 961, colWeights[c] = 1
+c = 527, colWeights[c] = 3
+c = 335, colWeights[c] = 4
+i = 576
+c = 210, colWeights[c] = 2
+c = 99, colWeights[c] = 2
+c = 371, colWeights[c] = 4
+i = 576
+c = 565, colWeights[c] = 4
+c = 1172, colWeights[c] = 3
+c = 981, colWeights[c] = 1
+i = 576
+c = 1143, colWeights[c] = 3
+c = 292, colWeights[c] = 3
+c = 895, colWeights[c] = 4
+i = 576
+c = 925, colWeights[c] = 3
+c = 43, colWeights[c] = 4
+c = 324, colWeights[c] = 1
+i = 576
+c = 411, colWeights[c] = 2
+c = 328, colWeights[c] = 2
+c = 281, colWeights[c] = 2
+i = 576
+c = 865, colWeights[c] = 1
+c = 278, colWeights[c] = 1
+c = 713, colWeights[c] = 4
+i = 576
+c = 36, colWeights[c] = 3
+c = 1034, colWeights[c] = 2
+c = 352, colWeights[c] = 2
+i = 576
+c = 1159, colWeights[c] = 1
+c = 951, colWeights[c] = 2
+c = 835, colWeights[c] = 3
+i = 576
+c = 1167, colWeights[c] = 3
+c = 360, colWeights[c] = 6
+c = 1235, colWeights[c] = 3
+i = 576
+c = 676, colWeights[c] = 4
+c = 985, colWeights[c] = 1
+c = 1014, colWeights[c] = 4
+i = 576
+c = 365, colWeights[c] = 3
+c = 427, colWeights[c] = 5
+c = 182, colWeights[c] = 3
+i = 576
+c = 477, colWeights[c] = 1
+c = 215, colWeights[c] = 1
+c = 1061, colWeights[c] = 1
+i = 576
+c = 476, colWeights[c] = 2
+c = 1213, colWeights[c] = 3
+c = 845, colWeights[c] = 4
+i = 576
+c = 750, colWeights[c] = 1
+c = 898, colWeights[c] = 3
+c = 1034, colWeights[c] = 3
+This is the buildRow32
+i = 608
+c = 1089, colWeights[c] = 1
+c = 502, colWeights[c] = 4
+c = 527, colWeights[c] = 4
+i = 608
+c = 189, colWeights[c] = 1
+c = 747, colWeights[c] = 1
+c = 1146, colWeights[c] = 4
+i = 608
+c = 592, colWeights[c] = 4
+c = 402, colWeights[c] = 3
+c = 294, colWeights[c] = 1
+i = 608
+c = 325, colWeights[c] = 3
+c = 1114, colWeights[c] = 1
+c = 230, colWeights[c] = 3
+i = 608
+c = 953, colWeights[c] = 4
+c = 852, colWeights[c] = 2
+c = 227, colWeights[c] = 5
+i = 608
+c = 37, colWeights[c] = 7
+c = 941, colWeights[c] = 2
+c = 586, colWeights[c] = 2
+i = 608
+c = 331, colWeights[c] = 3
+c = 635, colWeights[c] = 1
+c = 803, colWeights[c] = 3
+i = 608
+c = 878, colWeights[c] = 3
+c = 1057, colWeights[c] = 1
+c = 585, colWeights[c] = 2
+i = 608
+c = 1239, colWeights[c] = 2
+c = 1162, colWeights[c] = 1
+c = 481, colWeights[c] = 2
+i = 608
+c = 397, colWeights[c] = 6
+c = 1098, colWeights[c] = 3
+c = 1101, colWeights[c] = 2
+i = 608
+c = 1054, colWeights[c] = 2
+c = 1069, colWeights[c] = 3
+c = 621, colWeights[c] = 1
+i = 608
+c = 925, colWeights[c] = 4
+c = 287, colWeights[c] = 1
+c = 742, colWeights[c] = 1
+i = 608
+c = 248, colWeights[c] = 3
+c = 145, colWeights[c] = 4
+c = 1146, colWeights[c] = 5
+i = 608
+c = 28, colWeights[c] = 3
+c = 801, colWeights[c] = 2
+c = 1066, colWeights[c] = 1
+i = 608
+c = 1051, colWeights[c] = 3
+c = 977, colWeights[c] = 1
+c = 1018, colWeights[c] = 2
+i = 608
+c = 235, colWeights[c] = 1
+c = 0, colWeights[c] = 3
+c = 827, colWeights[c] = 4
+i = 608
+c = 23, colWeights[c] = 2
+c = 989, colWeights[c] = 4
+c = 1206, colWeights[c] = 1
+i = 608
+c = 1068, colWeights[c] = 3
+c = 956, colWeights[c] = 6
+c = 368, colWeights[c] = 2
+i = 608
+c = 402, colWeights[c] = 4
+c = 1027, colWeights[c] = 2
+c = 312, colWeights[c] = 3
+i = 608
+c = 860, colWeights[c] = 1
+c = 845, colWeights[c] = 5
+c = 403, colWeights[c] = 2
+i = 608
+c = 783, colWeights[c] = 1
+c = 340, colWeights[c] = 1
+c = 747, colWeights[c] = 2
+i = 608
+c = 726, colWeights[c] = 2
+c = 410, colWeights[c] = 1
+c = 693, colWeights[c] = 2
+i = 608
+c = 472, colWeights[c] = 2
+c = 852, colWeights[c] = 3
+c = 582, colWeights[c] = 2
+i = 608
+c = 804, colWeights[c] = 4
+c = 340, colWeights[c] = 2
+c = 461, colWeights[c] = 2
+i = 608
+c = 616, colWeights[c] = 1
+c = 154, colWeights[c] = 1
+c = 270, colWeights[c] = 3
+i = 608
+c = 834, colWeights[c] = 4
+c = 1180, colWeights[c] = 2
+c = 119, colWeights[c] = 1
+i = 608
+c = 331, colWeights[c] = 4
+c = 650, colWeights[c] = 3
+c = 617, colWeights[c] = 2
+i = 608
+c = 652, colWeights[c] = 3
+c = 1151, colWeights[c] = 2
+c = 919, colWeights[c] = 2
+i = 608
+c = 1136, colWeights[c] = 1
+c = 887, colWeights[c] = 3
+c = 708, colWeights[c] = 3
+i = 608
+c = 841, colWeights[c] = 2
+c = 991, colWeights[c] = 4
+c = 1080, colWeights[c] = 2
+i = 608
+c = 72, colWeights[c] = 3
+c = 589, colWeights[c] = 2
+c = 113, colWeights[c] = 1
+i = 608
+c = 468, colWeights[c] = 5
+c = 503, colWeights[c] = 2
+c = 445, colWeights[c] = 3
+This is the buildRow32
+i = 640
+c = 696, colWeights[c] = 1
+c = 955, colWeights[c] = 3
+c = 900, colWeights[c] = 1
+i = 640
+c = 836, colWeights[c] = 5
+c = 796, colWeights[c] = 1
+c = 1155, colWeights[c] = 6
+i = 640
+c = 177, colWeights[c] = 2
+c = 983, colWeights[c] = 1
+c = 1054, colWeights[c] = 3
+i = 640
+c = 365, colWeights[c] = 4
+c = 19, colWeights[c] = 3
+c = 696, colWeights[c] = 2
+i = 640
+c = 1220, colWeights[c] = 2
+c = 926, colWeights[c] = 3
+c = 172, colWeights[c] = 2
+i = 640
+c = 778, colWeights[c] = 5
+c = 349, colWeights[c] = 2
+c = 406, colWeights[c] = 2
+i = 640
+c = 890, colWeights[c] = 4
+c = 590, colWeights[c] = 3
+c = 1111, colWeights[c] = 3
+i = 640
+c = 922, colWeights[c] = 3
+c = 547, colWeights[c] = 2
+c = 929, colWeights[c] = 2
+i = 640
+c = 236, colWeights[c] = 3
+c = 897, colWeights[c] = 3
+c = 593, colWeights[c] = 2
+i = 640
+c = 3, colWeights[c] = 2
+c = 210, colWeights[c] = 3
+c = 152, colWeights[c] = 2
+i = 640
+c = 923, colWeights[c] = 2
+c = 955, colWeights[c] = 4
+c = 982, colWeights[c] = 2
+i = 640
+c = 985, colWeights[c] = 2
+c = 268, colWeights[c] = 2
+c = 832, colWeights[c] = 2
+i = 640
+c = 151, colWeights[c] = 1
+c = 1192, colWeights[c] = 2
+c = 63, colWeights[c] = 3
+i = 640
+c = 1052, colWeights[c] = 4
+c = 875, colWeights[c] = 2
+c = 831, colWeights[c] = 2
+i = 640
+c = 100, colWeights[c] = 1
+c = 246, colWeights[c] = 3
+c = 1037, colWeights[c] = 1
+i = 640
+c = 754, colWeights[c] = 1
+c = 706, colWeights[c] = 2
+c = 1238, colWeights[c] = 1
+i = 640
+c = 730, colWeights[c] = 3
+c = 712, colWeights[c] = 3
+c = 1027, colWeights[c] = 3
+i = 640
+c = 1162, colWeights[c] = 2
+c = 182, colWeights[c] = 4
+c = 715, colWeights[c] = 2
+i = 640
+c = 380, colWeights[c] = 2
+c = 106, colWeights[c] = 2
+c = 555, colWeights[c] = 3
+i = 640
+c = 736, colWeights[c] = 3
+c = 357, colWeights[c] = 3
+c = 823, colWeights[c] = 3
+i = 640
+c = 961, colWeights[c] = 2
+c = 1093, colWeights[c] = 2
+c = 458, colWeights[c] = 2
+i = 640
+c = 406, colWeights[c] = 3
+c = 785, colWeights[c] = 2
+c = 549, colWeights[c] = 4
+i = 640
+c = 511, colWeights[c] = 1
+c = 638, colWeights[c] = 4
+c = 114, colWeights[c] = 1
+i = 640
+c = 13, colWeights[c] = 2
+c = 733, colWeights[c] = 2
+c = 247, colWeights[c] = 1
+i = 640
+c = 466, colWeights[c] = 1
+c = 740, colWeights[c] = 2
+c = 583, colWeights[c] = 2
+i = 640
+c = 1172, colWeights[c] = 4
+c = 535, colWeights[c] = 2
+c = 335, colWeights[c] = 5
+i = 640
+c = 1221, colWeights[c] = 4
+c = 31, colWeights[c] = 3
+c = 348, colWeights[c] = 1
+i = 640
+c = 859, colWeights[c] = 1
+c = 400, colWeights[c] = 1
+c = 533, colWeights[c] = 4
+i = 640
+c = 1104, colWeights[c] = 4
+c = 1213, colWeights[c] = 4
+c = 30, colWeights[c] = 1
+i = 640
+c = 680, colWeights[c] = 5
+c = 430, colWeights[c] = 2
+c = 549, colWeights[c] = 5
+i = 640
+c = 77, colWeights[c] = 1
+c = 503, colWeights[c] = 3
+c = 513, colWeights[c] = 1
+i = 640
+c = 1077, colWeights[c] = 1
+c = 577, colWeights[c] = 1
+c = 931, colWeights[c] = 2
+This is the buildRow32
+i = 672
+c = 822, colWeights[c] = 2
+c = 988, colWeights[c] = 1
+c = 548, colWeights[c] = 3
+i = 672
+c = 748, colWeights[c] = 2
+c = 1009, colWeights[c] = 1
+c = 257, colWeights[c] = 3
+i = 672
+c = 113, colWeights[c] = 2
+c = 826, colWeights[c] = 4
+c = 528, colWeights[c] = 1
+i = 672
+c = 462, colWeights[c] = 5
+c = 264, colWeights[c] = 2
+c = 1188, colWeights[c] = 2
+i = 672
+c = 112, colWeights[c] = 2
+c = 1152, colWeights[c] = 2
+c = 1032, colWeights[c] = 1
+i = 672
+c = 849, colWeights[c] = 3
+c = 655, colWeights[c] = 3
+c = 432, colWeights[c] = 1
+i = 672
+c = 1003, colWeights[c] = 2
+c = 617, colWeights[c] = 3
+c = 98, colWeights[c] = 1
+i = 672
+c = 572, colWeights[c] = 4
+c = 1144, colWeights[c] = 3
+c = 1057, colWeights[c] = 2
+i = 672
+c = 494, colWeights[c] = 2
+c = 825, colWeights[c] = 2
+c = 1058, colWeights[c] = 2
+i = 672
+c = 1081, colWeights[c] = 1
+c = 1041, colWeights[c] = 1
+c = 470, colWeights[c] = 3
+i = 672
+c = 7, colWeights[c] = 2
+c = 140, colWeights[c] = 1
+c = 1218, colWeights[c] = 1
+i = 672
+c = 573, colWeights[c] = 3
+c = 499, colWeights[c] = 1
+c = 484, colWeights[c] = 2
+i = 672
+c = 657, colWeights[c] = 2
+c = 261, colWeights[c] = 1
+c = 1151, colWeights[c] = 3
+i = 672
+c = 932, colWeights[c] = 1
+c = 24, colWeights[c] = 2
+c = 1059, colWeights[c] = 2
+i = 672
+c = 1027, colWeights[c] = 4
+c = 670, colWeights[c] = 2
+c = 418, colWeights[c] = 1
+i = 672
+c = 1249, colWeights[c] = 2
+c = 72, colWeights[c] = 4
+c = 936, colWeights[c] = 2
+i = 672
+c = 1238, colWeights[c] = 2
+c = 1178, colWeights[c] = 2
+c = 794, colWeights[c] = 2
+i = 672
+c = 310, colWeights[c] = 2
+c = 447, colWeights[c] = 3
+c = 424, colWeights[c] = 2
+i = 672
+c = 999, colWeights[c] = 3
+c = 271, colWeights[c] = 2
+c = 290, colWeights[c] = 2
+i = 672
+c = 163, colWeights[c] = 3
+c = 1216, colWeights[c] = 1
+c = 714, colWeights[c] = 1
+i = 672
+c = 1154, colWeights[c] = 3
+c = 974, colWeights[c] = 2
+c = 1174, colWeights[c] = 2
+i = 672
+c = 888, colWeights[c] = 2
+c = 320, colWeights[c] = 2
+c = 114, colWeights[c] = 2
+i = 672
+c = 1245, colWeights[c] = 3
+c = 312, colWeights[c] = 4
+c = 944, colWeights[c] = 6
+i = 672
+c = 169, colWeights[c] = 2
+c = 1058, colWeights[c] = 3
+c = 602, colWeights[c] = 2
+i = 672
+c = 1143, colWeights[c] = 4
+c = 87, colWeights[c] = 1
+c = 883, colWeights[c] = 3
+i = 672
+c = 298, colWeights[c] = 5
+c = 407, colWeights[c] = 1
+c = 377, colWeights[c] = 3
+i = 672
+c = 1201, colWeights[c] = 3
+c = 734, colWeights[c] = 2
+c = 526, colWeights[c] = 1
+i = 672
+c = 654, colWeights[c] = 4
+c = 1210, colWeights[c] = 1
+c = 962, colWeights[c] = 4
+i = 672
+c = 1149, colWeights[c] = 2
+c = 1212, colWeights[c] = 2
+c = 1052, colWeights[c] = 5
+i = 672
+c = 533, colWeights[c] = 5
+c = 1247, colWeights[c] = 2
+c = 1201, colWeights[c] = 4
+i = 672
+c = 1011, colWeights[c] = 2
+c = 826, colWeights[c] = 5
+c = 776, colWeights[c] = 2
+i = 672
+c = 995, colWeights[c] = 2
+c = 480, colWeights[c] = 2
+c = 352, colWeights[c] = 3
+This is the buildRow32
+i = 704
+c = 440, colWeights[c] = 3
+c = 1046, colWeights[c] = 1
+c = 107, colWeights[c] = 1
+i = 704
+c = 742, colWeights[c] = 2
+c = 531, colWeights[c] = 5
+c = 493, colWeights[c] = 3
+i = 704
+c = 988, colWeights[c] = 2
+c = 134, colWeights[c] = 1
+c = 1217, colWeights[c] = 4
+i = 704
+c = 279, colWeights[c] = 4
+c = 713, colWeights[c] = 5
+c = 979, colWeights[c] = 1
+i = 704
+c = 931, colWeights[c] = 3
+c = 741, colWeights[c] = 3
+c = 392, colWeights[c] = 2
+i = 704
+c = 594, colWeights[c] = 6
+c = 746, colWeights[c] = 2
+c = 960, colWeights[c] = 2
+i = 704
+c = 220, colWeights[c] = 3
+c = 12, colWeights[c] = 3
+c = 273, colWeights[c] = 2
+i = 704
+c = 1196, colWeights[c] = 1
+c = 630, colWeights[c] = 3
+c = 436, colWeights[c] = 2
+i = 704
+c = 178, colWeights[c] = 3
+c = 1142, colWeights[c] = 1
+c = 43, colWeights[c] = 5
+i = 704
+c = 1145, colWeights[c] = 3
+c = 569, colWeights[c] = 3
+c = 531, colWeights[c] = 6
+i = 704
+c = 840, colWeights[c] = 4
+c = 1222, colWeights[c] = 3
+c = 558, colWeights[c] = 3
+i = 704
+c = 101, colWeights[c] = 1
+c = 559, colWeights[c] = 1
+c = 614, colWeights[c] = 3
+i = 704
+c = 1175, colWeights[c] = 5
+c = 423, colWeights[c] = 2
+c = 135, colWeights[c] = 3
+i = 704
+c = 810, colWeights[c] = 3
+c = 22, colWeights[c] = 3
+c = 336, colWeights[c] = 2
+i = 704
+c = 1062, colWeights[c] = 2
+c = 128, colWeights[c] = 5
+c = 1247, colWeights[c] = 3
+i = 704
+c = 853, colWeights[c] = 2
+c = 869, colWeights[c] = 2
+c = 1014, colWeights[c] = 5
+i = 704
+c = 1030, colWeights[c] = 2
+c = 565, colWeights[c] = 5
+c = 208, colWeights[c] = 4
+i = 704
+c = 519, colWeights[c] = 2
+c = 364, colWeights[c] = 2
+c = 629, colWeights[c] = 3
+i = 704
+c = 97, colWeights[c] = 5
+c = 276, colWeights[c] = 3
+c = 1139, colWeights[c] = 3
+i = 704
+c = 890, colWeights[c] = 5
+c = 158, colWeights[c] = 3
+c = 201, colWeights[c] = 2
+i = 704
+c = 172, colWeights[c] = 3
+c = 984, colWeights[c] = 3
+c = 1130, colWeights[c] = 2
+i = 704
+c = 395, colWeights[c] = 2
+c = 90, colWeights[c] = 2
+c = 709, colWeights[c] = 1
+i = 704
+c = 1028, colWeights[c] = 3
+c = 825, colWeights[c] = 3
+c = 1086, colWeights[c] = 2
+i = 704
+c = 157, colWeights[c] = 4
+c = 92, colWeights[c] = 3
+c = 276, colWeights[c] = 4
+i = 704
+c = 784, colWeights[c] = 4
+c = 1139, colWeights[c] = 4
+c = 230, colWeights[c] = 4
+i = 704
+c = 441, colWeights[c] = 1
+c = 227, colWeights[c] = 6
+c = 684, colWeights[c] = 3
+i = 704
+c = 1115, colWeights[c] = 1
+c = 18, colWeights[c] = 3
+c = 1084, colWeights[c] = 3
+i = 704
+c = 874, colWeights[c] = 2
+c = 232, colWeights[c] = 2
+c = 758, colWeights[c] = 1
+i = 704
+c = 1090, colWeights[c] = 3
+c = 741, colWeights[c] = 4
+c = 638, colWeights[c] = 5
+i = 704
+c = 602, colWeights[c] = 3
+c = 1169, colWeights[c] = 3
+c = 847, colWeights[c] = 1
+i = 704
+c = 1022, colWeights[c] = 2
+c = 1199, colWeights[c] = 2
+c = 387, colWeights[c] = 5
+i = 704
+c = 506, colWeights[c] = 3
+c = 134, colWeights[c] = 2
+c = 428, colWeights[c] = 4
+This is the buildRow32
+i = 736
+c = 440, colWeights[c] = 4
+c = 665, colWeights[c] = 2
+c = 80, colWeights[c] = 1
+i = 736
+c = 440, colWeights[c] = 5
+c = 555, colWeights[c] = 4
+c = 659, colWeights[c] = 1
+i = 736
+c = 1146, colWeights[c] = 6
+c = 1081, colWeights[c] = 2
+c = 1008, colWeights[c] = 3
+i = 736
+c = 562, colWeights[c] = 2
+c = 794, colWeights[c] = 3
+c = 1250, colWeights[c] = 2
+i = 736
+c = 1170, colWeights[c] = 1
+c = 617, colWeights[c] = 4
+c = 839, colWeights[c] = 1
+i = 736
+c = 1083, colWeights[c] = 3
+c = 522, colWeights[c] = 1
+c = 284, colWeights[c] = 3
+i = 736
+c = 1145, colWeights[c] = 4
+c = 950, colWeights[c] = 2
+c = 597, colWeights[c] = 2
+i = 736
+c = 974, colWeights[c] = 3
+c = 1185, colWeights[c] = 2
+c = 659, colWeights[c] = 2
+i = 736
+c = 196, colWeights[c] = 2
+c = 544, colWeights[c] = 5
+c = 1126, colWeights[c] = 2
+i = 736
+c = 1017, colWeights[c] = 1
+c = 990, colWeights[c] = 2
+c = 78, colWeights[c] = 3
+i = 736
+c = 325, colWeights[c] = 4
+c = 1236, colWeights[c] = 3
+c = 633, colWeights[c] = 4
+i = 736
+c = 1024, colWeights[c] = 1
+c = 1214, colWeights[c] = 2
+c = 115, colWeights[c] = 1
+i = 736
+c = 770, colWeights[c] = 2
+c = 398, colWeights[c] = 5
+c = 1217, colWeights[c] = 5
+i = 736
+c = 352, colWeights[c] = 4
+c = 475, colWeights[c] = 1
+c = 1119, colWeights[c] = 3
+i = 736
+c = 121, colWeights[c] = 2
+c = 715, colWeights[c] = 3
+c = 836, colWeights[c] = 6
+i = 736
+c = 868, colWeights[c] = 3
+c = 401, colWeights[c] = 2
+c = 305, colWeights[c] = 3
+i = 736
+c = 1063, colWeights[c] = 2
+c = 437, colWeights[c] = 2
+c = 762, colWeights[c] = 2
+i = 736
+c = 1210, colWeights[c] = 2
+c = 15, colWeights[c] = 1
+c = 1067, colWeights[c] = 2
+i = 736
+c = 949, colWeights[c] = 2
+c = 290, colWeights[c] = 3
+c = 251, colWeights[c] = 2
+i = 736
+c = 711, colWeights[c] = 3
+c = 982, colWeights[c] = 3
+c = 1204, colWeights[c] = 1
+i = 736
+c = 706, colWeights[c] = 3
+c = 149, colWeights[c] = 3
+c = 1085, colWeights[c] = 1
+i = 736
+c = 449, colWeights[c] = 1
+c = 577, colWeights[c] = 2
+c = 238, colWeights[c] = 3
+i = 736
+c = 808, colWeights[c] = 4
+c = 105, colWeights[c] = 5
+c = 571, colWeights[c] = 3
+i = 736
+c = 821, colWeights[c] = 3
+c = 592, colWeights[c] = 5
+c = 777, colWeights[c] = 1
+i = 736
+c = 788, colWeights[c] = 2
+c = 632, colWeights[c] = 2
+c = 687, colWeights[c] = 2
+i = 736
+c = 56, colWeights[c] = 2
+c = 529, colWeights[c] = 4
+c = 343, colWeights[c] = 1
+i = 736
+c = 691, colWeights[c] = 1
+c = 191, colWeights[c] = 3
+c = 1004, colWeights[c] = 7
+i = 736
+c = 299, colWeights[c] = 2
+c = 733, colWeights[c] = 3
+c = 1234, colWeights[c] = 4
+i = 736
+c = 1056, colWeights[c] = 5
+c = 203, colWeights[c] = 2
+c = 392, colWeights[c] = 3
+i = 736
+c = 265, colWeights[c] = 2
+c = 482, colWeights[c] = 2
+c = 1067, colWeights[c] = 3
+i = 736
+c = 1176, colWeights[c] = 3
+c = 377, colWeights[c] = 4
+c = 101, colWeights[c] = 2
+i = 736
+c = 721, colWeights[c] = 1
+c = 187, colWeights[c] = 2
+c = 209, colWeights[c] = 3
+This is the buildRow32
+i = 768
+c = 229, colWeights[c] = 3
+c = 368, colWeights[c] = 3
+c = 653, colWeights[c] = 2
+i = 768
+c = 969, colWeights[c] = 2
+c = 515, colWeights[c] = 2
+c = 1065, colWeights[c] = 2
+i = 768
+c = 909, colWeights[c] = 1
+c = 764, colWeights[c] = 3
+c = 916, colWeights[c] = 2
+i = 768
+c = 188, colWeights[c] = 1
+c = 1055, colWeights[c] = 2
+c = 847, colWeights[c] = 2
+i = 768
+c = 1220, colWeights[c] = 3
+c = 226, colWeights[c] = 3
+c = 23, colWeights[c] = 3
+i = 768
+c = 1182, colWeights[c] = 1
+c = 1117, colWeights[c] = 3
+c = 220, colWeights[c] = 4
+i = 768
+c = 565, colWeights[c] = 6
+c = 806, colWeights[c] = 5
+c = 527, colWeights[c] = 5
+i = 768
+c = 840, colWeights[c] = 5
+c = 1230, colWeights[c] = 1
+c = 416, colWeights[c] = 2
+i = 768
+c = 1127, colWeights[c] = 2
+c = 1190, colWeights[c] = 3
+c = 1203, colWeights[c] = 2
+i = 768
+c = 1010, colWeights[c] = 1
+c = 622, colWeights[c] = 2
+c = 1181, colWeights[c] = 1
+i = 768
+c = 1082, colWeights[c] = 4
+c = 250, colWeights[c] = 2
+c = 1186, colWeights[c] = 2
+i = 768
+c = 10, colWeights[c] = 3
+c = 238, colWeights[c] = 4
+c = 1246, colWeights[c] = 2
+i = 768
+c = 464, colWeights[c] = 2
+c = 983, colWeights[c] = 2
+c = 507, colWeights[c] = 1
+i = 768
+c = 295, colWeights[c] = 1
+c = 349, colWeights[c] = 3
+c = 34, colWeights[c] = 3
+i = 768
+c = 423, colWeights[c] = 3
+c = 1213, colWeights[c] = 5
+c = 1081, colWeights[c] = 3
+i = 768
+c = 1062, colWeights[c] = 3
+c = 760, colWeights[c] = 2
+c = 526, colWeights[c] = 2
+i = 768
+c = 206, colWeights[c] = 4
+c = 1135, colWeights[c] = 5
+c = 1197, colWeights[c] = 1
+i = 768
+c = 1162, colWeights[c] = 3
+c = 724, colWeights[c] = 5
+c = 871, colWeights[c] = 1
+i = 768
+c = 508, colWeights[c] = 1
+c = 592, colWeights[c] = 6
+c = 1104, colWeights[c] = 5
+i = 768
+c = 887, colWeights[c] = 4
+c = 644, colWeights[c] = 2
+c = 1203, colWeights[c] = 3
+i = 768
+c = 18, colWeights[c] = 4
+c = 509, colWeights[c] = 1
+c = 99, colWeights[c] = 3
+i = 768
+c = 336, colWeights[c] = 3
+c = 453, colWeights[c] = 4
+c = 30, colWeights[c] = 2
+i = 768
+c = 407, colWeights[c] = 2
+c = 561, colWeights[c] = 4
+c = 263, colWeights[c] = 2
+i = 768
+c = 529, colWeights[c] = 5
+c = 707, colWeights[c] = 2
+c = 392, colWeights[c] = 4
+i = 768
+c = 1220, colWeights[c] = 4
+c = 109, colWeights[c] = 4
+c = 889, colWeights[c] = 3
+i = 768
+c = 9, colWeights[c] = 1
+c = 154, colWeights[c] = 2
+c = 159, colWeights[c] = 6
+i = 768
+c = 705, colWeights[c] = 3
+c = 1169, colWeights[c] = 4
+c = 961, colWeights[c] = 3
+i = 768
+c = 47, colWeights[c] = 2
+c = 1075, colWeights[c] = 3
+c = 474, colWeights[c] = 1
+i = 768
+c = 479, colWeights[c] = 2
+c = 136, colWeights[c] = 2
+c = 1250, colWeights[c] = 3
+i = 768
+c = 954, colWeights[c] = 3
+c = 640, colWeights[c] = 5
+c = 438, colWeights[c] = 3
+i = 768
+c = 392, colWeights[c] = 5
+c = 523, colWeights[c] = 2
+c = 550, colWeights[c] = 2
+i = 768
+c = 453, colWeights[c] = 5
+c = 587, colWeights[c] = 4
+c = 147, colWeights[c] = 2
+This is the buildRow32
+i = 800
+c = 638, colWeights[c] = 6
+c = 717, colWeights[c] = 1
+c = 1081, colWeights[c] = 4
+i = 800
+c = 708, colWeights[c] = 4
+c = 289, colWeights[c] = 2
+c = 53, colWeights[c] = 6
+i = 800
+c = 95, colWeights[c] = 1
+c = 308, colWeights[c] = 4
+c = 750, colWeights[c] = 2
+i = 800
+c = 356, colWeights[c] = 4
+c = 1051, colWeights[c] = 4
+c = 1092, colWeights[c] = 2
+i = 800
+c = 1081, colWeights[c] = 5
+c = 661, colWeights[c] = 1
+c = 404, colWeights[c] = 2
+i = 800
+c = 515, colWeights[c] = 3
+c = 703, colWeights[c] = 3
+c = 473, colWeights[c] = 1
+i = 800
+c = 180, colWeights[c] = 4
+c = 486, colWeights[c] = 4
+c = 444, colWeights[c] = 2
+i = 800
+c = 901, colWeights[c] = 1
+c = 1123, colWeights[c] = 1
+c = 314, colWeights[c] = 2
+i = 800
+c = 597, colWeights[c] = 3
+c = 949, colWeights[c] = 3
+c = 124, colWeights[c] = 2
+i = 800
+c = 380, colWeights[c] = 3
+c = 755, colWeights[c] = 1
+c = 817, colWeights[c] = 2
+i = 800
+c = 438, colWeights[c] = 4
+c = 1030, colWeights[c] = 3
+c = 790, colWeights[c] = 3
+i = 800
+c = 24, colWeights[c] = 3
+c = 105, colWeights[c] = 6
+c = 910, colWeights[c] = 2
+i = 800
+c = 133, colWeights[c] = 2
+c = 81, colWeights[c] = 1
+c = 764, colWeights[c] = 4
+i = 800
+c = 191, colWeights[c] = 4
+c = 1165, colWeights[c] = 3
+c = 1032, colWeights[c] = 2
+i = 800
+c = 457, colWeights[c] = 2
+c = 387, colWeights[c] = 6
+c = 819, colWeights[c] = 3
+i = 800
+c = 125, colWeights[c] = 1
+c = 1213, colWeights[c] = 6
+c = 881, colWeights[c] = 4
+i = 800
+c = 254, colWeights[c] = 1
+c = 485, colWeights[c] = 3
+c = 1080, colWeights[c] = 3
+i = 800
+c = 1045, colWeights[c] = 3
+c = 105, colWeights[c] = 7
+c = 853, colWeights[c] = 3
+i = 800
+c = 360, colWeights[c] = 7
+c = 544, colWeights[c] = 6
+c = 93, colWeights[c] = 3
+i = 800
+c = 1093, colWeights[c] = 3
+c = 276, colWeights[c] = 5
+c = 114, colWeights[c] = 3
+i = 800
+c = 933, colWeights[c] = 2
+c = 451, colWeights[c] = 1
+c = 526, colWeights[c] = 3
+i = 800
+c = 384, colWeights[c] = 2
+c = 867, colWeights[c] = 3
+c = 1073, colWeights[c] = 3
+i = 800
+c = 966, colWeights[c] = 2
+c = 299, colWeights[c] = 3
+c = 644, colWeights[c] = 3
+i = 800
+c = 765, colWeights[c] = 2
+c = 311, colWeights[c] = 3
+c = 289, colWeights[c] = 3
+i = 800
+c = 515, colWeights[c] = 4
+c = 984, colWeights[c] = 4
+c = 664, colWeights[c] = 1
+i = 800
+c = 1222, colWeights[c] = 4
+c = 426, colWeights[c] = 4
+c = 987, colWeights[c] = 1
+i = 800
+c = 313, colWeights[c] = 3
+c = 385, colWeights[c] = 2
+c = 1237, colWeights[c] = 5
+i = 800
+c = 181, colWeights[c] = 2
+c = 709, colWeights[c] = 2
+c = 1173, colWeights[c] = 3
+i = 800
+c = 63, colWeights[c] = 4
+c = 122, colWeights[c] = 1
+c = 1245, colWeights[c] = 4
+i = 800
+c = 214, colWeights[c] = 4
+c = 446, colWeights[c] = 2
+c = 146, colWeights[c] = 1
+i = 800
+c = 429, colWeights[c] = 3
+c = 607, colWeights[c] = 2
+c = 586, colWeights[c] = 3
+i = 800
+c = 1108, colWeights[c] = 5
+c = 731, colWeights[c] = 2
+c = 48, colWeights[c] = 3
+This is the buildRow32
+i = 832
+c = 218, colWeights[c] = 2
+c = 219, colWeights[c] = 2
+c = 38, colWeights[c] = 3
+i = 832
+c = 1246, colWeights[c] = 3
+c = 170, colWeights[c] = 1
+c = 1214, colWeights[c] = 3
+i = 832
+c = 397, colWeights[c] = 7
+c = 225, colWeights[c] = 2
+c = 1112, colWeights[c] = 4
+i = 832
+c = 691, colWeights[c] = 2
+c = 494, colWeights[c] = 3
+c = 408, colWeights[c] = 5
+i = 832
+c = 329, colWeights[c] = 2
+c = 974, colWeights[c] = 4
+c = 1039, colWeights[c] = 1
+i = 832
+c = 325, colWeights[c] = 5
+c = 888, colWeights[c] = 3
+c = 811, colWeights[c] = 1
+i = 832
+c = 751, colWeights[c] = 1
+c = 1190, colWeights[c] = 4
+c = 1015, colWeights[c] = 2
+i = 832
+c = 400, colWeights[c] = 2
+c = 1019, colWeights[c] = 3
+c = 1210, colWeights[c] = 3
+i = 832
+c = 106, colWeights[c] = 3
+c = 303, colWeights[c] = 2
+c = 908, colWeights[c] = 3
+i = 832
+c = 1176, colWeights[c] = 4
+c = 617, colWeights[c] = 5
+c = 422, colWeights[c] = 1
+i = 832
+c = 1115, colWeights[c] = 2
+c = 1189, colWeights[c] = 1
+c = 105, colWeights[c] = 8
+i = 832
+c = 1120, colWeights[c] = 2
+c = 935, colWeights[c] = 4
+c = 1056, colWeights[c] = 6
+i = 832
+c = 299, colWeights[c] = 4
+c = 420, colWeights[c] = 2
+c = 558, colWeights[c] = 4
+i = 832
+c = 1000, colWeights[c] = 2
+c = 319, colWeights[c] = 3
+c = 624, colWeights[c] = 3
+i = 832
+c = 944, colWeights[c] = 7
+c = 246, colWeights[c] = 4
+c = 1017, colWeights[c] = 2
+i = 832
+c = 1215, colWeights[c] = 2
+c = 380, colWeights[c] = 4
+c = 489, colWeights[c] = 2
+i = 832
+c = 700, colWeights[c] = 3
+c = 1214, colWeights[c] = 4
+c = 1135, colWeights[c] = 6
+i = 832
+c = 1058, colWeights[c] = 4
+c = 771, colWeights[c] = 3
+c = 1117, colWeights[c] = 4
+i = 832
+c = 1068, colWeights[c] = 4
+c = 957, colWeights[c] = 2
+c = 1184, colWeights[c] = 1
+i = 832
+c = 508, colWeights[c] = 2
+c = 176, colWeights[c] = 4
+c = 1049, colWeights[c] = 1
+i = 832
+c = 306, colWeights[c] = 4
+c = 47, colWeights[c] = 3
+c = 971, colWeights[c] = 2
+i = 832
+c = 1189, colWeights[c] = 2
+c = 1044, colWeights[c] = 3
+c = 520, colWeights[c] = 1
+i = 832
+c = 228, colWeights[c] = 2
+c = 107, colWeights[c] = 2
+c = 371, colWeights[c] = 5
+i = 832
+c = 670, colWeights[c] = 3
+c = 1002, colWeights[c] = 2
+c = 598, colWeights[c] = 1
+i = 832
+c = 1151, colWeights[c] = 4
+c = 69, colWeights[c] = 3
+c = 636, colWeights[c] = 1
+i = 832
+c = 210, colWeights[c] = 4
+c = 331, colWeights[c] = 5
+c = 827, colWeights[c] = 5
+i = 832
+c = 629, colWeights[c] = 4
+c = 253, colWeights[c] = 3
+c = 839, colWeights[c] = 2
+i = 832
+c = 81, colWeights[c] = 2
+c = 997, colWeights[c] = 2
+c = 936, colWeights[c] = 3
+i = 832
+c = 140, colWeights[c] = 2
+c = 854, colWeights[c] = 1
+c = 419, colWeights[c] = 2
+i = 832
+c = 654, colWeights[c] = 5
+c = 170, colWeights[c] = 2
+c = 549, colWeights[c] = 6
+i = 832
+c = 329, colWeights[c] = 3
+c = 1214, colWeights[c] = 5
+c = 32, colWeights[c] = 3
+i = 832
+c = 696, colWeights[c] = 3
+c = 182, colWeights[c] = 5
+c = 165, colWeights[c] = 3
+This is the buildRow32
+i = 864
+c = 788, colWeights[c] = 3
+c = 410, colWeights[c] = 2
+c = 597, colWeights[c] = 4
+i = 864
+c = 316, colWeights[c] = 1
+c = 870, colWeights[c] = 1
+c = 551, colWeights[c] = 3
+i = 864
+c = 967, colWeights[c] = 3
+c = 363, colWeights[c] = 1
+c = 218, colWeights[c] = 3
+i = 864
+c = 437, colWeights[c] = 3
+c = 1191, colWeights[c] = 3
+c = 1155, colWeights[c] = 7
+i = 864
+c = 301, colWeights[c] = 1
+c = 1103, colWeights[c] = 3
+c = 734, colWeights[c] = 3
+i = 864
+c = 1250, colWeights[c] = 4
+c = 332, colWeights[c] = 1
+c = 619, colWeights[c] = 3
+i = 864
+c = 483, colWeights[c] = 3
+c = 1115, colWeights[c] = 3
+c = 330, colWeights[c] = 2
+i = 864
+c = 70, colWeights[c] = 4
+c = 431, colWeights[c] = 2
+c = 922, colWeights[c] = 4
+i = 864
+c = 760, colWeights[c] = 3
+c = 1083, colWeights[c] = 4
+c = 430, colWeights[c] = 3
+i = 864
+c = 831, colWeights[c] = 3
+c = 960, colWeights[c] = 3
+c = 287, colWeights[c] = 2
+i = 864
+c = 643, colWeights[c] = 2
+c = 922, colWeights[c] = 5
+c = 24, colWeights[c] = 4
+i = 864
+c = 737, colWeights[c] = 2
+c = 196, colWeights[c] = 3
+c = 246, colWeights[c] = 5
+i = 864
+c = 1038, colWeights[c] = 2
+c = 290, colWeights[c] = 4
+c = 1082, colWeights[c] = 5
+i = 864
+c = 856, colWeights[c] = 2
+c = 1205, colWeights[c] = 2
+c = 669, colWeights[c] = 2
+i = 864
+c = 647, colWeights[c] = 1
+c = 766, colWeights[c] = 2
+c = 1235, colWeights[c] = 4
+i = 864
+c = 719, colWeights[c] = 5
+c = 957, colWeights[c] = 3
+c = 1208, colWeights[c] = 1
+i = 864
+c = 676, colWeights[c] = 5
+c = 769, colWeights[c] = 4
+c = 489, colWeights[c] = 3
+i = 864
+c = 1115, colWeights[c] = 4
+c = 498, colWeights[c] = 2
+c = 533, colWeights[c] = 6
+i = 864
+c = 1242, colWeights[c] = 3
+c = 593, colWeights[c] = 3
+c = 129, colWeights[c] = 2
+i = 864
+c = 173, colWeights[c] = 3
+c = 179, colWeights[c] = 4
+c = 272, colWeights[c] = 1
+i = 864
+c = 1146, colWeights[c] = 7
+c = 451, colWeights[c] = 2
+c = 758, colWeights[c] = 2
+i = 864
+c = 78, colWeights[c] = 4
+c = 28, colWeights[c] = 4
+c = 831, colWeights[c] = 4
+i = 864
+c = 381, colWeights[c] = 3
+c = 785, colWeights[c] = 3
+c = 587, colWeights[c] = 5
+i = 864
+c = 1109, colWeights[c] = 3
+c = 94, colWeights[c] = 4
+c = 440, colWeights[c] = 6
+i = 864
+c = 513, colWeights[c] = 2
+c = 63, colWeights[c] = 5
+c = 824, colWeights[c] = 2
+i = 864
+c = 1223, colWeights[c] = 3
+c = 515, colWeights[c] = 5
+c = 903, colWeights[c] = 1
+i = 864
+c = 642, colWeights[c] = 1
+c = 317, colWeights[c] = 2
+c = 875, colWeights[c] = 3
+i = 864
+c = 1246, colWeights[c] = 4
+c = 217, colWeights[c] = 3
+c = 795, colWeights[c] = 3
+i = 864
+c = 1041, colWeights[c] = 2
+c = 518, colWeights[c] = 2
+c = 1056, colWeights[c] = 7
+i = 864
+c = 915, colWeights[c] = 1
+c = 412, colWeights[c] = 4
+c = 648, colWeights[c] = 2
+i = 864
+c = 42, colWeights[c] = 3
+c = 19, colWeights[c] = 4
+c = 756, colWeights[c] = 2
+i = 864
+c = 1010, colWeights[c] = 2
+c = 10, colWeights[c] = 4
+c = 135, colWeights[c] = 4
+This is the buildRow32
+i = 896
+c = 955, colWeights[c] = 5
+c = 725, colWeights[c] = 4
+c = 325, colWeights[c] = 6
+i = 896
+c = 878, colWeights[c] = 4
+c = 248, colWeights[c] = 4
+c = 210, colWeights[c] = 5
+i = 896
+c = 1186, colWeights[c] = 3
+c = 888, colWeights[c] = 4
+c = 1093, colWeights[c] = 4
+i = 896
+c = 737, colWeights[c] = 3
+c = 33, colWeights[c] = 3
+c = 833, colWeights[c] = 2
+i = 896
+c = 107, colWeights[c] = 3
+c = 974, colWeights[c] = 5
+c = 1092, colWeights[c] = 3
+i = 896
+c = 1079, colWeights[c] = 3
+c = 856, colWeights[c] = 3
+c = 429, colWeights[c] = 4
+i = 896
+c = 612, colWeights[c] = 3
+c = 571, colWeights[c] = 4
+c = 189, colWeights[c] = 2
+i = 896
+c = 654, colWeights[c] = 6
+c = 803, colWeights[c] = 4
+c = 55, colWeights[c] = 4
+i = 896
+c = 833, colWeights[c] = 3
+c = 224, colWeights[c] = 3
+c = 605, colWeights[c] = 2
+i = 896
+c = 2, colWeights[c] = 3
+c = 1208, colWeights[c] = 2
+c = 985, colWeights[c] = 3
+i = 896
+c = 867, colWeights[c] = 4
+c = 444, colWeights[c] = 3
+c = 964, colWeights[c] = 5
+i = 896
+c = 123, colWeights[c] = 1
+c = 383, colWeights[c] = 2
+c = 81, colWeights[c] = 3
+i = 896
+c = 768, colWeights[c] = 3
+c = 133, colWeights[c] = 3
+c = 1006, colWeights[c] = 2
+i = 896
+c = 831, colWeights[c] = 5
+c = 871, colWeights[c] = 2
+c = 288, colWeights[c] = 1
+i = 896
+c = 461, colWeights[c] = 3
+c = 1170, colWeights[c] = 2
+c = 67, colWeights[c] = 4
+i = 896
+c = 433, colWeights[c] = 4
+c = 0, colWeights[c] = 4
+c = 82, colWeights[c] = 1
+i = 896
+c = 190, colWeights[c] = 7
+c = 258, colWeights[c] = 3
+c = 845, colWeights[c] = 6
+i = 896
+c = 9, colWeights[c] = 2
+c = 926, colWeights[c] = 4
+c = 802, colWeights[c] = 1
+i = 896
+c = 790, colWeights[c] = 4
+c = 333, colWeights[c] = 1
+c = 1221, colWeights[c] = 5
+i = 896
+c = 978, colWeights[c] = 3
+c = 757, colWeights[c] = 3
+c = 358, colWeights[c] = 3
+i = 896
+c = 1060, colWeights[c] = 2
+c = 771, colWeights[c] = 4
+c = 613, colWeights[c] = 1
+i = 896
+c = 864, colWeights[c] = 3
+c = 475, colWeights[c] = 2
+c = 429, colWeights[c] = 5
+i = 896
+c = 1095, colWeights[c] = 2
+c = 362, colWeights[c] = 2
+c = 927, colWeights[c] = 1
+i = 896
+c = 743, colWeights[c] = 2
+c = 718, colWeights[c] = 2
+c = 1147, colWeights[c] = 4
+i = 896
+c = 666, colWeights[c] = 1
+c = 906, colWeights[c] = 3
+c = 1141, colWeights[c] = 3
+i = 896
+c = 1172, colWeights[c] = 5
+c = 481, colWeights[c] = 3
+c = 755, colWeights[c] = 2
+i = 896
+c = 313, colWeights[c] = 4
+c = 62, colWeights[c] = 3
+c = 395, colWeights[c] = 3
+i = 896
+c = 790, colWeights[c] = 5
+c = 803, colWeights[c] = 5
+c = 1025, colWeights[c] = 2
+i = 896
+c = 368, colWeights[c] = 4
+c = 932, colWeights[c] = 2
+c = 1060, colWeights[c] = 3
+i = 896
+c = 566, colWeights[c] = 2
+c = 167, colWeights[c] = 5
+c = 837, colWeights[c] = 3
+i = 896
+c = 1026, colWeights[c] = 1
+c = 554, colWeights[c] = 5
+c = 126, colWeights[c] = 1
+i = 896
+c = 884, colWeights[c] = 2
+c = 702, colWeights[c] = 2
+c = 1233, colWeights[c] = 2
+This is the buildRow32
+i = 928
+c = 126, colWeights[c] = 2
+c = 478, colWeights[c] = 3
+c = 905, colWeights[c] = 3
+i = 928
+c = 910, colWeights[c] = 3
+c = 16, colWeights[c] = 1
+c = 702, colWeights[c] = 3
+i = 928
+c = 1241, colWeights[c] = 2
+c = 722, colWeights[c] = 3
+c = 950, colWeights[c] = 3
+i = 928
+c = 39, colWeights[c] = 4
+c = 1106, colWeights[c] = 2
+c = 619, colWeights[c] = 4
+i = 928
+c = 675, colWeights[c] = 4
+c = 88, colWeights[c] = 3
+c = 1168, colWeights[c] = 1
+i = 928
+c = 517, colWeights[c] = 1
+c = 1102, colWeights[c] = 3
+c = 483, colWeights[c] = 4
+i = 928
+c = 1130, colWeights[c] = 3
+c = 723, colWeights[c] = 2
+c = 1101, colWeights[c] = 3
+i = 928
+c = 949, colWeights[c] = 4
+c = 1230, colWeights[c] = 2
+c = 863, colWeights[c] = 1
+i = 928
+c = 637, colWeights[c] = 2
+c = 1159, colWeights[c] = 2
+c = 785, colWeights[c] = 4
+i = 928
+c = 125, colWeights[c] = 2
+c = 1013, colWeights[c] = 3
+c = 769, colWeights[c] = 5
+i = 928
+c = 549, colWeights[c] = 7
+c = 302, colWeights[c] = 1
+c = 1238, colWeights[c] = 3
+i = 928
+c = 1032, colWeights[c] = 3
+c = 815, colWeights[c] = 1
+c = 616, colWeights[c] = 2
+i = 928
+c = 834, colWeights[c] = 5
+c = 37, colWeights[c] = 8
+c = 554, colWeights[c] = 6
+i = 928
+c = 464, colWeights[c] = 3
+c = 1206, colWeights[c] = 2
+c = 326, colWeights[c] = 2
+i = 928
+c = 207, colWeights[c] = 3
+c = 859, colWeights[c] = 2
+c = 1087, colWeights[c] = 1
+i = 928
+c = 1191, colWeights[c] = 4
+c = 1239, colWeights[c] = 3
+c = 99, colWeights[c] = 4
+i = 928
+c = 198, colWeights[c] = 3
+c = 1017, colWeights[c] = 3
+c = 1152, colWeights[c] = 3
+i = 928
+c = 115, colWeights[c] = 2
+c = 487, colWeights[c] = 2
+c = 914, colWeights[c] = 5
+i = 928
+c = 819, colWeights[c] = 4
+c = 245, colWeights[c] = 2
+c = 523, colWeights[c] = 3
+i = 928
+c = 538, colWeights[c] = 2
+c = 656, colWeights[c] = 2
+c = 344, colWeights[c] = 3
+i = 928
+c = 1066, colWeights[c] = 2
+c = 70, colWeights[c] = 5
+c = 202, colWeights[c] = 5
+i = 928
+c = 130, colWeights[c] = 2
+c = 763, colWeights[c] = 1
+c = 434, colWeights[c] = 1
+i = 928
+c = 682, colWeights[c] = 4
+c = 86, colWeights[c] = 3
+c = 516, colWeights[c] = 3
+i = 928
+c = 132, colWeights[c] = 1
+c = 950, colWeights[c] = 4
+c = 481, colWeights[c] = 4
+i = 928
+c = 1172, colWeights[c] = 6
+c = 165, colWeights[c] = 4
+c = 288, colWeights[c] = 2
+i = 928
+c = 476, colWeights[c] = 3
+c = 1015, colWeights[c] = 3
+c = 651, colWeights[c] = 3
+i = 928
+c = 1066, colWeights[c] = 3
+c = 804, colWeights[c] = 5
+c = 389, colWeights[c] = 3
+i = 928
+c = 327, colWeights[c] = 2
+c = 449, colWeights[c] = 2
+c = 1240, colWeights[c] = 2
+i = 928
+c = 230, colWeights[c] = 5
+c = 374, colWeights[c] = 2
+c = 1035, colWeights[c] = 2
+i = 928
+c = 63, colWeights[c] = 6
+c = 931, colWeights[c] = 4
+c = 1162, colWeights[c] = 4
+i = 928
+c = 169, colWeights[c] = 3
+c = 839, colWeights[c] = 3
+c = 890, colWeights[c] = 6
+i = 928
+c = 494, colWeights[c] = 4
+c = 648, colWeights[c] = 3
+c = 994, colWeights[c] = 2
+This is the buildRow32
+i = 960
+c = 780, colWeights[c] = 2
+c = 247, colWeights[c] = 2
+c = 610, colWeights[c] = 2
+i = 960
+c = 991, colWeights[c] = 5
+c = 782, colWeights[c] = 1
+c = 635, colWeights[c] = 2
+i = 960
+c = 457, colWeights[c] = 3
+c = 958, colWeights[c] = 3
+c = 616, colWeights[c] = 3
+i = 960
+c = 1021, colWeights[c] = 2
+c = 780, colWeights[c] = 3
+c = 1247, colWeights[c] = 4
+i = 960
+c = 4, colWeights[c] = 2
+c = 386, colWeights[c] = 2
+c = 172, colWeights[c] = 4
+i = 960
+c = 527, colWeights[c] = 6
+c = 835, colWeights[c] = 4
+c = 531, colWeights[c] = 7
+i = 960
+c = 1062, colWeights[c] = 4
+c = 731, colWeights[c] = 3
+c = 45, colWeights[c] = 1
+i = 960
+c = 362, colWeights[c] = 3
+c = 368, colWeights[c] = 5
+c = 1236, colWeights[c] = 4
+i = 960
+c = 73, colWeights[c] = 1
+c = 791, colWeights[c] = 3
+c = 955, colWeights[c] = 6
+i = 960
+c = 1064, colWeights[c] = 2
+c = 1211, colWeights[c] = 3
+c = 78, colWeights[c] = 5
+i = 960
+c = 272, colWeights[c] = 2
+c = 331, colWeights[c] = 6
+c = 1062, colWeights[c] = 5
+i = 960
+c = 679, colWeights[c] = 1
+c = 1092, colWeights[c] = 4
+c = 423, colWeights[c] = 4
+i = 960
+c = 710, colWeights[c] = 3
+c = 641, colWeights[c] = 2
+c = 1053, colWeights[c] = 3
+i = 960
+c = 657, colWeights[c] = 3
+c = 759, colWeights[c] = 2
+c = 180, colWeights[c] = 5
+i = 960
+c = 239, colWeights[c] = 6
+c = 753, colWeights[c] = 1
+c = 872, colWeights[c] = 4
+i = 960
+c = 1126, colWeights[c] = 3
+c = 292, colWeights[c] = 4
+c = 685, colWeights[c] = 1
+i = 960
+c = 275, colWeights[c] = 3
+c = 808, colWeights[c] = 5
+c = 453, colWeights[c] = 6
+i = 960
+c = 693, colWeights[c] = 3
+c = 946, colWeights[c] = 3
+c = 336, colWeights[c] = 4
+i = 960
+c = 320, colWeights[c] = 3
+c = 1136, colWeights[c] = 2
+c = 114, colWeights[c] = 4
+i = 960
+c = 31, colWeights[c] = 4
+c = 971, colWeights[c] = 3
+c = 35, colWeights[c] = 3
+i = 960
+c = 1157, colWeights[c] = 2
+c = 458, colWeights[c] = 3
+c = 976, colWeights[c] = 4
+i = 960
+c = 429, colWeights[c] = 6
+c = 772, colWeights[c] = 2
+c = 1190, colWeights[c] = 5
+i = 960
+c = 339, colWeights[c] = 1
+c = 701, colWeights[c] = 3
+c = 415, colWeights[c] = 3
+i = 960
+c = 499, colWeights[c] = 2
+c = 680, colWeights[c] = 6
+c = 1217, colWeights[c] = 6
+i = 960
+c = 972, colWeights[c] = 2
+c = 1068, colWeights[c] = 5
+c = 26, colWeights[c] = 2
+i = 960
+c = 1204, colWeights[c] = 2
+c = 865, colWeights[c] = 2
+c = 1154, colWeights[c] = 4
+i = 960
+c = 863, colWeights[c] = 2
+c = 774, colWeights[c] = 3
+c = 586, colWeights[c] = 4
+i = 960
+c = 161, colWeights[c] = 2
+c = 271, colWeights[c] = 3
+c = 1239, colWeights[c] = 4
+i = 960
+c = 734, colWeights[c] = 4
+c = 640, colWeights[c] = 6
+c = 620, colWeights[c] = 1
+i = 960
+c = 121, colWeights[c] = 3
+c = 211, colWeights[c] = 3
+c = 387, colWeights[c] = 7
+i = 960
+c = 179, colWeights[c] = 5
+c = 1105, colWeights[c] = 2
+c = 38, colWeights[c] = 4
+i = 960
+c = 1205, colWeights[c] = 3
+c = 350, colWeights[c] = 3
+c = 1145, colWeights[c] = 5
+This is the buildRow32
+i = 992
+c = 931, colWeights[c] = 5
+c = 816, colWeights[c] = 1
+c = 634, colWeights[c] = 2
+i = 992
+c = 411, colWeights[c] = 3
+c = 211, colWeights[c] = 4
+c = 811, colWeights[c] = 2
+i = 992
+c = 289, colWeights[c] = 4
+c = 20, colWeights[c] = 2
+c = 1078, colWeights[c] = 3
+i = 992
+c = 910, colWeights[c] = 4
+c = 28, colWeights[c] = 5
+c = 507, colWeights[c] = 2
+i = 992
+c = 356, colWeights[c] = 5
+c = 1152, colWeights[c] = 4
+c = 729, colWeights[c] = 4
+i = 992
+c = 806, colWeights[c] = 6
+c = 1106, colWeights[c] = 3
+c = 316, colWeights[c] = 2
+i = 992
+c = 214, colWeights[c] = 5
+c = 526, colWeights[c] = 4
+c = 6, colWeights[c] = 3
+i = 992
+c = 833, colWeights[c] = 4
+c = 595, colWeights[c] = 1
+c = 801, colWeights[c] = 3
+i = 992
+c = 734, colWeights[c] = 5
+c = 441, colWeights[c] = 2
+c = 199, colWeights[c] = 6
+i = 992
+c = 21, colWeights[c] = 3
+c = 578, colWeights[c] = 3
+c = 227, colWeights[c] = 7
+i = 992
+c = 761, colWeights[c] = 1
+c = 170, colWeights[c] = 3
+c = 131, colWeights[c] = 4
+i = 992
+c = 225, colWeights[c] = 3
+c = 52, colWeights[c] = 2
+c = 463, colWeights[c] = 3
+i = 992
+c = 463, colWeights[c] = 4
+c = 60, colWeights[c] = 3
+c = 24, colWeights[c] = 5
+i = 992
+c = 89, colWeights[c] = 2
+c = 309, colWeights[c] = 3
+c = 772, colWeights[c] = 3
+i = 992
+c = 834, colWeights[c] = 6
+c = 892, colWeights[c] = 3
+c = 520, colWeights[c] = 2
+i = 992
+c = 1150, colWeights[c] = 2
+c = 976, colWeights[c] = 5
+c = 342, colWeights[c] = 6
+i = 992
+c = 1091, colWeights[c] = 1
+c = 166, colWeights[c] = 2
+c = 424, colWeights[c] = 3
+i = 992
+c = 373, colWeights[c] = 2
+c = 494, colWeights[c] = 5
+c = 593, colWeights[c] = 4
+i = 992
+c = 1102, colWeights[c] = 4
+c = 483, colWeights[c] = 5
+c = 270, colWeights[c] = 4
+i = 992
+c = 97, colWeights[c] = 6
+c = 4, colWeights[c] = 3
+c = 417, colWeights[c] = 2
+i = 992
+c = 1214, colWeights[c] = 6
+c = 970, colWeights[c] = 4
+c = 820, colWeights[c] = 4
+i = 992
+c = 992, colWeights[c] = 2
+c = 565, colWeights[c] = 7
+c = 899, colWeights[c] = 2
+i = 992
+c = 427, colWeights[c] = 6
+c = 320, colWeights[c] = 4
+c = 1052, colWeights[c] = 6
+i = 992
+c = 812, colWeights[c] = 1
+c = 1197, colWeights[c] = 2
+c = 535, colWeights[c] = 3
+i = 992
+c = 36, colWeights[c] = 4
+c = 450, colWeights[c] = 6
+c = 527, colWeights[c] = 7
+i = 992
+c = 819, colWeights[c] = 5
+c = 531, colWeights[c] = 8
+c = 864, colWeights[c] = 4
+i = 992
+c = 980, colWeights[c] = 3
+c = 781, colWeights[c] = 4
+c = 18, colWeights[c] = 5
+i = 992
+c = 233, colWeights[c] = 4
+c = 625, colWeights[c] = 1
+c = 182, colWeights[c] = 6
+i = 992
+c = 1069, colWeights[c] = 4
+c = 46, colWeights[c] = 1
+c = 255, colWeights[c] = 3
+i = 992
+c = 580, colWeights[c] = 2
+c = 1166, colWeights[c] = 3
+c = 42, colWeights[c] = 4
+i = 992
+c = 993, colWeights[c] = 4
+c = 668, colWeights[c] = 1
+c = 902, colWeights[c] = 2
+i = 992
+c = 457, colWeights[c] = 4
+c = 873, colWeights[c] = 2
+c = 836, colWeights[c] = 7
+Counter = 0
+mColBacking[0] = 235
+mColBacking[1] = 326
+mColBacking[2] = 623
+mRows[0][0] = 1065
+mRows[0][1] = 7
+mRows[0][2] = 268
+mCols[0][0] = 235? 0x55facd9ddd50
+mCols[0][1] = 326? 0x55facd9ddd52
+mCols[1][0] = 542? 0x55facd9ddd58

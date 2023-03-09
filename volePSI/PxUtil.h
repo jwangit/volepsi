@@ -460,6 +460,7 @@ namespace volePSI
 		std::vector<u64> mModVals;
 		void init(block seed, u64 weight, u64 paxosSize)
 		{
+			std::cout << "Hasher init method" << std::endl;
 			mWeight = weight;
 			mSparseSize = paxosSize;
 			mIdxSize = static_cast<IdxType>(oc::roundUpTo(oc::log2ceil(mSparseSize), 8) / 8);
@@ -483,8 +484,10 @@ namespace volePSI
 		void hashBuildRow32(const block* input, IdxType* rows, block* hash) const;
 		//void hashBuildRow8(const block* input, IdxType* rows, block* hash) const;
 		void hashBuildRow1(const block* input, IdxType* rows, block* hash) const;
+		int hashBuildRowHybrid(const block* input, IdxType* rows, block* hash, u64 threshold) const;
 
 		void buildRow(const block& hash, IdxType* row) const;
+		void buildRowHybrid(const block& hash, IdxType* row, int weight) const;
 		//void buildRow8(const block* hash, IdxType* row) const;
 		void buildRow32(const block* hash, IdxType* row) const;
 
