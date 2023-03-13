@@ -61,9 +61,11 @@ namespace volePSI
         setTimePoint("RsPsiSender::run-opprf");
 
         hashes.resize(inputs.size() * sizeof(block));
+        std::cout << "RsPsiSender::run-opprf" << std::endl;
         mSender.eval(inputs, span<block>((block*)hashes.data(), inputs.size()), mNumThreads);
 
         setTimePoint("RsPsiSender::run-eval");
+        std::cout << "RsPsiSender::run-eval" << std::endl;
         if (mCompress)
         {
             auto src = (block*)hashes.data();
@@ -87,6 +89,7 @@ namespace volePSI
 
         MC_AWAIT(chl.send(std::move(hashes)));
         setTimePoint("RsPsiSender::run-sendHash");
+        std::cout << "RsPsiSender::run-sendHash" << std::endl;
 
         MC_END();
     }
@@ -156,6 +159,7 @@ namespace volePSI
         // todo, parallelize these two
         MC_AWAIT(mRecver.receive(inputs, myHashes, mPrng, chl, mNumThreads, mUseReducedRounds));
         setTimePoint("RsPsiReceiver::run-opprf");
+        std::cout << "RsPsiReceiver::run-opprf" << std::endl;
 
         mask = oc::ZeroBlock;
         for (i = 0; i < mMaskSize; ++i)

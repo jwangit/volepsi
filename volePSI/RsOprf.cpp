@@ -46,9 +46,11 @@ namespace volePSI
 
         MC_AWAIT(chl.recv(mPaxos.mSeed));
         setTimePoint("RsOprfSender::recv-seed");
+        std::cout << "RsOprfSender::recv-seed" << std::endl;
         MC_AWAIT(fu);
         mB = mVoleSender.mB;
         setTimePoint("RsOprfSender::send-vole");
+        std::cout << "RsOprfSender::send-vole" << std::endl;
 
 
 
@@ -59,6 +61,7 @@ namespace volePSI
             MC_AWAIT(chl.send(std::move(ws)));
             mW = mW ^ ws;
             setTimePoint("RsOprfSender::recv-mal");
+            std::cout << "RsOprfSender::recv-mal" << std::endl;
         }
 
         pPtr.reset(new block[mPaxos.size()]);
@@ -69,6 +72,7 @@ namespace volePSI
         if (0)
         {
             MC_AWAIT(chl.recv(pp));
+            std::cout << "RsOprfSender::send-recv" << std::endl;
 
             setTimePoint("RsOprfSender::send-recv");
             {
@@ -114,6 +118,7 @@ namespace volePSI
                 setTimePoint("RsOprfSender::pre*-" + std::to_string(recvIdx));
                 MC_AWAIT(chl.recv(subPp));
                 setTimePoint("RsOprfSender::recv-" + std::to_string(recvIdx));
+                std::cout << "RsOprfSender::recv-" + std::to_string(recvIdx) << std::endl;
 
                 {
 
@@ -141,6 +146,7 @@ namespace volePSI
                     }
                 }
                 setTimePoint("RsOprfSender::gf128Mul-" + std::to_string(recvIdx));
+                std::cout << "RsOprfSender::gf128Mul-" + std::to_string(recvIdx) << std::endl;
 
                 ++recvIdx;
 
@@ -280,7 +286,7 @@ namespace volePSI
 
     Proto RsOprfReceiver::receive(span<const block> values, span<block> outputs, PRNG& prng, Socket& chl, u64 numThreads, bool reducedRounds)
     {
-
+        std::cout << "call this RsOprfReceiver.receive function!" << std::endl;
         MC_BEGIN(Proto,this, values, outputs, &prng, &chl, numThreads, reducedRounds,
             hashingSeed = block{},
             wr = block{},
@@ -306,8 +312,10 @@ namespace volePSI
 
         hashingSeed = prng.get(), wr = prng.get();
         paxos.init(values.size(), mBinSize, 3, mSsp, PaxosParam::GF128, hashingSeed);
+        std::cout << "receiver paxos init done!"  << std::endl;
 
         MC_AWAIT(chl.send(std::move(hashingSeed)));
+        std::cout << "receiver sends hashingSeed!"  << std::endl;
 
         if (mMalicious)
         {
@@ -339,6 +347,7 @@ namespace volePSI
 
         paxos.solve<block>(values, h, p, nullptr, numThreads);
         setTimePoint("RsOprfReceiver::receive-solve");
+        std::cout << "receiver cal paxos.solve done!"  << std::endl;
         MC_AWAIT(fu);
 
         // a + b  = c * d
@@ -439,6 +448,7 @@ namespace volePSI
         paxos.decode<block>(values, outputs, a, numThreads);
 
         setTimePoint("RsOprfReceiver::receive-decode");
+        std::cout << "receiver cal paxos.decode done!"  << std::endl;
 
         if (mMalicious)
         {

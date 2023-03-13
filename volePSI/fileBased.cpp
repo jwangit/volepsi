@@ -345,6 +345,9 @@ namespace volePSI
 			u64 theirSize;
 			macoro::sync_wait(chl.send(set.size()));
 			macoro::sync_wait(chl.recv(theirSize));
+			std::cout << "my size: " << set.size() << std::endl;
+			std::cout << "their size: " << theirSize << std::endl;
+			
 
 			if (theirSize != cmd.getOr((r != Role::Sender) ? "senderSize" : "receiverSize", theirSize))
 				throw std::runtime_error("Other party's set size does not match.");
