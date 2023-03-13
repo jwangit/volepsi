@@ -4,6 +4,7 @@ namespace volePSI
 {
     Proto RsOprfSender::send(u64 n, PRNG& prng, Socket& chl, u64 numThreads, bool reducedRounds)
     {
+        std::cout << "Call send function!" << std::endl;
         MC_BEGIN(Proto,this, n, &prng, &chl, numThreads, reducedRounds,
             ws = block{},
             hBuff = std::array<u8, 32> {},

@@ -303,9 +303,9 @@ void perfPaxosImpl(oc::CLP& cmd)
 	auto cols = cmd.getOr("cols", 0);
 	auto hyb = cmd.getOr("hybrid", 0);
 	auto rate = cmd.getOr("rate", 0.2);
-	auto overlap = cmd.getOr("overlap", 0.3);
+	auto overlap = cmd.getOr("overlap", 0.0);
 	std::cout << "n = " << n << std::endl;
-	std::vector<int> mode = {3,3};
+	std::vector<int> mode = {2,3};
 	PaxosParam pp(n, w, ssp, dt, rate, overlap, mode, hyb);
 	//std::cout << "e=" << pp.size() / double(n) << std::endl;
 	if (maxN < pp.size())
@@ -346,6 +346,8 @@ void perfPaxosImpl(oc::CLP& cmd)
 			// std::cout << "call this" << std::endl;
 			paxos.template solve<block>(key, oc::span<block>(val), oc::span<block>(pax));
 			timer.setTimePoint("s" + std::to_string(i));
+			std::cout << "Start decode!" << std::endl;
+			std::cout << "hybrid flag = " << paxos.hybridFlag << std::endl;
 			paxos.template decode<block>(key, oc::span<block>(val), oc::span<block>(pax));
 		}
 		
@@ -357,7 +359,6 @@ void perfPaxosImpl(oc::CLP& cmd)
 
 
 		end = timer.setTimePoint("d" + std::to_string(i));
-		std::cout<< paxos.mCols.size() << ", " << paxos.mCols[0].size() << std::endl;
 	}
 	
 	if (v)

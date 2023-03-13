@@ -45,7 +45,7 @@ namespace volePSI
 
     Proto RsPsiSender::run(span<block> inputs, Socket& chl)
     {
-
+        std::cout << "This is sender.run." << std::endl;
         MC_BEGIN(Proto,this, inputs, &chl,
             hashes = std::move(Buffer<u8>{})
         );
@@ -103,6 +103,7 @@ namespace volePSI
 
     Proto RsPsiReceiver::run(span<block> inputs, Socket& chl)
     {
+        std::cout << "This is receiver.run." << std::endl;
         setTimePoint("RsPsiReceiver::run-enter");
         static const u64 batchSize = 128;
 

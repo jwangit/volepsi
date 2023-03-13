@@ -42,22 +42,27 @@ namespace volePSI
 			mG = 0,
 			mSsp = 40;
 		DenseType mDt = GF128;
-		double Rate = 0.0;
+		
+		// For hybrid
+		double Rate = 0.2;
 		double overlapRate = 0.0;
-		int hybridFlag = 0;
-		std::vector<int> Mode = {3,3};
+		int hybridFlag = 1;
+		std::vector<int> Mode = {2,3};
+		u64 mFirstSize = 0;
+		u64 mSecondSize = 0;
+		u64 mPos = 0;
 
 		PaxosParam() = default;
 		PaxosParam(const PaxosParam&) = default;
 		PaxosParam& operator=(const PaxosParam&) = default;
 
-		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.0, double overlap = 0.0, std::vector<int> mode = {3,3}, int hybflag = 0)
+		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.2, double overlap = 0.0, std::vector<int> mode = {2,3}, int hybflag = 1)
 		{
 			init(numItems, weight, ssp, dt, rate, overlap, mode, hybflag);
 		}
 
 		// computes the paxos parameters based the parameters.
-		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.0, double overlap = 0.0, std::vector<int> mode = {3,3}, int hybflag = 0);
+		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.2, double overlap = 0.0, std::vector<int> mode = {2,3}, int hybflag = 1);
 
 		// the size of the paxos data structure.
 		u64 size() const
@@ -278,6 +283,16 @@ namespace volePSI
 		// part. values is where the values are written to. p is the Paxos, h is the value op. helper.
 		template<typename ValueType, typename Helper, typename Vec>
 		void decode1(
+			const IdxType* rows,
+			const block* dense,
+			ValueType* values,
+			Vec& p,
+			Helper& h);
+
+		// decodes one instances. rows should contain the row indicies, dense the dense 
+		// part. values is where the values are written to. p is the Paxos, h is the value op. helper.
+		template<typename ValueType, typename Helper, typename Vec>
+		void decodeHybrid(
 			const IdxType* rows,
 			const block* dense,
 			ValueType* values,
