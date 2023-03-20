@@ -22,5 +22,7 @@ add_subdirectory(tests)
 # link the executable.
 add_subdirectory(frontend)
 
+# add_subdirectory(xxHash)
+
 # setup the install
 include(cmake/install.cmake)

@@ -30,7 +30,8 @@ if(VOLE_PSI_ENABLE_OPPRF)
 endif()
 
 add_library(volePSI STATIC ${SRCS})
-target_link_libraries(volePSI oc::libOTe sparsehash libdivide)
+
+target_link_libraries(volePSI oc::libOTe sparsehash libdivide xxhash)
 
 if(APPLE)
     target_compile_options(volePSI PUBLIC
@@ -81,3 +82,14 @@ target_include_directories(volePSI PUBLIC
                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
                     $<INSTALL_INTERFACE:include>) 
 
+include_directories(/usr/local/include)
+
+# include_directories("../thirdparty/xxHash")
+# target_link_directories(volePSI PUBLIC  "../thirdparty/xxHash")
+# target_link_libraries(volePSI xxhash)
+# Hasher test
+# include_directories(./xxHash)
+# target_link_directories(volePSI
+# 	PUBLIC	xxHash
+# )
+# Hasher test end

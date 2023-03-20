@@ -1,0 +1,17 @@
+n = 32768
+firstTableSize = 15729
+secondTableSize = 34079
+pos = 9438
+mSparseSize = 43517
+paxos init method
+Hasher init method
+start setInput
+Counter = 6679
+num: 91625
+-1: 65535
+mColBacking.size(): 98304
+Peeling init done.
+Initial Number: 32768
+Initial Queue size: 10661
+TwoCores nums: 13
+Complete peeling = 

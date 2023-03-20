@@ -25,6 +25,8 @@
 #include "libOTe/Tools/LDPC/Mtx.h"
 #include "volePSI/PxUtil.h"
 
+// #include "Hasher.h"
+
 namespace volePSI
 {
 	struct PaxosParam {
@@ -143,6 +145,24 @@ namespace volePSI
 		// in size, output should be Paxos::size() in size. If the paxos
 		// should be randomized, then provide a PRNG.
 		template<typename ValueType>
+		void solveHasher(span<const block> inputs, span<const ValueType> values, span<ValueType> output, oc::PRNG* prng = nullptr)
+		{
+			setInputHasher(inputs);
+			encode<ValueType>(values, output, prng);
+		}
+
+		template<typename ValueType>
+		void solveHasher(span<const block> inputs, MatrixView<const ValueType> values, MatrixView<ValueType> output, oc::PRNG* prng = nullptr)
+		{
+			setInputHasher(inputs);
+			encode<ValueType>(values, output, prng);
+		}
+
+		// solve/encode the given inputs,value pair. The paxos data 
+		// structure is written to output. input,value should be numItems 
+		// in size, output should be Paxos::size() in size. If the paxos
+		// should be randomized, then provide a PRNG.
+		template<typename ValueType>
 		void solve(span<const block> inputs, span<const ValueType> values, span<ValueType> output, oc::PRNG* prng = nullptr)
 		{
 			setInput(inputs);
@@ -164,6 +184,8 @@ namespace volePSI
 		// set the input keys which define the paxos matrix. After that,
 		// encode can be called more than once.
 		void setInput(span<const block> inputs);
+
+		void setInputHasher(span<const block> inputs);
 
 		// encode the given inputs,value pair based on the already set input. The paxos data 
 		// structure is written to output. input,value should be numItems 
@@ -264,6 +286,8 @@ namespace volePSI
 		// private functions
 		////////////////////////////////////////
 
+		
+		void peeling(const span<IdxType> colWeights);
 
 		// allocate the memory needed to triangulate.
 		void allocate();
