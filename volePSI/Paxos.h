@@ -25,7 +25,7 @@
 #include "libOTe/Tools/LDPC/Mtx.h"
 #include "volePSI/PxUtil.h"
 
-// #include "Hasher.h"
+#include <chrono>
 
 namespace volePSI
 {
@@ -58,13 +58,13 @@ namespace volePSI
 		PaxosParam(const PaxosParam&) = default;
 		PaxosParam& operator=(const PaxosParam&) = default;
 
-		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.2, double overlap = 0.0, std::vector<int> mode = {2,3}, int hybflag = 1)
+		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.2, double overlap = 0.0, std::vector<int> mode = {2,3}, int hybflag = 1, double sparsesize=0)
 		{
-			init(numItems, weight, ssp, dt, rate, overlap, mode, hybflag);
+			init(numItems, weight, ssp, dt, rate, overlap, mode, hybflag, sparsesize);
 		}
 
 		// computes the paxos parameters based the parameters.
-		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.2, double overlap = 0.0, std::vector<int> mode = {2,3}, int hybflag = 1);
+		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.2, double overlap = 0.0, std::vector<int> mode = {2,3}, int hybflag = 1, double sparsesize = 0);
 
 		// the size of the paxos data structure.
 		u64 size() const
