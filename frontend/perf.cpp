@@ -9,6 +9,117 @@
 using namespace oc;
 using namespace volePSI;;
 
+// demo
+// sender run: ./out/build/linux/frontend/frontend -in dev/senderData.csv -r 0 -out dev/out1.csv -csv
+// receiver run: ./out/build/linux/frontend/frontend -in dev/receiverData.csv -r 1 -out dev/out2.csv -csv
+
+// test e and g
+// Test Vole-okvs: ./out/build/linux/frontend/frontend -perf -test -hybrid 0 -nn 10 -t 100 -ssize 1.23 > dev/res.log
+// Test Hybrid-okvs (2vs3): ./out/build/linux/frontend/frontend -perf -test -hybrid 1 -nn 10 -t 100 -rate 0.2 -ssize 1.23 > dev/res.log
+// Test Hybrid-okvs (3vs4): ./out/build/linux/frontend/frontend -perf -test -hybrid 1 -nn 10 -t 100 -rate 0.2 -ssize 1.23 -w 4 > dev/res.log
+template<typename T>
+void perfTestImpl(oc::CLP& cmd)
+{
+	auto n = cmd.getOr("n", 1ull << cmd.getOr("nn", 10));
+	u64 maxN = std::numeric_limits<T>::max() - 1;
+	auto t = cmd.getOr("t", 1ull);
+	//auto rand = cmd.isSet("rand");
+	auto v = cmd.getOr("v", cmd.isSet("v") ? 1 : 0);
+	auto w = cmd.getOr("w", 3);
+	auto ssp = cmd.getOr("ssp", 40);
+	auto dt = cmd.isSet("binary") ? PaxosParam::Binary : PaxosParam::GF128;
+	auto cols = cmd.getOr("cols", 0);
+	// hybrid params
+	auto hyb = cmd.getOr("hybrid", 1);
+	auto rate = cmd.getOr("rate", 0.2);
+	auto ssize = cmd.getOr("ssize", 0.0); // sparsesize/n
+
+	PaxosParam pp(n, w, ssp, dt, hyb, rate, ssize);
+	if (hyb == 0) {
+		std::cout << "Vole mode: " << std::endl;
+	}
+	else {
+		std::cout << "Hybrid mode: " << std::endl;
+		std::cout << "Rate: " << rate << std::endl;
+	}
+	
+	std::cout << "mSparseSize/n = " << pp.mSparseSize / double(n) << std::endl;
+	std::cout << "e =" << pp.size() / double(n) << std::endl;
+	if (maxN < pp.size())
+	{
+		std::cout << "n must be smaller than the index type max value. " LOCATION << std::endl;
+		throw RTE_LOC;
+	}
+
+	auto m = cols ? cols : 1;
+	std::vector<block> key(n);
+	oc::Matrix<block> val(n, m), pax(pp.size(), m);
+	PRNG prng(ZeroBlock);
+	prng.get<block>(key);
+	prng.get<block>(val);
+
+	Timer timer;
+	auto start = timer.setTimePoint("start");
+	auto end = start;
+	for (u64 i = 0; i < t; ++i)
+	{
+		
+		Paxos<T> paxos;
+		paxos.init(n, pp, block(i, i));		
+		
+		if (v > 1)
+			paxos.setTimer(timer);
+
+		if (cols)
+		{
+			paxos.setInput(key);
+			paxos.template encode<block>(val, pax);
+			timer.setTimePoint("s" + std::to_string(i));
+			paxos.template decode<block>(key, val, pax);
+			
+		}
+		else
+		{
+			// std::cout << "call this" << std::endl;
+			paxos.template solveTest<block>(key, oc::span<block>(val), oc::span<block>(pax));
+			timer.setTimePoint("s" + std::to_string(i));
+		}
+
+
+		end = timer.setTimePoint("d" + std::to_string(i));
+	}
+	
+	if (v)
+		std::cout << timer << std::endl;
+
+	auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000);
+	std::cout << "total " << tt << "ms" << std::endl;
+	// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
+}
+
+void perfTest(oc::CLP& cmd)
+{
+	auto bits = cmd.getOr("b", 16);
+	switch (bits)
+	{
+	case 8:
+		perfTestImpl<u8>(cmd);
+		break;
+	case 16:
+		perfTestImpl<u16>(cmd);
+		break;
+	case 32:
+		perfTestImpl<u32>(cmd);
+		break;
+	case 64:
+		perfTestImpl<u64>(cmd);
+		break;
+	default:
+		std::cout << "b must be 8,16,32 or 64. " LOCATION << std::endl;
+		throw RTE_LOC;
+	}
+
+}
 
 void perfPrf(oc::CLP& cmd)
 {
@@ -563,6 +674,8 @@ void perf(oc::CLP& cmd)
 		perfMod(cmd);
 	if (cmd.isSet("prf"))
 		perfPrf(cmd);
+	if (cmd.isSet("test"))
+		perfTest(cmd);
 }
 
 

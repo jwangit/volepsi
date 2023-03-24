@@ -139,7 +139,30 @@ namespace volePSI
 		// initialize the paxos with the given parameters.
 		void init(u64 numItems, PaxosParam p, block seed);
 
+		// For test e and g
+		template<typename ValueType>
+		void solveTest(span<const block> inputs, span<const ValueType> values, span<ValueType> output, oc::PRNG* prng = nullptr)
+		{
+			setInput(inputs);
+			PxVector<const ValueType> V(values);
+			PxVector<ValueType> P(output);
+			auto h = P.defaultHelper();
+			encodeTest(V, P, h, prng);
+		}
 
+		template<typename ValueType>
+		void solveTest(span<const block> inputs, MatrixView<const ValueType> values, MatrixView<ValueType> output, oc::PRNG* prng = nullptr)
+		{
+			setInput(inputs);
+			PxVector<const ValueType> V(values);
+			PxVector<ValueType> P(output);
+			auto h = P.defaultHelper();
+			encodeTest(V, P, h, prng);
+		}
+
+		template<typename Vec, typename ConstVec, typename Helper>
+		void encodeTest(ConstVec& values, Vec& output, Helper& h, oc::PRNG* prng = nullptr);
+		//////////////////////////////////////////////////////////
 		// solve/encode the given inputs,value pair. The paxos data 
 		// structure is written to output. input,value should be numItems 
 		// in size, output should be Paxos::size() in size. If the paxos

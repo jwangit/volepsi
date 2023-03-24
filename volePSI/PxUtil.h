@@ -460,7 +460,7 @@ namespace volePSI
 		std::vector<u64> mModVals;
 		void init(block seed, u64 weight, u64 paxosSize)
 		{
-			std::cout << "Hasher init method" << std::endl;
+			
 			mWeight = weight;
 			mSparseSize = paxosSize;
 			mIdxSize = static_cast<IdxType>(oc::roundUpTo(oc::log2ceil(mSparseSize), 8) / 8);

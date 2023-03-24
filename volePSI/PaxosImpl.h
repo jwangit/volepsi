@@ -968,7 +968,7 @@ namespace volePSI
 	template <typename IdxType>
 	void Paxos<IdxType>::init(u64 numItems, PaxosParam p, block seed)
 	{
-		std::cout << "paxos init method" << std::endl;
+		// std::cout << "paxos init method" << std::endl;
 		if (p.mSparseSize >= u64(std::numeric_limits<IdxType>::max()))
 		{
 			std::cout << "the size of the paxos is too large for the index type. "
@@ -989,7 +989,7 @@ namespace volePSI
 	template <typename IdxType>
 	void Paxos<IdxType>::setInput(span<const block> inputs)
 	{
-		std::cout << "start setInput" << std::endl;
+		// std::cout << "start setInput" << std::endl;
 		setTimePoint("setInput begin");
 		if (inputs.size() != mNumItems)
 			throw RTE_LOC;
@@ -1066,7 +1066,7 @@ namespace volePSI
 				}
 			}
 		}
-		std::cout << "Counter = " << Count << std::endl;
+		// std::cout << "Counter = " << Count << std::endl;
 
 		setTimePoint("setInput buildRow");
 		// std::cout << "colWeights shape = " << colWeights.size() << ", " << std::endl;
@@ -1505,6 +1505,43 @@ namespace volePSI
 		std::cout << "complete backfill!" << std::endl;
 	}
 
+	template <typename IdxType>
+	template <typename Vec, typename ConstVec, typename Helper>
+	void Paxos<IdxType>::encodeTest(ConstVec &values, Vec &output, Helper &h, PRNG *prng)
+	{
+		if (static_cast<u64>(output.size()) != size())
+			throw RTE_LOC;
+
+		std::vector<IdxType> mainRows, mainCols;
+		mainRows.reserve(mNumItems);
+		mainCols.reserve(mNumItems);
+		std::vector<std::array<IdxType, 2>> gapRows;
+
+		triangulate(mainRows, mainCols, gapRows);
+		output.zerofill();
+
+		if (prng)
+		{
+			typename WeightData<IdxType>::WeightNode *node = mWeightSets.mWeightSets[0];
+			while (node != nullptr)
+			{
+				auto colIdx = mWeightSets.idxOf(*node);
+				// prng->get(output[colIdx], output.stride());
+				h.randomize(output[colIdx], *prng);
+
+				if (node->mNextWeightNode == mWeightSets.NullNode)
+					node = nullptr;
+				else
+					node = mWeightSets.mNodes.data() + node->mNextWeightNode;
+			}
+		}
+		std::cout << gapRows.size() << std::endl;
+		// std::cout << "start backfill!" << std::endl;
+		// backfill(mainRows, mainCols, gapRows, values, output, h, prng);
+		// std::cout << "complete backfill!" << std::endl;
+	}
+
+	
 	template <typename IdxType>
 	template <typename Vec, typename ConstVec, typename Helper>
 	Vec Paxos<IdxType>::getX2Prime(
