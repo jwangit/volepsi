@@ -1,1 +1,309 @@
-./out/build/linux/frontend/frontend -perf -paxos -nn 8 -hybrid 0  -ssize 1.24  -t 100 > dev/res.log
+	template <typename IdxType>
+	void Paxos<IdxType>::peeling(const span<IdxType> colWeights)
+	{
+		span<IdxType> cWeights(colWeights);
+		std::vector<std::vector<IdxType>> cols(mSparseSize);
+		for (u64 i = 0; i < mSparseSize; i++)
+		{
+			cols[i].assign(mCols[i].begin(), mCols[i].end());
+		}
+
+		std::vector<IdxType> TwoCores(mNumItems, 1);
+		std::queue<IdxType> colQueue;
+		// std::cout << "Peeling init done." << std::endl;
+		for (u64 i = 0; i < cWeights.size(); i++)
+		{
+			if (cWeights[i] == 1)
+			{
+				colQueue.push(i);
+			}
+			if (cWeights[i] != cols[i].size())
+			{
+				throw std::runtime_error("INCONSISTENT");
+			}
+		}
+
+		while (colQueue.size() != 0)
+		{
+			// std::cout << "Queue size: " << colQueue.size() << endl;
+			IdxType cidx = colQueue.front();
+			// std::cout << "col index: " << cidx << "; ";
+			colQueue.pop();
+			if (cWeights[cidx] < 0)
+			{
+				throw RTE_LOC;
+			}
+			if (cWeights[cidx] == 0)
+			{
+				continue;
+			}
+			IdxType ridx = cols[cidx][0];
+			TwoCores[ridx] = 0;
+			cWeights[cidx] = 0;
+
+			for (u64 i = 0; i < 3; i++)
+			{
+				if (mRows[ridx][i] == IdxType(-1) || mRows[ridx][i] == cidx)
+				{
+					continue;
+				}
+				auto idx = mRows[ridx][i];
+				cWeights[idx] = cWeights[idx] - 1;
+				if (cWeights[idx] == 1)
+				{
+					colQueue.push(idx);
+				}
+				for (u64 j = 0; j < cols[idx].size(); j++)
+				{
+					if (cols[idx][j] == ridx)
+					{
+						cols[idx].erase(cols[idx].begin() + j);
+						break;
+					}
+					if (cols[idx].begin() + j == cols[idx].end())
+					{
+						throw std::runtime_error("Cannot find the row in the given col id");
+					}
+				}
+				if (cWeights[idx] != cols[idx].size())
+				{
+					throw std::runtime_error("INCONSISTENT!");
+				}
+			}
+		}
+
+		u64 num = 0;
+		for (u64 i = 0; i < mNumItems; i++)
+		{
+			num += TwoCores[i];
+			// if (TwoCores[i]>0){
+			// 	std::cout << "Row = " << i << std::endl;
+			// 	std::cout << "Col1: " << mRows[i][0] << ", ColWeight" << cWeights[mRows[i][0]] << std::endl;
+			// 	std::cout << "Col2: " << mRows[i][1] << ", ColWeight" << cWeights[mRows[i][1]] << std::endl;
+			// 	if (mRows[i][2] != IdxType(-1))
+			// 		std::cout << "Col3: " << mRows[i][2] << ", ColWeight" << cWeights[mRows[i][2]] << std::endl;
+			// }
+		}
+		// std::cout << "TwoCores nums: " << num << std::endl;
+		std::cout << num << "\t";
+	}
+
+
+
+
+
+	template <typename IdxType>
+	void Paxos<IdxType>::setInputHasher(span<const block> inputs)
+	{
+		// std::cout << "start setInput" << std::endl;
+		setTimePoint("setInput begin");
+		if (inputs.size() != mNumItems)
+			throw RTE_LOC;
+
+		allocate();
+		// Hasher hash1 = Hasher(1);
+		// Hasher hash2 = Hasher(2);
+		// Hasher hash3 = Hasher(3);
+		std::vector<Hasher> hasher(mWeight);
+		for (u64 i = 0; i < mWeight; i++)
+		{
+			hasher[i] = Hasher(i);
+		}
+
+		std::vector<IdxType> colWeights(mSparseSize);
+
+#ifndef NDEBUG
+		{
+			std::unordered_set<block> inputSet;
+			for (auto i : inputs)
+			{
+				assert(inputSet.insert(i).second);
+			}
+		}
+#endif
+		setTimePoint("setInput alloc");
+
+		{
+			auto inIter = inputs.data();
+			u64 Modulus = mSparseSize / mWeight;
+			u64 data;
+
+			for (u64 i = 0; i < mNumItems; ++i, ++inIter)
+			{
+				mHasher.hashBuildRow1(inIter, mRows[i].data(), &mDense[i]);
+				// mHasher.hashBuildRowHybrid(inIter, mRows[i].data(), &mDense[i], threshold);
+				memcpy(&data, &mDense[i], sizeof(u64));
+				for (u64 j = 0; j < mWeight-1; j++) {
+					mRows[i][j] = hasher[j](data) % Modulus + Modulus * j;
+				}
+				mRows[i][mWeight-1] = hasher[mWeight-1](data) % (mSparseSize - (mWeight-1) * Modulus) + Modulus * (mWeight-1);
+				// if (mWeight == 3)
+				// {
+				// 	mRows[i][0] = hash1(data) % Modulus;
+				// 	mRows[i][1] = hash2(data) % Modulus + Modulus;
+				// 	mRows[i][2] = hash3(data) % (mSparseSize - 2 * Modulus) + Modulus * 2;
+				// }
+				// else
+				// {
+				// 	mRows[i][0] = hash1(data) % Modulus;
+				// 	mRows[i][1] = hash2(data) % (mSparseSize - Modulus) + Modulus;
+				// }
+
+				for (auto c : mRows[i])
+				{
+					++colWeights[c];
+				}
+			}
+		}
+		// std::cout << "Counter = " << Count << std::endl;
+
+		setTimePoint("setInput buildRow");
+		// std::cout << "colWeights shape = " << colWeights.size() << ", " << std::endl;
+		rebuildColumns(colWeights, mWeight * mNumItems);
+		// std::cout << "rebuildcolWeights shape = " << colWeights.size() << std::endl;
+		setTimePoint("setInput rebuildColumns");
+		// test peeling
+		auto t1 = std::chrono::high_resolution_clock::now();
+		peeling(colWeights);
+		setTimePoint("setInput peeling");
+		auto t2 = std::chrono::high_resolution_clock::now();
+		auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+		// std::cout << "Peeling time: " << duration << std::endl;
+		std::cout << duration << "\t";
+
+		
+		mWeightSets.init(colWeights);
+		// std::cout << "mWeightSets shape = " << mWeightSets.mWeightSets.size() << std::endl;
+
+		setTimePoint("setInput end");
+	}
+
+
+template<typename ValueType>
+		void solveHasher(span<const block> inputs, span<const ValueType> values, span<ValueType> output, oc::PRNG* prng = nullptr)
+		{
+			setInputHasher(inputs);
+			encode<ValueType>(values, output, prng);
+		}
+
+		template<typename ValueType>
+		void solveHasher(span<const block> inputs, MatrixView<const ValueType> values, MatrixView<ValueType> output, oc::PRNG* prng = nullptr)
+		{
+			setInputHasher(inputs);
+			encode<ValueType>(values, output, prng);
+		}
+
+void setInputHasher(span<const block> inputs);
+
+#include "volePSI/Hasher.h"
+
+
+template<typename T>
+void perfHasherImpl(oc::CLP& cmd)
+{
+	auto n = cmd.getOr("n", 1ull << cmd.getOr("nn", 10));
+	u64 maxN = std::numeric_limits<T>::max() - 1;
+	auto t = cmd.getOr("t", 1ull);
+	//auto rand = cmd.isSet("rand");
+	auto v = cmd.getOr("v", cmd.isSet("v") ? 1 : 0);
+	auto w = cmd.getOr("w", 3);
+	auto ssp = cmd.getOr("ssp", 40);
+	auto dt = cmd.isSet("binary") ? PaxosParam::Binary : PaxosParam::GF128;
+	auto cols = cmd.getOr("cols", 0);
+	auto hyb = cmd.getOr("hybrid", 0);
+	auto rate = cmd.getOr("rate", 0.0);
+	auto overlap = cmd.getOr("overlap", 0.0);
+	auto ssize = cmd.getOr("ssize", 0.0);
+	// std::cout << "n = " << n << std::endl;
+	std::vector<int> mode = {0,0};
+	PaxosParam pp(n, w, ssp, dt, rate, overlap, mode, hyb, ssize);
+	// std::cout << "e=" << pp.mSparseSize / double(n) << std::endl;
+	if (maxN < pp.size())
+	{
+		std::cout << "n must be smaller than the index type max value. " LOCATION << std::endl;
+		throw RTE_LOC;
+	}
+	std::cout << "\n Hasher ssize: " << ssize << std::endl;
+
+	auto m = cols ? cols : 1;
+	std::vector<block> key(n);
+	oc::Matrix<block> val(n, m), pax(pp.size(), m);
+	PRNG prng(ZeroBlock);
+	prng.get<block>(key);
+	// for (u64 i=0; i<n; i++){
+	// 	key[i] = block(i+1);
+	// }
+	prng.get<block>(val);
+
+	Timer timer;
+	auto start = timer.setTimePoint("start");
+	auto end = start;
+	// std::cout << "PeelingTwoCore	" << "Peeling Time	" << "Triangularization Time 	" << "TriangularizationTwoCore" << std::endl;
+	for (u64 i = 0; i < t; ++i)
+	{
+		// std::cout << "mSparseSize = " << pp.mSparseSize << std::endl;
+		Paxos<T> paxos;
+		paxos.init(n, pp, block(i, i));	
+		// double x = paxos.mSparseSize / n;
+		// std::cout << x << std::endl;	
+		
+		if (v > 1)
+			paxos.setTimer(timer);
+
+		if (cols)
+		{
+			paxos.setInput(key);
+			paxos.template encode<block>(val, pax);
+			timer.setTimePoint("s" + std::to_string(i));
+			paxos.template decode<block>(key, val, pax);
+			
+		}
+		else
+		{
+			// std::cout << "call this" << std::endl;
+			paxos.template solveHasher<block>(key, oc::span<block>(val), oc::span<block>(pax));
+			timer.setTimePoint("s" + std::to_string(i));
+			// paxos.template decode<block>(key, oc::span<block>(val), oc::span<block>(pax));
+		}
+		
+		if (hyb == 1) {
+			std::cout << "Rate: " << paxos.Rate << std::endl;
+			std::cout << "threshold: " << paxos.threshold << std::endl;
+			std::cout << "OverlapRate: " << paxos.overlapRate << std::endl;
+		}
+
+
+		end = timer.setTimePoint("d" + std::to_string(i));
+	}
+	
+	if (v)
+		std::cout << timer << std::endl;
+
+	auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000);
+	std::cout << "total " << tt << "ms" << std::endl;
+	// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
+}
+
+void perfHasher(oc::CLP& cmd)
+{
+	auto bits = cmd.getOr("b", 16);
+	switch (bits)
+	{
+	case 8:
+		perfHasherImpl<u8>(cmd);
+		break;
+	case 16:
+		perfHasherImpl<u16>(cmd);
+		break;
+	case 32:
+		perfHasherImpl<u32>(cmd);
+		break;
+	case 64:
+		perfHasherImpl<u64>(cmd);
+		break;
+	default:
+		std::cout << "b must be 8,16,32 or 64. " LOCATION << std::endl;
+		throw RTE_LOC;
+	}
+
+}

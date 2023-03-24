@@ -3,11 +3,12 @@
 #include "volePSI/RsPsi.h"
 #include "volePSI/RsCpsi.h"
 #include "volePSI/SimpleIndex.h"
+
 #include "libdivide.h"
-
-
 using namespace oc;
 using namespace volePSI;;
+
+
 
 template<typename T>
 void perfHasherImpl(oc::CLP& cmd)
@@ -21,13 +22,10 @@ void perfHasherImpl(oc::CLP& cmd)
 	auto ssp = cmd.getOr("ssp", 40);
 	auto dt = cmd.isSet("binary") ? PaxosParam::Binary : PaxosParam::GF128;
 	auto cols = cmd.getOr("cols", 0);
-	auto hyb = cmd.getOr("hybrid", 0);
-	auto rate = cmd.getOr("rate", 0.0);
-	auto overlap = cmd.getOr("overlap", 0.0);
 	auto ssize = cmd.getOr("ssize", 0.0);
 	// std::cout << "n = " << n << std::endl;
-	std::vector<int> mode = {0,0};
-	PaxosParam pp(n, w, ssp, dt, rate, overlap, mode, hyb, ssize);
+
+	PaxosParam pp(n, w, ssp, dt, ssize);
 	// std::cout << "e=" << pp.mSparseSize / double(n) << std::endl;
 	if (maxN < pp.size())
 	{
@@ -41,9 +39,6 @@ void perfHasherImpl(oc::CLP& cmd)
 	oc::Matrix<block> val(n, m), pax(pp.size(), m);
 	PRNG prng(ZeroBlock);
 	prng.get<block>(key);
-	// for (u64 i=0; i<n; i++){
-	// 	key[i] = block(i+1);
-	// }
 	prng.get<block>(val);
 
 	Timer timer;
@@ -75,12 +70,6 @@ void perfHasherImpl(oc::CLP& cmd)
 			paxos.template solveHasher<block>(key, oc::span<block>(val), oc::span<block>(pax));
 			timer.setTimePoint("s" + std::to_string(i));
 			// paxos.template decode<block>(key, oc::span<block>(val), oc::span<block>(pax));
-		}
-		
-		if (hyb == 1) {
-			std::cout << "Rate: " << paxos.Rate << std::endl;
-			std::cout << "threshold: " << paxos.threshold << std::endl;
-			std::cout << "OverlapRate: " << paxos.overlapRate << std::endl;
 		}
 
 
@@ -120,36 +109,6 @@ void perfHasher(oc::CLP& cmd)
 }
 
 
-void perfPrf(oc::CLP& cmd)
-{
-	int n = cmd.getOr("n", 1024);
-	// int len = 4;
-	uint threshold = (0xffffffff)*0.2;
-    block seed = block(123);
-    oc::AES mAes;
-    mAes.setKey(seed);
-	// std::vector<block> ciphers(n);
-	std::vector<uint> res(n);
-	int count=0;
-	for (int i=0; i<n; i++) {
-		block plaintext = block(i);
-		block ciphertext;
-		mAes.ecbEncBlock(plaintext, ciphertext);
-		memcpy(&res[i], &ciphertext, sizeof(uint));
-		// res[i] = int(ciphers[i]&block((1ull<<11)-1);
-		if (res[i]< threshold) {
-			count++;
-		}
-		std::cout << ciphertext << std::endl;
-		std::cout << std::hex << res[i] << std::endl;
-		std::cout << std::dec << res[i] << std::endl;	
-	}
-	std::cout << "threshold = " << threshold << std::endl;
-	std::cout << "count = " << count << std::endl;
-
-    
-    // std::cout << ciphertext << std::endl;
-}
 
 void perfMod(oc::CLP& cmd)
 {
@@ -396,10 +355,6 @@ void perfBuildRow(oc::CLP& cmd)
 	}
 
 }
-
-
-
-
 template<typename T>
 void perfPaxosImpl(oc::CLP& cmd)
 {
@@ -412,14 +367,12 @@ void perfPaxosImpl(oc::CLP& cmd)
 	auto ssp = cmd.getOr("ssp", 40);
 	auto dt = cmd.isSet("binary") ? PaxosParam::Binary : PaxosParam::GF128;
 	auto cols = cmd.getOr("cols", 0);
-	auto hyb = cmd.getOr("hybrid", 0);
-	auto rate = cmd.getOr("rate", 0.2);
-	auto overlap = cmd.getOr("overlap", 0.0);
+	auto hybrid = cmd.getOr("hybrid", 0);
+	auto rate = cmd.getOr("rate", 0.0);
 	auto ssize = cmd.getOr("ssize", 0.0);
-	// std::cout << "n = " << n << std::endl;
-	std::vector<int> mode = {0,0};
-	PaxosParam pp(n, w, ssp, dt, rate, overlap, mode, hyb, ssize);
-	//std::cout << "e=" << pp.size() / double(n) << std::endl;
+
+	PaxosParam pp(n, w, ssp, dt, hybrid, rate, ssize);
+	std::cout << "e=" << ssize << std::endl;
 	if (maxN < pp.size())
 	{
 		std::cout << "n must be smaller than the index type max value. " LOCATION << std::endl;
@@ -431,9 +384,6 @@ void perfPaxosImpl(oc::CLP& cmd)
 	oc::Matrix<block> val(n, m), pax(pp.size(), m);
 	PRNG prng(ZeroBlock);
 	prng.get<block>(key);
-	// for (u64 i=0; i<n; i++){
-	// 	key[i] = block(i);
-	// }
 	prng.get<block>(val);
 
 	Timer timer;
@@ -441,10 +391,9 @@ void perfPaxosImpl(oc::CLP& cmd)
 	auto end = start;
 	for (u64 i = 0; i < t; ++i)
 	{
-		// std::cout << "mSparseSize = " << pp.mSparseSize << std::endl;
 		Paxos<T> paxos;
-		paxos.init(n, pp, block(i, i));		
-		
+		paxos.init(n, pp, block(i, i));
+
 		if (v > 1)
 			paxos.setTimer(timer);
 
@@ -454,32 +403,24 @@ void perfPaxosImpl(oc::CLP& cmd)
 			paxos.template encode<block>(val, pax);
 			timer.setTimePoint("s" + std::to_string(i));
 			paxos.template decode<block>(key, val, pax);
-			
 		}
 		else
 		{
-			// std::cout << "call this" << std::endl;
+
 			paxos.template solve<block>(key, oc::span<block>(val), oc::span<block>(pax));
 			timer.setTimePoint("s" + std::to_string(i));
-			// paxos.template decode<block>(key, oc::span<block>(val), oc::span<block>(pax));
-		}
-		
-		if (hyb == 1) {
-			std::cout << "Rate: " << paxos.Rate << std::endl;
-			std::cout << "threshold: " << paxos.threshold << std::endl;
-			std::cout << "OverlapRate: " << paxos.overlapRate << std::endl;
+			paxos.template decode<block>(key, oc::span<block>(val), oc::span<block>(pax));
 		}
 
 
 		end = timer.setTimePoint("d" + std::to_string(i));
 	}
-	
+
 	if (v)
 		std::cout << timer << std::endl;
 
 	auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000);
 	std::cout << "total " << tt << "ms" << std::endl;
-	// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
 }
 
 void perfPaxos(oc::CLP& cmd)
@@ -515,7 +456,13 @@ void perfPSI(oc::CLP& cmd)
 	auto nt = cmd.getOr("nt", 1);
 	bool fakeBase = cmd.isSet("fakeBase");
 	bool noCompress = cmd.isSet("nc");
-	bool useSilver = cmd.isSet("useSilver");
+
+	// The vole type, default to expand accumulate.
+	auto type = oc::DefaultMultType;
+	type = cmd.isSet("useSilver") ? oc::MultType::slv5 : type;
+#ifdef ENABLE_BITPOLYMUL
+	type = cmd.isSet("useQC") ? oc::MultType::QuasiCyclic : type;
+#endif
 	//IOService ios;
 
 	//auto chl0 = Session(ios, "localhost:1212", SessionMode::Server).addChannel();
@@ -542,13 +489,8 @@ void perfPSI(oc::CLP& cmd)
 	recv.init(n, n, 40, ZeroBlock, mal, nt);
 	send.init(n, n, 40, ZeroBlock, mal, nt);
 
-#ifdef ENABLE_BITPOLYMUL
-	if (useSilver)
-	{
-		recv.setMultType(oc::MultType::slv5);
-		send.setMultType(oc::MultType::slv5);
-	}
-#endif
+	recv.setMultType(type);
+	send.setMultType(type);
 
 	if (noCompress)
 	{
@@ -680,8 +622,6 @@ void perf(oc::CLP& cmd)
 		perfBuildRow(cmd);
 	if (cmd.isSet("mod"))
 		perfMod(cmd);
-	if (cmd.isSet("prf"))
-		perfPrf(cmd);
 	if (cmd.isSet("hasher"))
 		perfHasher(cmd);
 }
