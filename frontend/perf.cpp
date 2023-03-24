@@ -9,113 +9,6 @@
 using namespace oc;
 using namespace volePSI;;
 
-template<typename T>
-void perfHasherImpl(oc::CLP& cmd)
-{
-	auto n = cmd.getOr("n", 1ull << cmd.getOr("nn", 10));
-	u64 maxN = std::numeric_limits<T>::max() - 1;
-	auto t = cmd.getOr("t", 1ull);
-	//auto rand = cmd.isSet("rand");
-	auto v = cmd.getOr("v", cmd.isSet("v") ? 1 : 0);
-	auto w = cmd.getOr("w", 3);
-	auto ssp = cmd.getOr("ssp", 40);
-	auto dt = cmd.isSet("binary") ? PaxosParam::Binary : PaxosParam::GF128;
-	auto cols = cmd.getOr("cols", 0);
-	auto hyb = cmd.getOr("hybrid", 0);
-	auto rate = cmd.getOr("rate", 0.2);
-	auto overlap = cmd.getOr("overlap", 0.0);
-	std::cout << "n = " << n << std::endl;
-	std::vector<int> mode = {2,3};
-	PaxosParam pp(n, w, ssp, dt, rate, overlap, mode, hyb);
-	//std::cout << "e=" << pp.size() / double(n) << std::endl;
-	if (maxN < pp.size())
-	{
-		std::cout << "n must be smaller than the index type max value. " LOCATION << std::endl;
-		throw RTE_LOC;
-	}
-
-	auto m = cols ? cols : 1;
-	std::vector<block> key(n);
-	oc::Matrix<block> val(n, m), pax(pp.size(), m);
-	PRNG prng(ZeroBlock);
-	prng.get<block>(key);
-	// for (u64 i=0; i<n; i++){
-	// 	key[i] = block(i+1);
-	// }
-	prng.get<block>(val);
-
-	Timer timer;
-	auto start = timer.setTimePoint("start");
-	auto end = start;
-	for (u64 i = 0; i < t; ++i)
-	{
-		std::cout << "mSparseSize = " << pp.mSparseSize << std::endl;
-		Paxos<T> paxos;
-		paxos.init(n, pp, block(i, i));		
-		
-		if (v > 1)
-			paxos.setTimer(timer);
-
-		if (cols)
-		{
-			paxos.setInput(key);
-			paxos.template encode<block>(val, pax);
-			timer.setTimePoint("s" + std::to_string(i));
-			paxos.template decode<block>(key, val, pax);
-			
-		}
-		else
-		{
-			// std::cout << "call this" << std::endl;
-			paxos.template solveHasher<block>(key, oc::span<block>(val), oc::span<block>(pax));
-			timer.setTimePoint("s" + std::to_string(i));
-			std::cout << "Start decode!" << std::endl;
-			std::cout << "hybrid flag = " << paxos.hybridFlag << std::endl;
-			paxos.template decode<block>(key, oc::span<block>(val), oc::span<block>(pax));
-		}
-		
-		if (hyb == 1) {
-			std::cout << "Rate: " << paxos.Rate << std::endl;
-			std::cout << "threshold: " << paxos.threshold << std::endl;
-			std::cout << "OverlapRate: " << paxos.overlapRate << std::endl;
-		}
-
-
-		end = timer.setTimePoint("d" + std::to_string(i));
-	}
-	
-	if (v)
-		std::cout << timer << std::endl;
-
-	auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000);
-	std::cout << "total " << tt << "ms" << std::endl;
-	// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
-}
-
-void perfHasher(oc::CLP& cmd)
-{
-	auto bits = cmd.getOr("b", 16);
-	switch (bits)
-	{
-	case 8:
-		perfHasherImpl<u8>(cmd);
-		break;
-	case 16:
-		perfHasherImpl<u16>(cmd);
-		break;
-	case 32:
-		perfHasherImpl<u32>(cmd);
-		break;
-	case 64:
-		perfHasherImpl<u64>(cmd);
-		break;
-	default:
-		std::cout << "b must be 8,16,32 or 64. " LOCATION << std::endl;
-		throw RTE_LOC;
-	}
-
-}
-
 
 void perfPrf(oc::CLP& cmd)
 {
@@ -411,10 +304,9 @@ void perfPaxosImpl(oc::CLP& cmd)
 	auto cols = cmd.getOr("cols", 0);
 	auto hyb = cmd.getOr("hybrid", 0);
 	auto rate = cmd.getOr("rate", 0.2);
-	auto overlap = cmd.getOr("overlap", 0.0);
-	std::cout << "n = " << n << std::endl;
-	std::vector<int> mode = {2,3};
-	PaxosParam pp(n, w, ssp, dt, rate, overlap, mode, hyb);
+	auto ssize = cmd.getOr("ssize", 0.0);
+
+	PaxosParam pp(n, w, ssp, dt, hyb, rate, ssize);
 	//std::cout << "e=" << pp.size() / double(n) << std::endl;
 	if (maxN < pp.size())
 	{
@@ -426,10 +318,7 @@ void perfPaxosImpl(oc::CLP& cmd)
 	std::vector<block> key(n);
 	oc::Matrix<block> val(n, m), pax(pp.size(), m);
 	PRNG prng(ZeroBlock);
-	// prng.get<block>(key);
-	for (u64 i=0; i<n; i++){
-		key[i] = block(i);
-	}
+	prng.get<block>(key);
 	prng.get<block>(val);
 
 	Timer timer;
@@ -437,7 +326,7 @@ void perfPaxosImpl(oc::CLP& cmd)
 	auto end = start;
 	for (u64 i = 0; i < t; ++i)
 	{
-		std::cout << "mSparseSize = " << pp.mSparseSize << std::endl;
+		std::cout << "e = " << pp.mSparseSize / double(n) << std::endl;
 		Paxos<T> paxos;
 		paxos.init(n, pp, block(i, i));		
 		
@@ -460,12 +349,6 @@ void perfPaxosImpl(oc::CLP& cmd)
 			std::cout << "Start decode!" << std::endl;
 			std::cout << "hybrid flag = " << paxos.hybridFlag << std::endl;
 			paxos.template decode<block>(key, oc::span<block>(val), oc::span<block>(pax));
-		}
-		
-		if (hyb == 1) {
-			std::cout << "Rate: " << paxos.Rate << std::endl;
-			std::cout << "threshold: " << paxos.threshold << std::endl;
-			std::cout << "OverlapRate: " << paxos.overlapRate << std::endl;
 		}
 
 
@@ -680,8 +563,6 @@ void perf(oc::CLP& cmd)
 		perfMod(cmd);
 	if (cmd.isSet("prf"))
 		perfPrf(cmd);
-	if (cmd.isSet("hasher"))
-		perfHasher(cmd);
 }
 
 

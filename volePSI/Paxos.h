@@ -46,25 +46,24 @@ namespace volePSI
 		DenseType mDt = GF128;
 		
 		// For hybrid
-		double Rate = 0.2;
-		double overlapRate = 0.0;
-		int hybridFlag = 1;
-		std::vector<int> Mode = {2,3};
-		u64 mFirstSize = 0;
-		u64 mSecondSize = 0;
-		u64 mPos = 0;
+		double mRate = 0.2;
+		bool hybridFlag = 1;
+		u64 mThreshold = (0xffffffff) * mRate;
+
+
+
 
 		PaxosParam() = default;
 		PaxosParam(const PaxosParam&) = default;
 		PaxosParam& operator=(const PaxosParam&) = default;
 
-		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.2, double overlap = 0.0, std::vector<int> mode = {2,3}, int hybflag = 1)
+		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.2, double ssize = 0.0)
 		{
-			init(numItems, weight, ssp, dt, rate, overlap, mode, hybflag);
+			init(numItems, weight, ssp, dt, hybflag, rate, ssize);
 		}
 
 		// computes the paxos parameters based the parameters.
-		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, double rate = 0.2, double overlap = 0.0, std::vector<int> mode = {2,3}, int hybflag = 1);
+		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.2, double ssize = 0.0);
 
 		// the size of the paxos data structure.
 		u64 size() const
@@ -88,7 +87,7 @@ namespace volePSI
 		// the number of items to be encoded.
 		IdxType mNumItems = 0;
 
-		u64 threshold = (0xffffffff) * Rate;
+		
 		u64 Count = 0;
 
 		// the encoding/decoding seed.
@@ -140,23 +139,6 @@ namespace volePSI
 		// initialize the paxos with the given parameters.
 		void init(u64 numItems, PaxosParam p, block seed);
 
-		// solve/encode the given inputs,value pair. The paxos data 
-		// structure is written to output. input,value should be numItems 
-		// in size, output should be Paxos::size() in size. If the paxos
-		// should be randomized, then provide a PRNG.
-		template<typename ValueType>
-		void solveHasher(span<const block> inputs, span<const ValueType> values, span<ValueType> output, oc::PRNG* prng = nullptr)
-		{
-			setInputHasher(inputs);
-			encode<ValueType>(values, output, prng);
-		}
-
-		template<typename ValueType>
-		void solveHasher(span<const block> inputs, MatrixView<const ValueType> values, MatrixView<ValueType> output, oc::PRNG* prng = nullptr)
-		{
-			setInputHasher(inputs);
-			encode<ValueType>(values, output, prng);
-		}
 
 		// solve/encode the given inputs,value pair. The paxos data 
 		// structure is written to output. input,value should be numItems 
@@ -185,7 +167,6 @@ namespace volePSI
 		// encode can be called more than once.
 		void setInput(span<const block> inputs);
 
-		void setInputHasher(span<const block> inputs);
 
 		// encode the given inputs,value pair based on the already set input. The paxos data 
 		// structure is written to output. input,value should be numItems 
