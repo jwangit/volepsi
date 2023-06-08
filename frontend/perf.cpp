@@ -5,9 +5,9 @@
 #include "volePSI/SimpleIndex.h"
 #include "libdivide.h"
 
-
 using namespace oc;
-using namespace volePSI;;
+using namespace volePSI;
+;
 
 // demo
 // sender run: ./out/build/linux/frontend/frontend -in dev/senderData.csv -r 0 -out dev/out1.csv -csv
@@ -16,14 +16,14 @@ using namespace volePSI;;
 // test e and g
 // Test Vole-okvs: ./out/build/linux/frontend/frontend -perf -test -hybrid 0 -nn 10 -t 100 -ssize 1.23 > dev/res.log
 // Test Hybrid-okvs (2vs3): ./out/build/linux/frontend/frontend -perf -test -hybrid 1 -nn 10 -t 100 -rate 0.2 -ssize 1.23 > dev/res.log
-// Test Hybrid-okvs (3vs4): ./out/build/linux/frontend/frontend -perf -test -hybrid 1 -nn 10 -t 100 -rate 0.2 -ssize 1.23 -w 4 > dev/res.log
-template<typename T>
-void perfTestImpl(oc::CLP& cmd)
+// Test Hybrid-okvs (3vs4): ./out/build/linux/frontend/frontend -perf -test -hybrid 1 -nn 10 -t 10000000 -w 4 -rate 0.8 -ssize 1.5 > dev/res.log
+template <typename T>
+void perfTestImpl(oc::CLP &cmd)
 {
 	auto n = cmd.getOr("n", 1ull << cmd.getOr("nn", 10));
 	u64 maxN = std::numeric_limits<T>::max() - 1;
 	auto t = cmd.getOr("t", 1ull);
-	//auto rand = cmd.isSet("rand");
+	// auto rand = cmd.isSet("rand");
 	auto v = cmd.getOr("v", cmd.isSet("v") ? 1 : 0);
 	auto w = cmd.getOr("w", 3);
 	auto ssp = cmd.getOr("ssp", 40);
@@ -34,15 +34,20 @@ void perfTestImpl(oc::CLP& cmd)
 	auto rate = cmd.getOr("rate", 0.2);
 	auto ssize = cmd.getOr("ssize", 0.0); // sparsesize/n
 
-	PaxosParam pp(n, w, ssp, dt, hyb, rate, ssize);
-	if (hyb == 0) {
+	// PaxosParam pp(n, w, ssp, dt, hyb, rate, ssize);
+	PaxosParam pp;
+	pp.initTest(n, w, ssp, dt, hyb, rate, ssize);
+
+	if (hyb == 0)
+	{
 		std::cout << "Vole mode: " << std::endl;
 	}
-	else {
+	else
+	{
 		std::cout << "Hybrid mode: " << std::endl;
 		std::cout << "Rate: " << rate << std::endl;
 	}
-	
+
 	std::cout << "mSparseSize/n = " << pp.mSparseSize / double(n) << std::endl;
 	std::cout << "e =" << pp.size() / double(n) << std::endl;
 	if (maxN < pp.size())
@@ -60,13 +65,16 @@ void perfTestImpl(oc::CLP& cmd)
 
 	Timer timer;
 	auto start = timer.setTimePoint("start");
-	auto end = start;
+	// auto end = start;
 	for (u64 i = 0; i < t; ++i)
 	{
-		
+		if (i % 100 == 0)
+		{
+			std::cout << std::endl;
+		}
 		Paxos<T> paxos;
-		paxos.init(n, pp, block(i, i));		
-		
+		paxos.init(n, pp, block(i, i));
+
 		if (v > 1)
 			paxos.setTimer(timer);
 
@@ -76,7 +84,6 @@ void perfTestImpl(oc::CLP& cmd)
 			paxos.template encode<block>(val, pax);
 			timer.setTimePoint("s" + std::to_string(i));
 			paxos.template decode<block>(key, val, pax);
-			
 		}
 		else
 		{
@@ -84,11 +91,8 @@ void perfTestImpl(oc::CLP& cmd)
 			paxos.template solveTest<block>(key, oc::span<block>(val), oc::span<block>(pax));
 			timer.setTimePoint("s" + std::to_string(i));
 		}
-
-
-		end = timer.setTimePoint("d" + std::to_string(i));
 	}
-	
+	auto end = timer.setTimePoint("end");
 	if (v)
 		std::cout << timer << std::endl;
 
@@ -97,7 +101,7 @@ void perfTestImpl(oc::CLP& cmd)
 	// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
 }
 
-void perfTest(oc::CLP& cmd)
+void perfTest(oc::CLP &cmd)
 {
 	auto bits = cmd.getOr("b", 16);
 	switch (bits)
@@ -118,41 +122,41 @@ void perfTest(oc::CLP& cmd)
 		std::cout << "b must be 8,16,32 or 64. " LOCATION << std::endl;
 		throw RTE_LOC;
 	}
-
 }
 
-void perfPrf(oc::CLP& cmd)
+void perfPrf(oc::CLP &cmd)
 {
 	int n = cmd.getOr("n", 1024);
 	// int len = 4;
-	uint threshold = (0xffffffff)*0.2;
-    block seed = block(123);
-    oc::AES mAes;
-    mAes.setKey(seed);
+	uint threshold = (0xffffffff) * 0.2;
+	block seed = block(123);
+	oc::AES mAes;
+	mAes.setKey(seed);
 	// std::vector<block> ciphers(n);
 	std::vector<uint> res(n);
-	int count=0;
-	for (int i=0; i<n; i++) {
+	int count = 0;
+	for (int i = 0; i < n; i++)
+	{
 		block plaintext = block(i);
 		block ciphertext;
 		mAes.ecbEncBlock(plaintext, ciphertext);
 		memcpy(&res[i], &ciphertext, sizeof(uint));
 		// res[i] = int(ciphers[i]&block((1ull<<11)-1);
-		if (res[i]< threshold) {
+		if (res[i] < threshold)
+		{
 			count++;
 		}
 		std::cout << ciphertext << std::endl;
 		std::cout << std::hex << res[i] << std::endl;
-		std::cout << std::dec << res[i] << std::endl;	
+		std::cout << std::dec << res[i] << std::endl;
 	}
 	std::cout << "threshold = " << threshold << std::endl;
 	std::cout << "count = " << count << std::endl;
 
-    
-    // std::cout << ciphertext << std::endl;
+	// std::cout << ciphertext << std::endl;
 }
 
-void perfMod(oc::CLP& cmd)
+void perfMod(oc::CLP &cmd)
 {
 	auto n = cmd.getOr("n", 1ull << cmd.getOr("nn", 10));
 
@@ -160,12 +164,13 @@ void perfMod(oc::CLP& cmd)
 	PRNG prng_(oc::ZeroBlock);
 	u64 mod = prng_.get<u32>();
 
-
-	auto rand = [&](oc::span<u64> v) {
+	auto rand = [&](oc::span<u64> v)
+	{
 		PRNG prng(oc::ZeroBlock);
 		prng.get<u64>(v);
 	};
-	auto check = [&](std::string name) {
+	auto check = [&](std::string name)
+	{
 		std::vector<u64> v2(n);
 		rand(v2);
 
@@ -179,16 +184,15 @@ void perfMod(oc::CLP& cmd)
 		}
 	};
 
-	auto cRoutine = [&] {
+	auto cRoutine = [&]
+	{
 		for (u64 i = 0; i < n; ++i)
 			vals[i] = vals[i] % mod;
 	};
 
-
-	//auto avxRoutine = [&] {
+	// auto avxRoutine = [&] {
 	//	auto n32 = n / 32;
 	//	auto mod256 = ::_mm256_set1_epi64x(mod);
-
 
 	//	//row256[0] = _mm256_loadu_si256(llPtr);
 	//	//row256[1] = _mm256_loadu_si256(llPtr + 1);
@@ -206,23 +210,23 @@ void perfMod(oc::CLP& cmd)
 	//	}
 	//};
 
-	auto libDivRoutine = [&] {
-
+	auto libDivRoutine = [&]
+	{
 		PaxosHash<u32> hasher;
 		hasher.mMods.emplace_back(libdivide::libdivide_u64_gen(mod));
 		hasher.mModVals.emplace_back(mod);
-		//libdivide::libdivide_u64_t mod2 = libdivide::libdivide_u64_gen(mod);
+		// libdivide::libdivide_u64_t mod2 = libdivide::libdivide_u64_gen(mod);
 		//__m256i temp;
 		for (u64 i = 0; i < n; i += 32)
 		{
 			hasher.mod32(&vals[i], 0);
 			//__m256i* row256 = (__m256i*) & vals[i];
-			//temp = libdivide::libdivide_u64_do_vec256(*row256, &mod2);
-			//auto temp64 = (u64*)&temp;
-			//vals[i + 0] -= temp64[0] * mod;
-			//vals[i + 1] -= temp64[1] * mod;
-			//vals[i + 2] -= temp64[2] * mod;
-			//vals[i + 3] -= temp64[3] * mod;
+			// temp = libdivide::libdivide_u64_do_vec256(*row256, &mod2);
+			// auto temp64 = (u64*)&temp;
+			// vals[i + 0] -= temp64[0] * mod;
+			// vals[i + 1] -= temp64[1] * mod;
+			// vals[i + 2] -= temp64[2] * mod;
+			// vals[i + 3] -= temp64[3] * mod;
 		}
 	};
 	oc::Timer timer;
@@ -235,34 +239,32 @@ void perfMod(oc::CLP& cmd)
 	rand(vals);
 	timer.setTimePoint("rand");
 
-	//avxRoutine();
-	//timer.setTimePoint("avx");
+	// avxRoutine();
+	// timer.setTimePoint("avx");
 
-	//check("avx");
-	//rand(vals);
-	//timer.setTimePoint("rand");
+	// check("avx");
+	// rand(vals);
+	// timer.setTimePoint("rand");
 
 	libDivRoutine();
 	timer.setTimePoint("ibdivide");
 	check("libDiv");
 
 	std::cout << timer << std::endl;
-
 }
 
-
-void perfBaxos(oc::CLP& cmd)
+void perfBaxos(oc::CLP &cmd)
 {
 	auto n = cmd.getOr("n", 1ull << cmd.getOr("nn", 10));
 	auto t = cmd.getOr("t", 1ull);
-	//auto rand = cmd.isSet("rand");
+	// auto rand = cmd.isSet("rand");
 	auto v = cmd.getOr("v", cmd.isSet("v") ? 1 : 0);
 	auto w = cmd.getOr("w", 3);
 	auto ssp = cmd.getOr("ssp", 40);
 	auto dt = cmd.isSet("binary") ? PaxosParam::Binary : PaxosParam::GF128;
 	auto nt = cmd.getOr("nt", 0);
 
-	//PaxosParam pp(n, w, ssp, dt);
+	// PaxosParam pp(n, w, ssp, dt);
 	auto binSize = 1 << cmd.getOr("lbs", 15);
 	u64 baxosSize;
 	{
@@ -283,7 +285,7 @@ void perfBaxos(oc::CLP& cmd)
 		Baxos paxos;
 		paxos.init(n, binSize, w, ssp, dt, block(i, i));
 
-		//if (v > 1)
+		// if (v > 1)
 		//	paxos.setTimer(timer);
 
 		paxos.solve<block>(key, val, pax, nullptr, nt);
@@ -301,21 +303,20 @@ void perfBaxos(oc::CLP& cmd)
 	std::cout << "total " << tt << "ms, e=" << double(baxosSize) / n << std::endl;
 }
 
-
-template<typename T>
-void perfBuildRowImpl(oc::CLP& cmd)
+template <typename T>
+void perfBuildRowImpl(oc::CLP &cmd)
 {
 	auto n = cmd.getOr("n", 1ull << cmd.getOr("nn", 10));
 	u64 maxN = std::numeric_limits<T>::max() - 1;
 	auto t = cmd.getOr("t", 1ull);
-	//auto rand = cmd.isSet("rand");
+	// auto rand = cmd.isSet("rand");
 	auto v = cmd.isSet("v");
 	auto w = cmd.getOr("w", 3);
 	auto ssp = cmd.getOr("ssp", 40);
 	auto dt = cmd.isSet("binary") ? PaxosParam::Binary : PaxosParam::GF128;
 
 	PaxosParam pp(n, w, ssp, dt);
-	//std::cout << "e=" << pp.size() / double(n) << std::endl;
+	// std::cout << "e=" << pp.size() / double(n) << std::endl;
 	if (maxN < pp.size())
 	{
 		std::cout << "n must be smaller than the index type max value. " LOCATION << std::endl;
@@ -347,7 +348,6 @@ void perfBuildRowImpl(oc::CLP& cmd)
 	auto tt32 = std::chrono::duration_cast<std::chrono::microseconds>(end32 - start32).count() / double(1000);
 	std::cout << "total32 " << tt32 << "ms" << std::endl;
 
-
 	if (cmd.isSet("single"))
 	{
 
@@ -367,14 +367,12 @@ void perfBuildRowImpl(oc::CLP& cmd)
 		}
 		auto tt1 = std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1).count() / double(1000);
 		std::cout << "total1  " << tt1 << "ms" << std::endl;
-
 	}
 	if (v)
 		std::cout << timer << std::endl;
-
 }
 
-void perfBuildRow(oc::CLP& cmd)
+void perfBuildRow(oc::CLP &cmd)
 {
 	auto bits = cmd.getOr("b", 16);
 	switch (bits)
@@ -395,19 +393,15 @@ void perfBuildRow(oc::CLP& cmd)
 		std::cout << "b must be 8,16,32 or 64. " LOCATION << std::endl;
 		throw RTE_LOC;
 	}
-
 }
 
-
-
-
-template<typename T>
-void perfPaxosImpl(oc::CLP& cmd)
+template <typename T>
+void perfPaxosImpl(oc::CLP &cmd)
 {
 	auto n = cmd.getOr("n", 1ull << cmd.getOr("nn", 10));
 	u64 maxN = std::numeric_limits<T>::max() - 1;
 	auto t = cmd.getOr("t", 1ull);
-	//auto rand = cmd.isSet("rand");
+	// auto rand = cmd.isSet("rand");
 	auto v = cmd.getOr("v", cmd.isSet("v") ? 1 : 0);
 	auto w = cmd.getOr("w", 3);
 	auto ssp = cmd.getOr("ssp", 40);
@@ -418,7 +412,7 @@ void perfPaxosImpl(oc::CLP& cmd)
 	auto ssize = cmd.getOr("ssize", 0.0);
 
 	PaxosParam pp(n, w, ssp, dt, hyb, rate, ssize);
-	//std::cout << "e=" << pp.size() / double(n) << std::endl;
+	// std::cout << "e=" << pp.size() / double(n) << std::endl;
 	if (maxN < pp.size())
 	{
 		std::cout << "n must be smaller than the index type max value. " LOCATION << std::endl;
@@ -435,12 +429,15 @@ void perfPaxosImpl(oc::CLP& cmd)
 	Timer timer;
 	auto start = timer.setTimePoint("start");
 	auto end = start;
+	auto time_encoding = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	auto time_total = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	for (u64 i = 0; i < t; ++i)
 	{
-		std::cout << "e = " << pp.mSparseSize / double(n) << std::endl;
+		auto init_time = timer.setTimePoint("init_time");
+		std::cout << "e = " << pp.size() / double(n) << std::endl;
 		Paxos<T> paxos;
-		paxos.init(n, pp, block(i, i));		
-		
+		paxos.init(n, pp, block(i, i));
+
 		if (v > 1)
 			paxos.setTimer(timer);
 
@@ -450,31 +447,34 @@ void perfPaxosImpl(oc::CLP& cmd)
 			paxos.template encode<block>(val, pax);
 			timer.setTimePoint("s" + std::to_string(i));
 			paxos.template decode<block>(key, val, pax);
-			
 		}
 		else
 		{
 			// std::cout << "call this" << std::endl;
+
 			paxos.template solve<block>(key, oc::span<block>(val), oc::span<block>(pax));
+			end = timer.setTimePoint("d" + std::to_string(i));
+			time_encoding = time_encoding + std::chrono::duration_cast<std::chrono::microseconds>(end - init_time).count();
 			timer.setTimePoint("s" + std::to_string(i));
-			std::cout << "Start decode!" << std::endl;
+			// std::cout << "Start decode!" << std::endl;
 			std::cout << "hybrid flag = " << paxos.hybridFlag << std::endl;
 			paxos.template decode<block>(key, oc::span<block>(val), oc::span<block>(pax));
 		}
 
-
-		end = timer.setTimePoint("d" + std::to_string(i));
+		end = timer.setTimePoint("end");
+		time_total = time_total + std::chrono::duration_cast<std::chrono::microseconds>(end - init_time).count();
 	}
-	
+
 	if (v)
 		std::cout << timer << std::endl;
 
-	auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000);
-	std::cout << "total " << tt << "ms" << std::endl;
+	// auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000);
+	std::cout << "encording time: " << time_encoding / double(1000) / t << "ms" << std::endl;
+	std::cout << "total time: " << time_total / double(1000) / t << "ms" << std::endl;
 	// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
 }
 
-void perfPaxos(oc::CLP& cmd)
+void perfPaxos(oc::CLP &cmd)
 {
 	auto bits = cmd.getOr("b", 16);
 	switch (bits)
@@ -495,10 +495,9 @@ void perfPaxos(oc::CLP& cmd)
 		std::cout << "b must be 8,16,32 or 64. " LOCATION << std::endl;
 		throw RTE_LOC;
 	}
-
 }
 
-void perfPSI(oc::CLP& cmd)
+void perfPSI(oc::CLP &cmd)
 {
 	auto n = 1ull << cmd.getOr("nn", 10);
 	auto t = cmd.getOr("t", 1ull);
@@ -508,10 +507,13 @@ void perfPSI(oc::CLP& cmd)
 	bool fakeBase = cmd.isSet("fakeBase");
 	bool noCompress = cmd.isSet("nc");
 	bool useSilver = cmd.isSet("useSilver");
-	//IOService ios;
+	auto hyb = cmd.getOr("hybrid", 0);
+	auto rate = cmd.getOr("rate", 0.2);
+	auto w = cmd.getOr("w", 3);
+	// IOService ios;
 
-	//auto chl0 = Session(ios, "localhost:1212", SessionMode::Server).addChannel();
-	//auto chl1 = Session(ios, "localhost:1212", SessionMode::Client).addChannel();
+	// auto chl0 = Session(ios, "localhost:1212", SessionMode::Server).addChannel();
+	// auto chl1 = Session(ios, "localhost:1212", SessionMode::Client).addChannel();
 	PRNG prng(ZeroBlock);
 	Timer timer, s, r;
 	std::cout << "nt " << nt << " fakeBase " << int(fakeBase) << " n " << n << std::endl;
@@ -531,85 +533,106 @@ void perfPSI(oc::CLP& cmd)
 		send.mSender.mVoleSender.setBaseOts(recvBase, recvChoice);
 		timer.setTimePoint("fakeBase");
 	}
-	recv.init(n, n, 40, ZeroBlock, mal, nt);
-	send.init(n, n, 40, ZeroBlock, mal, nt);
-
-#ifdef ENABLE_BITPOLYMUL
-	if (useSilver)
-	{
-		recv.setMultType(oc::MultType::slv5);
-		send.setMultType(oc::MultType::slv5);
-	}
-#endif
-
-	if (noCompress)
-	{
-		recv.mCompress = false;
-		send.mCompress = false;
-		recv.mMaskSize = sizeof(block);
-		send.mMaskSize = sizeof(block);
-	}
-
-
-	if (cmd.hasValue("bs") || cmd.hasValue("lbs"))
-	{
-		u64 binSize = cmd.getOr("bs", 1ull << cmd.getOr("lbs", 15));
-		recv.mRecver.mBinSize = binSize;
-		send.mSender.mBinSize = binSize;
-	}
-
-	std::vector<block> recvSet(n), sendSet(n);
-	prng.get<block>(recvSet);
-	prng.get<block>(sendSet);
-
-	recv.setTimer(r);
-	send.setTimer(s);
-
-	auto sockets = cp::LocalAsyncSocket::makePair();
-
+	
+	auto start = timer.setTimePoint("start total");
 	for (u64 i = 0; i < t; ++i)
 	{
+		if (i==1){
+			start = timer.setTimePoint("start reset");
+		}
+		timer.setTimePoint("start"+ std::to_string(i));
+		recv.init(n, n, 40, ZeroBlock, mal, nt);
+		send.init(n, n, 40, ZeroBlock, mal, nt);
+
+#ifdef ENABLE_BITPOLYMUL
+		if (useSilver)
+		{
+			recv.setMultType(oc::MultType::slv5);
+			send.setMultType(oc::MultType::slv5);
+		}
+#endif
+
+		if (noCompress)
+		{
+			recv.mCompress = false;
+			send.mCompress = false;
+			recv.mMaskSize = sizeof(block);
+			send.mMaskSize = sizeof(block);
+		}
+
+		if (cmd.hasValue("bs") || cmd.hasValue("lbs"))
+		{
+			u64 binSize = cmd.getOr("bs", 1ull << cmd.getOr("lbs", 15));
+			recv.mRecver.mBinSize = binSize;
+			send.mSender.mBinSize = binSize;
+		}
+
+		std::vector<block> recvSet(n), sendSet(n);
+		prng.get<block>(recvSet);
+		prng.get<block>(sendSet);
+
+		recv.setTimer(r);
+		send.setTimer(s);
+
+		auto sockets = cp::LocalAsyncSocket::makePair();
+
 		auto p0 = recv.run(recvSet, sockets[0]);
 		auto p1 = send.run(sendSet, sockets[1]);
 		s.setTimePoint("begin");
 		r.setTimePoint("begin");
-		timer.setTimePoint("begin");
+		// timer.setTimePoint("begin");
 		auto r = macoro::sync_wait(macoro::when_all_ready(std::move(p0), std::move(p1)));
-		try{ std::get<0>(r).result(); } catch(std::exception& e) {std::cout << e.what() << std::endl; }
-		try{ std::get<1>(r).result(); } catch(std::exception& e) {std::cout << e.what() << std::endl; }
-		timer.setTimePoint("end");
-
+		try
+		{
+			std::get<0>(r).result();
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		try
+		{
+			std::get<1>(r).result();
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		timer.setTimePoint("end"+ std::to_string(i));
 	}
-	//auto thrd = std::thread([&] {
+	// auto thrd = std::thread([&] {
 	//	timer.setTimePoint("");
 	//	timer.setTimePoint("end");
 
 	//	});
 
-
-	//thrd.join();
+	// thrd.join();
+	auto end = timer.setTimePoint("end total");
+	auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000) / (t-1);
+	std::cout << "total " << tt << "ms" << std::endl;
 
 	if (v)
 	{
 
 		std::cout << timer << std::endl;
-		std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
+		// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
 		if (v > 1)
-			std::cout << "s\n" << s << "\nr\n" << r << std::endl;
-		//std::cout <<"-------------log--------------------\n" << coproto::getLog() << std::endl;
+			std::cout << "s\n"
+					  << s << "\nr\n"
+					  << r << std::endl;
+		// std::cout <<"-------------log--------------------\n" << coproto::getLog() << std::endl;
 	}
 }
 
-void perfCPSI(oc::CLP& cmd)
+void perfCPSI(oc::CLP &cmd)
 {
 #ifdef VOLE_PSI_ENABLE_CPSI
 	auto n = 1ull << cmd.getOr("nn", 10);
 	auto t = cmd.getOr("t", 1ull);
-	//auto mal = cmd.isSet("mal");
+	// auto mal = cmd.isSet("mal");
 	auto v = cmd.isSet("v");
 	auto nt = cmd.getOr("nt", 0);
 	auto socket = cp::LocalAsyncSocket::makePair();
-
 
 	RsCpsiReceiver recv;
 	RsCpsiSender send;
@@ -618,7 +641,6 @@ void perfCPSI(oc::CLP& cmd)
 
 	recv.init(n, n, 0, 40, ZeroBlock, nt);
 	send.init(n, n, 0, 40, ZeroBlock, nt);
-
 
 	std::vector<block> recvSet(n), sendSet(n);
 	PRNG prng(ZeroBlock);
@@ -639,26 +661,25 @@ void perfCPSI(oc::CLP& cmd)
 		std::get<0>(r).result();
 		std::get<1>(r).result();
 
-		//ev.eval(p0, p1);
+		// ev.eval(p0, p1);
 	}
-	timer.setTimePoint("end");
-
+	auto end = timer.setTimePoint("end");
 
 	if (v)
 	{
 
-		std::cout << timer << "\ns\n" << s << "\nr" << r << std::endl;
+		std::cout << timer << "\ns\n"
+				  << s << "\nr" << r << std::endl;
 		std::cout << "comm " << socket[0].bytesSent() << " + " << socket[1].bytesSent()
-			<< " = " << (socket[0].bytesSent() + socket[1].bytesSent())
-			<< std::endl;
-
+				  << " = " << (socket[0].bytesSent() + socket[1].bytesSent())
+				  << std::endl;
 	}
 #else
 	std::cout << "cpsi disabled. " << std::endl;
 #endif
 }
 
-void perf(oc::CLP& cmd)
+void perf(oc::CLP &cmd)
 {
 	if (cmd.isSet("psi"))
 		return perfPSI(cmd);
@@ -678,16 +699,15 @@ void perf(oc::CLP& cmd)
 		perfTest(cmd);
 }
 
-
-
-void overflow(CLP& cmd)
+void overflow(CLP &cmd)
 {
 	auto statSecParam = 40;
 	std::vector<std::vector<u64>> sizes;
 	for (u64 numBins = 1; numBins <= (1ull << 32); numBins *= 2)
 	{
 		sizes.emplace_back();
-		try {
+		try
+		{
 			for (u64 numBalls = 1; numBalls <= (1ull << 32); numBalls *= 2)
 			{
 				auto s0 = SimpleIndex::get_bin_size(numBins, numBalls, statSecParam, true);
@@ -695,7 +715,9 @@ void overflow(CLP& cmd)
 				std::cout << numBins << " " << numBalls << " " << s0 << std::endl;
 			}
 		}
-		catch (...) {}
+		catch (...)
+		{
+		}
 	}
 
 	for (u64 i = 0; i < sizes.size(); ++i)
@@ -703,7 +725,8 @@ void overflow(CLP& cmd)
 		std::cout << "/*" << i << "*/ {{ ";
 		for (u64 j = 0; j < sizes[i].size(); ++j)
 		{
-			if (j) std::cout << ", ";
+			if (j)
+				std::cout << ", ";
 			std::cout << std::log2(sizes[i][j]);
 		}
 		std::cout << " }}," << std::endl;

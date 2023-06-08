@@ -214,7 +214,86 @@ namespace volePSI
 			mDenseSize = mG + (dt == DenseType::Binary) * ssp;
 			mSparseSize = numItems * e;
 		}
-		if (ssize > 1) {
+		if (ssize > 1)
+		{
+			mSparseSize = numItems * ssize;
+		}
+		if (hybflag == 1)
+		{
+			double ee;
+			if (logN == 8) {
+				ee = 1.623;
+			} else {
+				ee = 1.217;
+			}
+			// double logW = std::log2(weight);
+			double logLambdaVsE = 0.521 * logN + 2.820;
+			std::cout << "pp logLambdaVsE = " << logLambdaVsE << std::endl;
+			double lambdaVsE = std::pow(2, logLambdaVsE);
+			std::cout << "pp lambdaVsE = " << lambdaVsE << std::endl;
+			double b = -9.173 - lambdaVsE * ee;
+			std::cout << "pp b = " << b << std::endl;
+			double e = (ssp - b) / lambdaVsE;
+			std::cout << "pp e = " << e << std::endl;
+			mG = std::floor(ssp / (0.644 + std::log2(e * numItems)));
+			std::cout << "pp mG = " << mG << std::endl;
+
+			mDenseSize = mG + (dt == DenseType::Binary) * ssp;
+			mSparseSize = numItems * e;
+
+			// u64 lweight = weight - 1;
+			// u64 lDenseSize;
+			// if (lweight == 2)
+			// {
+			// 	double a = 7.529;
+			// 	double b = 0.61;
+			// 	double c = 2.556;
+			// 	double lambdaVsGap = a / (logN - c) + b;
+
+			// 	mG = static_cast<u64>(std::ceil(ssp / lambdaVsGap + 1.9));
+
+			// 	lDenseSize = mG + (dt == DenseType::Binary) * ssp;
+			// }
+			// else
+			// {
+			// 	double ee = 0;
+			// 	if (lweight == 3)
+			// 		ee = 1.223;
+			// 	if (lweight == 4)
+			// 		ee = 1.293;
+			// 	if (lweight >= 5)
+			// 		ee = 0.1485 * lweight + 0.6845;
+
+			// 	double logW = std::log2(lweight);
+			// 	double logLambdaVsE = 0.555 * logN + 0.093 * std::pow(logW, 3) - 1.01 * std::pow(logW, 2) + 2.925 * logW - 0.133;
+			// 	double lambdaVsE = std::pow(2, logLambdaVsE);
+
+			// 	double b = -9.2 - lambdaVsE * ee;
+			// 	double e = (ssp - b) / lambdaVsE;
+			// 	mG = std::floor(ssp / ((weight - 2) * std::log2(e * numItems)));
+
+			// 	lDenseSize = mG + (dt == DenseType::Binary) * ssp;
+			// }
+
+			// // mDenseSize = (mDenseSize > lDenseSize)? mDenseSize : lDenseSize;
+			// mDenseSize = 0;
+		}
+	}
+
+	inline void PaxosParam::initTest(u64 numItems, u64 weight, u64 ssp, DenseType dt, bool hybflag, double rate, double ssize)
+	{
+		mRate = rate;
+		mThreshold = mRate * (0xffffffff);
+		hybridFlag = hybflag;
+
+		mWeight = weight;
+		mSsp = ssp;
+		mDt = dt;
+
+		double logN = std::log2(numItems);
+
+		if (ssize > 1)
+		{
 			mSparseSize = numItems * ssize;
 		}
 		if (hybflag == 1)
@@ -246,7 +325,6 @@ namespace volePSI
 				double logLambdaVsE = 0.555 * logN + 0.093 * std::pow(logW, 3) - 1.01 * std::pow(logW, 2) + 2.925 * logW - 0.133;
 				double lambdaVsE = std::pow(2, logLambdaVsE);
 
-
 				double b = -9.2 - lambdaVsE * ee;
 				double e = (ssp - b) / lambdaVsE;
 				mG = std::floor(ssp / ((weight - 2) * std::log2(e * numItems)));
@@ -254,9 +332,11 @@ namespace volePSI
 				lDenseSize = mG + (dt == DenseType::Binary) * ssp;
 			}
 
-			mDenseSize = (mDenseSize > lDenseSize)? mDenseSize : lDenseSize;
+			// mDenseSize = (mDenseSize > lDenseSize)? mDenseSize : lDenseSize;
+			mDenseSize = 0;
 		}
 	}
+
 
 #ifdef ENABLE_SSE
 	using block256 = __m256i;
@@ -817,7 +897,7 @@ namespace volePSI
 		int count = 0;
 		if (res < threshold)
 		{
-			buildRowHybrid(*hash, rows, mWeight-1);
+			buildRowHybrid(*hash, rows, mWeight - 1);
 		}
 		else
 		{
@@ -1047,7 +1127,6 @@ namespace volePSI
 					else
 						throw RTE_LOC;
 
-
 					span<IdxType> cols(rr, gPaxosBuildRowSize * mWeight);
 					for (auto c : cols)
 					{
@@ -1073,7 +1152,6 @@ namespace volePSI
 		rebuildColumns(colWeights, mWeight * mNumItems);
 		// std::cout << "rebuildcolWeights shape = " << colWeights.size() << std::endl;
 		setTimePoint("setInput rebuildColumns");
-
 
 		mWeightSets.init(colWeights);
 		// std::cout << "mWeightSets shape = " << mWeightSets.mWeightSets.size() << std::endl;
@@ -1168,26 +1246,19 @@ namespace volePSI
 
 		auto inIter = inputs.data();
 		std::cout << "hybridFlag" << hybridFlag << std::endl;
+		Matrix<IdxType> rows(gPaxosBuildRowSize, mWeight);
+		std::vector<block> dense(gPaxosBuildRowSize);
 
 		if (hybridFlag == 0)
 		{
-			Matrix<IdxType> rows(gPaxosBuildRowSize, mWeight);
-			std::vector<block> dense(gPaxosBuildRowSize);
-			u64 modulus = mSparseSize / 3;
+
 			if (mAddToDecode)
 			{
 				auto v = h.newVec(gPaxosBuildRowSize);
 				for (u64 i = 0; i < main; i += gPaxosBuildRowSize, inIter += gPaxosBuildRowSize)
 				{
 					assert(gPaxosBuildRowSize == 32);
-
 					mHasher.hashBuildRow32(inIter, rows.data(), dense.data());
-					for (u64 j = 0; j < 32; j++)
-					{
-						rows[i + j][0] = rows[i + j][0] % modulus;
-						rows[i + j][1] = rows[i + j][1] % modulus + modulus;
-						rows[i + j][2] = rows[i + j][2] % (mSparseSize - modulus) + 2 * modulus;
-					}
 					decode32(rows.data(), dense.data(), v[0], PP, h);
 					for (u64 j = 0; j < 32; j += 8)
 					{
@@ -1199,17 +1270,13 @@ namespace volePSI
 						h.add(values[i + j + 5], v[j + 5]);
 						h.add(values[i + j + 6], v[j + 6]);
 						h.add(values[i + j + 7], v[j + 7]);
-						for (u64 k = 0; k < 8; k++)
-						{
-							std::cout << "v[j+k] = " << v[j + k] << std::endl;
-						}
 					}
 				}
 
 				for (u64 i = main; i < inputs.size(); ++i, ++inIter)
 				{
 					mHasher.hashBuildRow1(inIter, rows.data(), dense.data());
-					decodeHybrid(rows.data(), dense.data(), v[0], PP, h);
+					decode1(rows.data(), dense.data(), v[0], PP, h);
 					h.add(values[i], v[0]);
 				}
 			}
@@ -1235,6 +1302,8 @@ namespace volePSI
 			std::cout << "Call this hybrid decode function!" << std::endl;
 			Matrix<IdxType> rows(gPaxosBuildRowSize, mWeight);
 			std::vector<block> dense(mNumItems);
+			std::cout << "mAddToDecode = " << mAddToDecode << std::endl;
+			std::cout << "mThreshold = " << mThreshold << std::endl;
 
 			if (mAddToDecode)
 			{
@@ -1245,8 +1314,8 @@ namespace volePSI
 					int flag = mHasher.hashBuildRowHybrid(inIter, rows.data(), dense.data(), mThreshold);
 					if (flag == 0)
 					{
-						rows[0][mWeight-1] = IdxType(-1);
-						Count++;
+						rows[0][mWeight - 1] = IdxType(-1);
+						// Count++;
 					}
 
 					decodeHybrid(rows.data(), dense.data(), v[0], PP, h);
@@ -1260,10 +1329,9 @@ namespace volePSI
 					int flag = mHasher.hashBuildRowHybrid(inIter, rows.data(), dense.data(), mThreshold);
 					if (flag == 0)
 					{
-						rows[0][mWeight-1] = IdxType(-1);
-						Count++;
+						rows[0][mWeight - 1] = IdxType(-1);
+						// Count++;
 					}
-					
 
 					decodeHybrid(rows.data(), dense.data(), values[i], PP, h);
 					// std::cout << "decodeHybrid done" << std::endl;
@@ -1535,13 +1603,12 @@ namespace volePSI
 					node = mWeightSets.mNodes.data() + node->mNextWeightNode;
 			}
 		}
-		std::cout << gapRows.size() << std::endl;
+		std::cout << gapRows.size() << ", ";
 		// std::cout << "start backfill!" << std::endl;
 		// backfill(mainRows, mainCols, gapRows, values, output, h, prng);
 		// std::cout << "complete backfill!" << std::endl;
 	}
 
-	
 	template <typename IdxType>
 	template <typename Vec, typename ConstVec, typename Helper>
 	Vec Paxos<IdxType>::getX2Prime(
@@ -2060,11 +2127,24 @@ namespace volePSI
 				// assert(P[c] == oc::ZeroBlock);
 
 				auto row = &mRows(i, 0);
-				for (u64 j = 0; j < mWeight; ++j)
+				if (row[mWeight - 1] == IdxType(-1))
 				{
-					auto cc = row[j];
-					helper.add(y, P[cc]);
-					// y = y ^ P[cc];
+					for (u64 j = 0; j < mWeight - 1; ++j)
+					{
+						auto cc = row[j];
+						helper.add(y, P[cc]);
+						// y = y ^ P[cc];
+					}
+				}
+				else
+				{
+
+					for (u64 j = 0; j < mWeight; ++j)
+					{
+						auto cc = row[j];
+						helper.add(y, P[cc]);
+						// y = y ^ P[cc];
+					}
 				}
 
 				GF128_DENSE_BACKFILL;
@@ -3071,6 +3151,7 @@ namespace volePSI
 		u64 numThreads,
 		Helper &h)
 	{
+		std::cout << "Call implParSolve!" << std::endl;
 #ifndef NDEBUG
 		{
 			std::unordered_set<block> inputSet;

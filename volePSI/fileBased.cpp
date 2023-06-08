@@ -7,7 +7,7 @@
 namespace volePSI
 {
 
-	std::ifstream::pos_type filesize(std::ifstream& file)
+	std::ifstream::pos_type filesize(std::ifstream &file)
 	{
 		auto pos = file.tellg();
 		file.seekg(0, std::ios_base::end);
@@ -16,13 +16,14 @@ namespace volePSI
 		return size;
 	}
 
-	bool hasSuffix(std::string const& value, std::string const& ending)
+	bool hasSuffix(std::string const &value, std::string const &ending)
 	{
-		if (ending.size() > value.size()) return false;
+		if (ending.size() > value.size())
+			return false;
 		return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 	}
 
-	bool isHexBlock(const std::string& buff)
+	bool isHexBlock(const std::string &buff)
 	{
 		if (buff.size() != 32)
 			return false;
@@ -32,7 +33,7 @@ namespace volePSI
 		return ret;
 	}
 
-	block hexToBlock(const std::string& buff)
+	block hexToBlock(const std::string &buff)
 	{
 		assert(buff.size() == 32);
 
@@ -44,12 +45,13 @@ namespace volePSI
 		{
 			b[0] = buff[2 * i + 0];
 			b[1] = buff[2 * i + 1];
-			vv[15 - i] = (char)strtol(b, nullptr, 16);;
+			vv[15 - i] = (char)strtol(b, nullptr, 16);
+			;
 		}
 		return oc::toBlock(vv.data());
 	}
 
-	std::vector<block> readSet(const std::string& path, FileType ft, bool debug)
+	std::vector<block> readSet(const std::string &path, FileType ft, bool debug)
 	{
 		std::vector<block> ret;
 		if (ft == FileType::Bin)
@@ -62,7 +64,7 @@ namespace volePSI
 				throw std::runtime_error("Bad file size. Expecting a binary file with 16 byte elements");
 
 			ret.resize(size / 16);
-			file.read((char*)ret.data(), size);
+			file.read((char *)ret.data(), size);
 		}
 		else if (ft == FileType::Csv)
 		{
@@ -75,7 +77,7 @@ namespace volePSI
 			std::string buffer;
 			while (std::getline(file, buffer))
 			{
-				// if the input is already a 32 char hex 
+				// if the input is already a 32 char hex
 				// value, just parse it as is.
 				if (isHexBlock(buffer))
 				{
@@ -101,7 +103,7 @@ namespace volePSI
 			std::unordered_map<block, u64> hashes;
 			for (u64 i = 0; i < ret.size(); ++i)
 			{
-				auto r = hashes.insert({ ret[i], i });
+				auto r = hashes.insert({ret[i], i});
 				if (r.second == false)
 				{
 					std::cout << "duplicate at index " << i << " & " << r.first->second << std::endl;
@@ -112,7 +114,6 @@ namespace volePSI
 				}
 			}
 
-
 			if (maxPrint != 40)
 				throw RTE_LOC;
 		}
@@ -120,25 +121,27 @@ namespace volePSI
 		return ret;
 	}
 
-	template<typename InputIterator >
+	template <typename InputIterator>
 	void counting_sort(InputIterator first, InputIterator last, u64 endIndex)
 	{
 		using ValueType = typename std::iterator_traits<InputIterator>::value_type;
 		std::vector<u64> counts(endIndex);
 
-		for (auto value = first; value < last; ++value) {
+		for (auto value = first; value < last; ++value)
+		{
 			++counts[*value];
 		}
 
-		for (u64 i = 0; i < counts.size(); ++i) {
-			ValueType& value = i;
-			u64& size = counts[i];
+		for (u64 i = 0; i < counts.size(); ++i)
+		{
+			ValueType &value = i;
+			u64 &size = counts[i];
 			std::fill_n(first, size, value);
 			std::advance(first, size);
 		}
 	}
 
-	void writeOutput(std::string outPath, FileType ft, const std::vector<u64>& intersection, bool indexOnly, std::string inPath)
+	void writeOutput(std::string outPath, FileType ft, const std::vector<u64> &intersection, bool indexOnly, std::string inPath)
 	{
 		std::ofstream file;
 
@@ -155,7 +158,7 @@ namespace volePSI
 
 			if (ft == FileType::Bin)
 			{
-				file.write((char*)intersection.data(), intersection.size() * sizeof(u64));
+				file.write((char *)intersection.data(), intersection.size() * sizeof(u64));
 			}
 			else
 			{
@@ -165,7 +168,7 @@ namespace volePSI
 		}
 		else
 		{
-			//std::set<u64> set(intersection.begin(), intersection.end());
+			// std::set<u64> set(intersection.begin(), intersection.end());
 			if (ft == FileType::Bin)
 			{
 				std::ifstream inFile(inPath, std::ios::binary | std::ios::in);
@@ -177,12 +180,11 @@ namespace volePSI
 
 				auto n = size / 16;
 				std::vector<block> fData(n);
-				inFile.read((char*)fData.data(), size);
+				inFile.read((char *)fData.data(), size);
 				for (u64 i = 0; i < intersection.size(); ++i)
 				{
-					file.write((char*)fData[intersection[i]].data(), sizeof(block));
+					file.write((char *)fData[intersection[i]].data(), sizeof(block));
 				}
-
 			}
 			else if (ft == FileType::Csv)
 			{
@@ -197,7 +199,6 @@ namespace volePSI
 				std::vector<char> fData(size);
 				inFile.read(fData.data(), size);
 
-				
 				std::vector<span<char>> beg;
 				auto iter = fData.begin();
 				for (u64 i = 0; i < size; ++i)
@@ -227,185 +228,208 @@ namespace volePSI
 		}
 	}
 
-	void doFilePSI(const oc::CLP& cmd)
+	void doFilePSI(const oc::CLP &cmd)
 	{
-		try {
-			auto path = cmd.get<std::string>("in");
-			auto outPath = cmd.getOr<std::string>("out", path + ".out");
-			bool debug = cmd.isSet("debug");
-			bool mal = cmd.isSet("malicious");
-			bool indexOnly = cmd.isSet("indexSet");
-			bool sortOutput = !cmd.isSet("noSort");
-			bool tls = cmd.isSet("tls");
-			bool quiet = cmd.isSet("quiet");
+		chrono::high_resolution_clock::time_point time_start, time_end;
+		auto tt = std::chrono::duration_cast<std::chrono::microseconds>(time_end - time_start).count();
+		auto t = cmd.getOr("t", 1);
+		int iter = 0;
+		while (iter < t)
+		{
+			time_start = chrono::high_resolution_clock::now();
+			if (iter == 1){
+				time_start = chrono::high_resolution_clock::now();
+			}
+			try
+			{
+				auto path = cmd.get<std::string>("in");
+				auto outPath = cmd.getOr<std::string>("out", path + ".out");
+				bool debug = cmd.isSet("debug");
+				bool mal = cmd.isSet("malicious");
+				bool indexOnly = cmd.isSet("indexSet");
+				bool sortOutput = !cmd.isSet("noSort");
+				bool tls = cmd.isSet("tls");
+				bool quiet = cmd.isSet("quiet");
 
-    // The vole type.
+				// The vole type.
 #ifdef ENABLE_BITPOLYMUL
-   		 	auto mType = cmd.isSet("useSilver") ? oc::MultType::slv5 : oc::MultType::QuasiCyclic;
+				auto mType = cmd.isSet("useSilver") ? oc::MultType::slv5 : oc::MultType::QuasiCyclic;
 #else
-    		auto mType = oc::MultType::slv5;
+				auto mType = oc::MultType::slv5;
 #endif
 
-			FileType ft = FileType::Unspecified;
-			if (cmd.isSet("bin")) ft = FileType::Bin;
-			if (cmd.isSet("csv")) ft = FileType::Csv;
-			if (ft == FileType::Unspecified)
-			{
-				if (hasSuffix(path, ".bin"))
+				FileType ft = FileType::Unspecified;
+				if (cmd.isSet("bin"))
 					ft = FileType::Bin;
-				else if (hasSuffix(path, ".csv"))
+				if (cmd.isSet("csv"))
 					ft = FileType::Csv;
-			}
-			if (ft == FileType::Unspecified)
-				throw std::runtime_error("unknown file extension, must be .csv or .bin or you must specify the -bin or -csv flags.");
-
-			u64 statSetParam = cmd.getOr("ssp", 40);
-			auto ip = cmd.getOr<std::string>("ip", "localhost:1212");
-			auto r = (Role)cmd.getOr<int>("r", 2);
-			if (r != Role::Sender && r != Role::Receiver)
-				throw std::runtime_error("-r tag must be set with value 0 (sender) or 1 (receiver).");
-
-			auto isServer = cmd.getOr<int>("server", (int)r);
-			if (r != Role::Sender && r != Role::Receiver)
-				throw std::runtime_error("-server tag must be set with value 0 or 1.");
-			oc::Timer timer;
-
-			if(!quiet)
-				std::cout << "reading set... " << std::flush;
-			auto readBegin = timer.setTimePoint("");
-			std::vector<block> set = readSet(path, ft, debug);
-			auto readEnd = timer.setTimePoint("");
-			if (!quiet)
-				std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(readEnd-readBegin).count() << "ms" << std::endl;
-
-
-			if (!quiet)
-				std::cout << "connecting as " <<(tls ? "tls " : "") << (isServer ? "server" : "client") << " at address " << ip << std::flush;
-			coproto::Socket chl;
-			auto connBegin = timer.setTimePoint("");
-			if (tls)
-			{
-				std::string CACert = cmd.get<std::string>("CA");
-				auto privateKey = cmd.get<std::string>("sk");
-				auto publicKey = cmd.get<std::string>("pk");
-
-				if (!exist(CACert) || !exist(privateKey) || !exist(privateKey))
+				if (ft == FileType::Unspecified)
 				{
-					std::cout << "\n";
-					if (!exist(CACert))
-						std::cout << "CA cert " << CACert << " does not exist" << std::endl;
-					if (!exist(privateKey))
-						std::cout << "private key " << privateKey << " does not exist" << std::endl;
-					if (!exist(publicKey))
-						std::cout << "public key " << publicKey << " does not exist" << std::endl;
-
-					std::cout << "Please correctly set -CA=<path> -sk=<path> -pk=<path> to the CA cert, user private key "
-						<< " and public key respectively." << std::endl;
-
-					throw std::runtime_error("bad TLS parameter.");
+					if (hasSuffix(path, ".bin"))
+						ft = FileType::Bin;
+					else if (hasSuffix(path, ".csv"))
+						ft = FileType::Csv;
 				}
+				if (ft == FileType::Unspecified)
+					throw std::runtime_error("unknown file extension, must be .csv or .bin or you must specify the -bin or -csv flags.");
+
+				u64 statSetParam = cmd.getOr("ssp", 40);
+				auto ip = cmd.getOr<std::string>("ip", "localhost:1212");
+				auto r = (Role)cmd.getOr<int>("r", 2);
+				if (r != Role::Sender && r != Role::Receiver)
+					throw std::runtime_error("-r tag must be set with value 0 (sender) or 1 (receiver).");
+
+				auto isServer = cmd.getOr<int>("server", (int)r);
+				if (r != Role::Sender && r != Role::Receiver)
+					throw std::runtime_error("-server tag must be set with value 0 or 1.");
+				oc::Timer timer;
+
+				if (!quiet)
+					std::cout << "reading set... " << std::flush;
+				auto readBegin = timer.setTimePoint("");
+				std::vector<block> set = readSet(path, ft, debug);
+				auto readEnd = timer.setTimePoint("");
+				if (!quiet)
+					std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(readEnd - readBegin).count() << "ms" << std::endl;
+
+				if (!quiet)
+					std::cout << "connecting as " << (tls ? "tls " : "") << (isServer ? "server" : "client") << " at address " << ip << std::flush;
+				coproto::Socket chl;
+				auto connBegin = timer.setTimePoint("");
+
+				if (tls)
+				{
+					std::string CACert = cmd.get<std::string>("CA");
+					auto privateKey = cmd.get<std::string>("sk");
+					auto publicKey = cmd.get<std::string>("pk");
+
+					if (!exist(CACert) || !exist(privateKey) || !exist(privateKey))
+					{
+						std::cout << "\n";
+						if (!exist(CACert))
+							std::cout << "CA cert " << CACert << " does not exist" << std::endl;
+						if (!exist(privateKey))
+							std::cout << "private key " << privateKey << " does not exist" << std::endl;
+						if (!exist(publicKey))
+							std::cout << "public key " << publicKey << " does not exist" << std::endl;
+
+						std::cout << "Please correctly set -CA=<path> -sk=<path> -pk=<path> to the CA cert, user private key "
+								  << " and public key respectively." << std::endl;
+
+						throw std::runtime_error("bad TLS parameter.");
+					}
 
 #ifdef COPROTO_ENABLE_OPENSSL
-				boost::asio::ssl::context ctx(!isServer ?
-					boost::asio::ssl::context::tlsv13_client :
-					boost::asio::ssl::context::tlsv13_server
-				);
+					boost::asio::ssl::context ctx(!isServer ? boost::asio::ssl::context::tlsv13_client : boost::asio::ssl::context::tlsv13_server);
 
-				ctx.set_verify_mode(
-					boost::asio::ssl::verify_peer |
-					boost::asio::ssl::verify_fail_if_no_peer_cert);
-				ctx.load_verify_file(CACert);
-				ctx.use_private_key_file(privateKey, boost::asio::ssl::context::file_format::pem);
-				ctx.use_certificate_file(publicKey, boost::asio::ssl::context::file_format::pem);
+					ctx.set_verify_mode(
+						boost::asio::ssl::verify_peer |
+						boost::asio::ssl::verify_fail_if_no_peer_cert);
+					ctx.load_verify_file(CACert);
+					ctx.use_private_key_file(privateKey, boost::asio::ssl::context::file_format::pem);
+					ctx.use_certificate_file(publicKey, boost::asio::ssl::context::file_format::pem);
 
-				chl = coproto::sync_wait(
-					!isServer ?
-					macoro::make_task(coproto::AsioTlsConnect(ip, coproto::global_io_context(), ctx)) :
-					macoro::make_task(coproto::AsioTlsAcceptor(ip, coproto::global_io_context(), ctx))
-				);
+					chl = coproto::sync_wait(
+						!isServer ? macoro::make_task(coproto::AsioTlsConnect(ip, coproto::global_io_context(), ctx)) : macoro::make_task(coproto::AsioTlsAcceptor(ip, coproto::global_io_context(), ctx)));
 #else
-				throw std::runtime_error("COPROTO_ENABLE_OPENSSL must be define (via cmake) to use TLS sockets. " COPROTO_LOCATION);
+					throw std::runtime_error("COPROTO_ENABLE_OPENSSL must be define (via cmake) to use TLS sockets. " COPROTO_LOCATION);
 #endif
-		}
-			else
-			{
+				}
+				else
+				{
 #ifdef COPROTO_ENABLE_BOOST
-				chl = coproto::asioConnect(ip, isServer);
+					chl = coproto::asioConnect(ip, isServer);
 #else
-				throw std::runtime_error("COPROTO_ENABLE_BOOST must be define (via cmake) to use tcp sockets. " COPROTO_LOCATION);
+					throw std::runtime_error("COPROTO_ENABLE_BOOST must be define (via cmake) to use tcp sockets. " COPROTO_LOCATION);
 #endif
+				}
+				auto connEnd = timer.setTimePoint("");
+				if (!quiet)
+					std::cout << ' ' << std::chrono::duration_cast<std::chrono::milliseconds>(connEnd - connBegin).count()
+							  << "ms\nValidating set sizes... " << std::flush;
+
+				if (set.size() != cmd.getOr((r == Role::Sender) ? "senderSize" : "receiverSize", set.size()))
+					throw std::runtime_error("File does not contain the specified set size.");
+				u64 theirSize;
+				macoro::sync_wait(chl.send(set.size()));
+				macoro::sync_wait(chl.recv(theirSize));
+				std::cout << "my size: " << set.size() << std::endl;
+				std::cout << "their size: " << theirSize << std::endl;
+
+				if (theirSize != cmd.getOr((r != Role::Sender) ? "senderSize" : "receiverSize", theirSize))
+					throw std::runtime_error("Other party's set size does not match.");
+
+				auto valEnd = timer.setTimePoint("");
+				if (!quiet)
+					std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(valEnd - connEnd).count()
+							  << "ms\nrunning PSI... " << std::flush;
+
+				if (r == Role::Sender)
+				{
+					RsPsiSender sender;
+
+					sender.setMultType(mType);
+					sender.init(set.size(), theirSize, statSetParam, oc::sysRandomSeed(), mal, 1);
+					macoro::sync_wait(sender.run(set, chl));
+					macoro::sync_wait(chl.flush());
+
+					std::cout << "Sender sent bytes:" << chl.bytesSent() << std::endl;
+					std::cout << "Sender received bytes:" << chl.bytesReceived() << std::endl;
+
+					auto psiEnd = timer.setTimePoint("");
+					if (!quiet)
+						std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(psiEnd - valEnd).count()
+								  << "ms\nDone" << std::endl;
+					std::cout << "Total time " << std::chrono::duration_cast<std::chrono::milliseconds>(psiEnd - connEnd).count()
+							  << "ms\n"
+							  << std::flush;
+				}
+				else
+				{
+					RsPsiReceiver recver;
+
+					recver.setMultType(mType);
+					recver.init(theirSize, set.size(), statSetParam, oc::sysRandomSeed(), mal, 1);
+					macoro::sync_wait(recver.run(set, chl));
+					macoro::sync_wait(chl.flush());
+
+					auto psiEnd = timer.setTimePoint("");
+					if (!quiet)
+						std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(psiEnd - valEnd).count()
+								  << "ms\nWriting output to " << outPath << std::flush << std::endl;
+
+					if (sortOutput)
+						counting_sort(recver.mIntersection.begin(), recver.mIntersection.end(), set.size());
+
+					writeOutput(outPath, ft, recver.mIntersection, indexOnly, path);
+
+					std::cout << "Receiver sent bytes:" << chl.bytesSent() << std::endl;
+					std::cout << "Receiver received bytes:" << chl.bytesReceived() << std::endl;
+
+					auto outEnd = timer.setTimePoint("");
+					if (!quiet)
+						std::cout << " " << std::chrono::duration_cast<std::chrono::milliseconds>(outEnd - psiEnd).count()
+								  << "ms\n"
+								  << std::flush;
+
+					std::cout << "Total time " << std::chrono::duration_cast<std::chrono::milliseconds>(outEnd - connBegin).count()
+							  << "ms\n"
+							  << std::flush;
+					tt = tt + std::chrono::duration_cast<std::chrono::milliseconds>(outEnd - connEnd).count();
+					iter += 1;
+				}
 			}
-			auto connEnd = timer.setTimePoint("");
-			if (!quiet)
-				std::cout << ' ' << std::chrono::duration_cast<std::chrono::milliseconds>(connEnd - connBegin).count()
-				<< "ms\nValidating set sizes... " << std::flush;
-
-			if (set.size() != cmd.getOr((r == Role::Sender) ? "senderSize" : "receiverSize", set.size()))
-				throw std::runtime_error("File does not contain the specified set size.");
-			u64 theirSize;
-			macoro::sync_wait(chl.send(set.size()));
-			macoro::sync_wait(chl.recv(theirSize));
-			std::cout << "my size: " << set.size() << std::endl;
-			std::cout << "their size: " << theirSize << std::endl;
-			
-
-			if (theirSize != cmd.getOr((r != Role::Sender) ? "senderSize" : "receiverSize", theirSize))
-				throw std::runtime_error("Other party's set size does not match.");
-
-
-			auto valEnd = timer.setTimePoint("");
-			if (!quiet)
-				std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(valEnd - connEnd).count()
-				<< "ms\nrunning PSI... " << std::flush;
-
-			if (r == Role::Sender)
+			catch (std::exception &e)
 			{
-				RsPsiSender sender;
+				std::cout << oc::Color::Red << "Exception: " << e.what() << std::endl
+						  << oc::Color::Default;
 
-				sender.setMultType(mType);
-				sender.init(set.size(), theirSize, statSetParam, oc::sysRandomSeed(), mal, 1);
-				macoro::sync_wait(sender.run(set, chl));
-				macoro::sync_wait(chl.flush());
-
-				auto psiEnd = timer.setTimePoint("");
-				if (!quiet)
-					std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(psiEnd - valEnd).count()
-					<< "ms\nDone" << std::endl;
+				std::cout << "Try adding command line argument -debug" << std::endl;
 			}
-			else
-			{
-				RsPsiReceiver recver;
-
-				recver.setMultType(mType);
-				recver.init(theirSize, set.size(), statSetParam, oc::sysRandomSeed(), mal, 1);
-				macoro::sync_wait(recver.run(set, chl));
-				macoro::sync_wait(chl.flush());
-
-
-				auto psiEnd = timer.setTimePoint("");
-				if (!quiet)
-					std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(psiEnd-valEnd).count()
-					<< "ms\nWriting output to " << outPath<< std::flush;
-
-				if(sortOutput)
-					counting_sort(recver.mIntersection.begin(), recver.mIntersection.end(), set.size());
-
-				writeOutput(outPath, ft, recver.mIntersection, indexOnly, path);
-
-
-
-				auto outEnd = timer.setTimePoint("");
-				if (!quiet)
-					std::cout<< " " << std::chrono::duration_cast<std::chrono::milliseconds>(outEnd - psiEnd).count()
-					<< "ms\n" << std::flush;
-			}
-
 		}
-		catch (std::exception& e)
-		{
-			std::cout << oc::Color::Red << "Exception: " << e.what() << std::endl << oc::Color::Default;
-
-			std::cout << "Try adding command line argument -debug" << std::endl;
+		time_end = chrono::high_resolution_clock::now();
+		if (t>1) {
+			std::cout << "Per running time: [" << tt / (t-1) << " milliseconds]" << endl;
 		}
 	}
 

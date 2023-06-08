@@ -46,24 +46,24 @@ namespace volePSI
 		DenseType mDt = GF128;
 		
 		// For hybrid
-		double mRate = 0.2;
+		double mRate = 0.8;
 		bool hybridFlag = 1;
 		u64 mThreshold = (0xffffffff) * mRate;
-
-
-
 
 		PaxosParam() = default;
 		PaxosParam(const PaxosParam&) = default;
 		PaxosParam& operator=(const PaxosParam&) = default;
 
-		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.2, double ssize = 0.0)
+		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.8, double ssize = 0.0)
 		{
 			init(numItems, weight, ssp, dt, hybflag, rate, ssize);
 		}
 
 		// computes the paxos parameters based the parameters.
-		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.2, double ssize = 0.0);
+		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.8, double ssize = 0.0);
+
+
+		void initTest(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.8, double ssize = 0.0);
 
 		// the size of the paxos data structure.
 		u64 size() const
@@ -456,7 +456,7 @@ namespace volePSI
 		bool mAddToDecode = false;
 
 		// initialize the paxos with the given parameter.
-		void init(u64 numItems, u64 binSize, u64 weight, u64 ssp, PaxosParam::DenseType dt, block seed)
+		void init(u64 numItems, u64 binSize, u64 weight, u64 ssp, PaxosParam::DenseType dt, block seed, bool hybflag=0, double rate=1)
 		{
 			mNumItems = numItems;
 			mWeight = weight;
@@ -464,7 +464,7 @@ namespace volePSI
 			mItemsPerBin = getBinSize(mNumBins, mNumItems, ssp + std::log2(mNumBins));
 			mSsp = ssp;
 			mSeed = seed;
-			mPaxosParam.init(mItemsPerBin, weight, ssp, dt);
+			mPaxosParam.init(mItemsPerBin, weight, ssp, dt, hybflag, rate);
 		}
 
 		// solve the system for the given input vectors.

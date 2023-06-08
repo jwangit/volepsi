@@ -22,7 +22,8 @@ namespace volePSI
         setTimePoint("RsOprfSender::send-begin");
         ws = prng.get();
 
-        mPaxos.init(n, mBinSize, 3, mSsp, PaxosParam::GF128, oc::ZeroBlock);
+        // mPaxos.init(n, mBinSize, 3, mSsp, PaxosParam::GF128, oc::ZeroBlock, 0, 1);
+        mPaxos.init(n, mBinSize, 4, mSsp, PaxosParam::GF128, oc::ZeroBlock, 1, 0.8);
 
         mD = prng.get();
 
@@ -311,7 +312,9 @@ namespace volePSI
             throw RTE_LOC;
 
         hashingSeed = prng.get(), wr = prng.get();
-        paxos.init(values.size(), mBinSize, 3, mSsp, PaxosParam::GF128, hashingSeed);
+        // paxos.init(values.size(), mBinSize, 3, mSsp, PaxosParam::GF128, hashingSeed, 0, 1);
+        // hybrid mode
+        paxos.init(values.size(), mBinSize, 4, mSsp, PaxosParam::GF128, hashingSeed, 1, 0.8);
         std::cout << "receiver paxos init done!"  << std::endl;
 
         MC_AWAIT(chl.send(std::move(hashingSeed)));
@@ -323,17 +326,18 @@ namespace volePSI
             MC_AWAIT(chl.recv(Hws));
         }
 
-        if (mTimer)
+        if (mTimer){
             mVoleRecver.setTimer(*mTimer);
+        }
 
         fork = chl.fork();
-        fu = genVole(paxos.size(), prng, fork, reducedRounds)
-            | macoro::make_eager();
+        fu = genVole(paxos.size(), prng, fork, reducedRounds) | macoro::make_eager();
 
 
 
         hPtr.reset(new block[values.size()]);
         h = span<block>(hPtr.get(), values.size());
+        // std::cout << "hPtr.get(): " << hPtr.get() <<std::endl;
 
         oc::mAesFixedKey.hashBlocks(values, h);
         setTimePoint("RsOprfReceiver::receive-hash");
@@ -344,10 +348,15 @@ namespace volePSI
         p.resize(paxos.size());
 
         setTimePoint("RsOprfReceiver::receive-alloc");
-
+        // auto solve_start_time = setTimePoint("");
         paxos.solve<block>(values, h, p, nullptr, numThreads);
+        // chrono::high_resolution_clock::time_point solve_end = std::chrono::high_resolution_clock::now();
+        // chrono::microseconds solve_time = std::chrono::duration_cast<std::chrono::milliseconds>(solve_end - solve_start);
+        // std::cout << "Solve time:" << solve_time.count() << "ms" << std::endl;
+        std::cout << "numThreads:" << numThreads << std::endl;
+        std::cout << "Paxos size:" << int(paxos.size()) << std::endl;
         setTimePoint("RsOprfReceiver::receive-solve");
-        std::cout << "receiver cal paxos.solve done!"  << std::endl;
+        std::cout << "receiver call paxos.solve done!"  << std::endl;
         MC_AWAIT(fu);
 
         // a + b  = c * d

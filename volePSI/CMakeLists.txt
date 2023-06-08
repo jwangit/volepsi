@@ -31,7 +31,7 @@ endif()
 
 add_library(volePSI STATIC ${SRCS})
 
-target_link_libraries(volePSI oc::libOTe sparsehash libdivide xxhash)
+target_link_libraries(volePSI oc::libOTe sparsehash libdivide) #xxhash
 
 if(APPLE)
     target_compile_options(volePSI PUBLIC
