@@ -24,7 +24,7 @@ namespace volePSI
         Baxos mPaxos;
         bool mMalicious = false;
         block mW;
-        u64 mBinSize = 1 << 14;
+        u64 mBinSize = 1 << 18;
         u64 mSsp = 40;
 
         void setMultType(oc::MultType type) { mVoleSender.mMultType = type; };
@@ -49,7 +49,7 @@ namespace volePSI
     public:
         bool mMalicious = false;
         oc::SilentVoleReceiver mVoleRecver;
-        u64 mBinSize = 1 << 14;
+        u64 mBinSize = 1 << 18;
         u64 mSsp = 40;
 
         void setMultType(oc::MultType type) { mVoleRecver.mMultType = type; };

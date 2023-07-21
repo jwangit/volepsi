@@ -14,7 +14,7 @@
 #include "volePSI/SimpleIndex.h"
 #include <immintrin.h>
 #include <future>
-#include "volePSI/Hasher.h"
+
 
 namespace volePSI
 {
@@ -170,6 +170,7 @@ namespace volePSI
 		mDt = dt;
 
 		double logN = std::log2(numItems);
+		double e = 0.0;
 		if (weight == 2)
 		{
 			double a = 7.529;
@@ -186,11 +187,30 @@ namespace volePSI
 			mDenseSize = mG + (dt == DenseType::Binary) * ssp;
 			mSparseSize = 2 * numItems;
 		}
+		else if (weight == 3 && logN <= 12)
+		{
+			if (logN ==8) {
+				e = 1.59832;
+				mG = 5;
+			} else if (logN == 10) {
+				e = 1.40671;
+				mG = 4;
+			} else if (logN == 12) {
+				e = 1.31801;
+				mG = 4;
+			}
+			mDenseSize = mG + (dt == DenseType::Binary) * ssp;
+			mSparseSize = numItems * e;
+        }
 		else
 		{
 			double ee = 0;
-			if (weight == 3)
+			if (weight == 3 && logN > 12)
+      {
 				ee = 1.223;
+        }
+       
+      
 			if (weight == 4)
 				ee = 1.293;
 			if (weight >= 5)
@@ -208,11 +228,12 @@ namespace volePSI
 			// lambda = lambdaVsE * e + b
 			// e = (lambda - b) / lambdaVsE
 
-			double e = (ssp - b) / lambdaVsE;
+			e = (ssp - b) / lambdaVsE;
 			mG = std::floor(ssp / ((weight - 2) * std::log2(e * numItems)));
 
 			mDenseSize = mG + (dt == DenseType::Binary) * ssp;
 			mSparseSize = numItems * e;
+			std::cout << "ee=" << ee << std::endl;
 		}
 		if (ssize > 1)
 		{
@@ -220,12 +241,25 @@ namespace volePSI
 		}
 		if (hybflag == 1)
 		{
-			double ee;
-			if (logN == 8) {
-				ee = 1.623;
+			if (logN <=12) {
+				if (logN == 8) {
+					e = 1.56961;
+					mG = 5;
+				} else if (logN == 10) {
+        				e = 1.39280;
+					mG = 4;
+      				} else if (logN == 12) {
+        				e = 1.29890;
+					mG = 4;
+				}
+				mDenseSize = mG + (dt == DenseType::Binary) * ssp;
+         			 mSparseSize = numItems * e;
+
 			} else {
+
+			double ee;
 				ee = 1.217;
-			}
+			
 			// double logW = std::log2(weight);
 			double logLambdaVsE = 0.521 * logN + 2.820;
 			std::cout << "pp logLambdaVsE = " << logLambdaVsE << std::endl;
@@ -233,13 +267,20 @@ namespace volePSI
 			std::cout << "pp lambdaVsE = " << lambdaVsE << std::endl;
 			double b = -9.173 - lambdaVsE * ee;
 			std::cout << "pp b = " << b << std::endl;
-			double e = (ssp - b) / lambdaVsE;
+			e = (ssp - b) / lambdaVsE;
 			std::cout << "pp e = " << e << std::endl;
 			mG = std::floor(ssp / (0.644 + std::log2(e * numItems)));
 			std::cout << "pp mG = " << mG << std::endl;
 
+		
 			mDenseSize = mG + (dt == DenseType::Binary) * ssp;
 			mSparseSize = numItems * e;
+		
+			}
+		}
+		std::cout << "mDenseSize: " << mDenseSize << std::endl;
+		std::cout << "mSparseSize: " << mSparseSize << std::endl;
+		std::cout << "e: " << e << std::endl;
 
 			// u64 lweight = weight - 1;
 			// u64 lDenseSize;
@@ -277,7 +318,7 @@ namespace volePSI
 
 			// // mDenseSize = (mDenseSize > lDenseSize)? mDenseSize : lDenseSize;
 			// mDenseSize = 0;
-		}
+		
 	}
 
 	inline void PaxosParam::initTest(u64 numItems, u64 weight, u64 ssp, DenseType dt, bool hybflag, double rate, double ssize)

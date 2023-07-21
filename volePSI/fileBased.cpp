@@ -230,15 +230,15 @@ namespace volePSI
 
 	void doFilePSI(const oc::CLP &cmd)
 	{
-		chrono::high_resolution_clock::time_point time_start, time_end;
+		std::chrono::high_resolution_clock::time_point time_start, time_end;
 		auto tt = std::chrono::duration_cast<std::chrono::microseconds>(time_end - time_start).count();
 		auto t = cmd.getOr("t", 1);
 		int iter = 0;
 		while (iter < t)
 		{
-			time_start = chrono::high_resolution_clock::now();
+			time_start = std::chrono::high_resolution_clock::now();
 			if (iter == 1){
-				time_start = chrono::high_resolution_clock::now();
+				time_start = std::chrono::high_resolution_clock::now();
 			}
 			try
 			{
@@ -427,9 +427,9 @@ namespace volePSI
 				std::cout << "Try adding command line argument -debug" << std::endl;
 			}
 		}
-		time_end = chrono::high_resolution_clock::now();
+		time_end = std::chrono::high_resolution_clock::now();
 		if (t>1) {
-			std::cout << "Per running time: [" << tt / (t-1) << " milliseconds]" << endl;
+			std::cout << "Per running time: [" << tt / (t-1) << " milliseconds]" << std::endl;
 		}
 	}
 

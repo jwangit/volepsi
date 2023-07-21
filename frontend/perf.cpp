@@ -95,9 +95,11 @@ void perfTestImpl(oc::CLP &cmd)
 	auto end = timer.setTimePoint("end");
 	if (v)
 		std::cout << timer << std::endl;
-
-	auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000);
-	std::cout << "total " << tt << "ms" << std::endl;
+  if (v>1)
+  {
+	  auto tt = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / double(1000);
+	  std::cout << "total " << tt << "ms" << std::endl;
+   }
 	// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
 }
 
@@ -599,6 +601,9 @@ void perfPSI(oc::CLP &cmd)
 			std::cout << e.what() << std::endl;
 		}
 		timer.setTimePoint("end"+ std::to_string(i));
+    if (v) {
+       std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
+    }
 	}
 	// auto thrd = std::thread([&] {
 	//	timer.setTimePoint("");
@@ -615,7 +620,7 @@ void perfPSI(oc::CLP &cmd)
 	{
 
 		std::cout << timer << std::endl;
-		// std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
+		//std::cout << sockets[0].bytesSent() << " " << sockets[1].bytesSent() << std::endl;
 		if (v > 1)
 			std::cout << "s\n"
 					  << s << "\nr\n"
