@@ -35,6 +35,7 @@ void perfTestImpl(oc::CLP &cmd)
 	auto ssize = cmd.getOr("ssize", 0.0); // sparsesize/n
 
 	// PaxosParam pp(n, w, ssp, dt, hyb, rate, ssize);
+	// std::cout << "start!" << std::endl;
 	PaxosParam pp;
 	pp.initTest(n, w, ssp, dt, hyb, rate, ssize);
 
@@ -410,6 +411,7 @@ void perfPaxosImpl(oc::CLP &cmd)
 	auto dt = cmd.isSet("binary") ? PaxosParam::Binary : PaxosParam::GF128;
 	auto cols = cmd.getOr("cols", 0);
 	auto hyb = cmd.getOr("hybrid", 0);
+	// auto paxos = cmd.getOr("paxos", 0);
 	auto rate = cmd.getOr("rate", 0.2);
 	auto ssize = cmd.getOr("ssize", 0.0);
 
@@ -439,6 +441,8 @@ void perfPaxosImpl(oc::CLP &cmd)
 		std::cout << "e = " << pp.size() / double(n) << std::endl;
 		Paxos<T> paxos;
 		paxos.init(n, pp, block(i, i));
+		
+
 
 		if (v > 1)
 			paxos.setTimer(timer);

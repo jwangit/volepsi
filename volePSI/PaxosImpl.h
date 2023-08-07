@@ -330,6 +330,7 @@ namespace volePSI
 		mWeight = weight;
 		mSsp = ssp;
 		mDt = dt;
+		// std::cout << "numItems " << numItems << std::endl;
 
 		double logN = std::log2(numItems);
 
@@ -340,7 +341,7 @@ namespace volePSI
 		if (hybflag == 1)
 		{
 			u64 lweight = weight - 1;
-			u64 lDenseSize;
+			// u64 lDenseSize;
 			if (lweight == 2)
 			{
 				double a = 7.529;
@@ -350,7 +351,7 @@ namespace volePSI
 
 				mG = static_cast<u64>(std::ceil(ssp / lambdaVsGap + 1.9));
 
-				lDenseSize = mG + (dt == DenseType::Binary) * ssp;
+				// lDenseSize = mG + (dt == DenseType::Binary) * ssp;
 			}
 			else
 			{
@@ -370,12 +371,13 @@ namespace volePSI
 				double e = (ssp - b) / lambdaVsE;
 				mG = std::floor(ssp / ((weight - 2) * std::log2(e * numItems)));
 
-				lDenseSize = mG + (dt == DenseType::Binary) * ssp;
+				// lDenseSize = mG + (dt == DenseType::Binary) * ssp;
 			}
 
 			// mDenseSize = (mDenseSize > lDenseSize)? mDenseSize : lDenseSize;
 			mDenseSize = 0;
 		}
+
 	}
 
 
@@ -881,6 +883,7 @@ namespace volePSI
 				hh = hh.gf128Mul(hh);
 				// std::memcpy(&h, (u8*)&hash + byteIdx, mIdxSize);
 				auto colIdx = hh.get<u64>(0) % modulus;
+				
 
 				auto iter = row;
 				auto end = row + j;
@@ -947,6 +950,63 @@ namespace volePSI
 		}
 
 		return count;
+	}
+
+	template <typename IdxType>
+	void PaxosMultiHash<IdxType>::buildRow(const block &hash, IdxType *row, IdxType tableidx) const
+	{
+			auto hh = hash;
+			IdxType tableSize;
+			if (tableidx == mWeight - 1){
+				tableSize = mSparseSize - IdxType(mSparseSize / mWeight) * (mWeight - 1);
+			}else{
+				tableSize = mSparseSize / mWeight;
+			}
+			
+			auto modulus = tableSize;
+
+			hh = hh.gf128Mul(hh);
+			// std::memcpy(&h, (u8*)&hash + byteIdx, mIdxSize);
+			auto colIdx = hh.get<u64>(0) % modulus;
+
+			// auto iter = row;
+			// auto end = row + tableidx;
+			// while (iter != end)
+			// {
+			// 	if (*iter <= colIdx)
+			// 		++colIdx;
+			// 	else
+			// 		break;
+			// 	++iter;
+			// }
+
+			// while (iter != end)
+			// {
+			// 	end[0] = end[-1];
+			// 	--end;
+			// }
+			auto iter = row + tableidx;
+			*iter = static_cast<IdxType>(colIdx);
+			
+		
+	}
+
+	template <typename IdxType>
+	void PaxosMultiHash<IdxType>::hashBuildRowPaxos(
+		const block *inIter,
+		IdxType *rows,
+		block *hash) const
+	{
+		*hash = mAes1.hashBlock(inIter[0]);
+		buildRow(*hash, rows, 0);
+		*hash = mAes2.hashBlock(inIter[0]);
+		buildRow(*hash, rows, 1);
+		*hash = mAes3.hashBlock(inIter[0]);
+		buildRow(*hash, rows, 2);
+		*hash = mAes4.hashBlock(inIter[0]);
+		buildRow(*hash, rows, 3);
+		*hash = mAes5.hashBlock(inIter[0]);
+		buildRow(*hash, rows, 4);
 	}
 
 	namespace
@@ -1105,6 +1165,9 @@ namespace volePSI
 		mNumItems = static_cast<IdxType>(numItems);
 		mSeed = seed;
 		mHasher.init(mSeed, mWeight, mSparseSize);
+		if (paxosFlag == 1){
+			mMultiHasher.init(mSeed, mWeight, mSparseSize);
+		}
 	}
 
 	template <typename IdxType>
@@ -1152,6 +1215,38 @@ namespace volePSI
 						}
 					}
 				}
+			}
+			else if (paxosFlag == 1)
+			{
+				// IdxType count = 0;
+				// std::cout << "Paxos mode" << std::endl;
+				auto inIter = inputs.data();
+				IdxType tableSize = mSparseSize / mWeight;
+				// std::cout<<"table size = " << tableSize << std::endl;
+				// std::cout<<"mSparseSize size = " << mSparseSize << std::endl;
+
+				for (u64 i = 0; i < mNumItems; ++i, ++inIter)
+				{
+					// std::cout << "i = " << i << std::endl;
+					mMultiHasher.hashBuildRowPaxos(inIter, mRows[i].data(), &mDense[i]);
+					for (u64 j=0; j < mWeight-1; j++) {
+						assert(mRows[i][j] < tableSize);
+						mRows[i][j] = mRows[i][j] + tableSize * j;
+					}
+					assert(mRows[i][mWeight-1] < mSparseSize - (mWeight-1) * tableSize);
+					if(mRows[i][mWeight-1] >= mSparseSize - (mWeight-1) * tableSize) {
+						std::cout << "i: " << i <<", mRows[i][mWeight-1]: " << mRows[i][mWeight-1] <<std::endl;
+					}
+					mRows[i][mWeight-1] = mRows[i][mWeight-1] + (mWeight-1) * tableSize;
+					for (auto c : mRows[i])
+					{
+
+						// std::cout << "c=" << c << std::endl;
+						++colWeights[c];
+						// count++;
+					}
+				}
+				// std::cout << "count = " << count << std::endl;
 			}
 			else
 			{
@@ -2737,19 +2832,25 @@ namespace volePSI
 			throw RTE_LOC;
 
 		auto colIter = mColBacking.data();
+		// std::cout << "1 colIter = " << colIter << std::endl;
+		// IdxType count = 0;
 
 		for (u64 i = 0; i < mSparseSize; ++i)
 		{
 			mCols[i] = span<IdxType>(colIter, colIter);
 			colIter += colWeights[i];
+			// count += colWeights[i];
 		}
 		// std::cout << "check 1" << std::endl;
+		// std::cout << "count = " << count << std::endl;
+		// std::cout << "2 colIter = " << colIter << std::endl;
 		if (hybridFlag == 1)
 		{
 			colIter += IdxType(Count);
 		}
 
 		// std::cout << "check 2" << std::endl;
+		// std::cout << "3 colIter = " << colIter << std::endl;
 
 		if (colIter != mColBacking.data() + mColBacking.size())
 			throw RTE_LOC;

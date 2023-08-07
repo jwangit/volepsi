@@ -493,6 +493,51 @@ namespace volePSI
 
 	};
 
+	template<typename IdxType>
+	struct PaxosMultiHash
+	{
+		u64 mWeight, mSparseSize, mIdxSize;
+		oc::AES mAes1;
+		oc::AES mAes2;
+		oc::AES mAes3;
+		oc::AES mAes4;
+		oc::AES mAes5;
+		std::vector<libdivide::libdivide_u64_t> mMods;
+		//std::vector<libdivide::libdivide_u64_branchfree_t> mModsBF;
+		std::vector<u64> mModVals;
+		void init(block seed, u64 weight, u64 paxosSize)
+		{
+			
+			mWeight = weight;
+			mSparseSize = paxosSize;
+			mIdxSize = static_cast<IdxType>(oc::roundUpTo(oc::log2ceil(mSparseSize), 8) / 8);
+			mAes1.setKey(seed + seed + seed + seed + seed + block(0,0));
+			mAes2.setKey(seed + seed + seed + seed + seed + block(1,1));
+			mAes3.setKey(seed + seed + seed + seed + seed + block(2,2));
+			mAes4.setKey(seed + seed + seed + seed + seed + block(3,3));
+			mAes5.setKey(seed + seed + seed + seed + seed + block(4,4));
+
+			mModVals.resize(weight);
+			mMods.resize(weight);
+			//mModsBF.resize(weight);
+			int size = mSparseSize / weight;
+			for (u64 i = 0; i < weight; ++i)
+			{
+				if (i == weight - 1) {
+					mModVals[i] = mSparseSize - (weight - 1) * size;
+				}
+				mModVals[i] = size - i;
+				mMods[i] = libdivide::libdivide_u64_gen(mModVals[i]);
+				//mModsBF[i] = libdivide::libdivide_u64_branchfree_gen(mModVals[i]);
+			}
+		}
+
+		void hashBuildRowPaxos(const block* input, IdxType* rows, block* hash) const;
+
+		void buildRow(const block& hash, IdxType* row, IdxType tableidx) const;
+
+	};
+
 	// A Paxos vector type when the elements are of type T.
 	// This differs from PxMatrix which has elements that 
 	// each a vector of type T's. PxVector are more efficient

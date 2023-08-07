@@ -1,3 +1,5 @@
 #!/bin/sh
-./out/build/linux/frontend/frontend -perf -test -w 4 -rate 0.8 -hybrid 1 -nn 12 -t 200000000 -ssize 1.28 > res0.log
-mv res0.log* logs/nn12-ssize1283.csv
+./out/build/linux/frontend/frontend -perf -test -hybrid 0 -nn 16  -w 5 -ssize 1.221 -b 32 -t 100000 >> res.log
+mv res.log* paxoslog/nn16-ssize1221.csv
+./out/build/linux/frontend/frontend -perf -test -hybrid 0 -nn 16  -w 5 -ssize 1.222 -b 32 -t 100000 >> res.log
+mv res.log* paxoslog/nn16-ssize1222.csv

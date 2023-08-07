@@ -50,6 +50,9 @@ namespace volePSI
 		bool hybridFlag = 1;
 		u64 mThreshold = (0xffffffff) * mRate;
 
+		// For Paxos
+		bool paxosFlag = 1;
+
 		PaxosParam() = default;
 		PaxosParam(const PaxosParam&) = default;
 		PaxosParam& operator=(const PaxosParam&) = default;
@@ -103,6 +106,8 @@ namespace volePSI
 		// the method for generating the row data based on the input value.
 		PaxosHash<IdxType> mHasher;
 
+		PaxosMultiHash<IdxType> mMultiHasher;
+
 		// an allocate used for the encoding algorithm
 		std::unique_ptr<u8[]> mAllocation;
 		u64 mAllocationSize = 0;
@@ -143,6 +148,7 @@ namespace volePSI
 		template<typename ValueType>
 		void solveTest(span<const block> inputs, span<const ValueType> values, span<ValueType> output, oc::PRNG* prng = nullptr)
 		{
+			paxosFlag = 1;
 			setInput(inputs);
 			PxVector<const ValueType> V(values);
 			PxVector<ValueType> P(output);
@@ -153,6 +159,7 @@ namespace volePSI
 		template<typename ValueType>
 		void solveTest(span<const block> inputs, MatrixView<const ValueType> values, MatrixView<ValueType> output, oc::PRNG* prng = nullptr)
 		{
+			paxosFlag = 1;
 			setInput(inputs);
 			PxVector<const ValueType> V(values);
 			PxVector<ValueType> P(output);
