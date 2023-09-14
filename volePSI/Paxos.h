@@ -25,6 +25,8 @@
 #include "libOTe/Tools/LDPC/Mtx.h"
 #include "volePSI/PxUtil.h"
 
+// #include "Hasher.h"
+
 namespace volePSI
 {
 	struct PaxosParam {
@@ -42,18 +44,26 @@ namespace volePSI
 			mG = 0,
 			mSsp = 40;
 		DenseType mDt = GF128;
+		
+		// For hybrid
+		double mRate = 0.8;
+		bool hybridFlag = 1;
+		u64 mThreshold = (0xffffffff) * mRate;
 
 		PaxosParam() = default;
 		PaxosParam(const PaxosParam&) = default;
 		PaxosParam& operator=(const PaxosParam&) = default;
 
-		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128)
+		PaxosParam(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.8, double ssize = 0.0)
 		{
-			init(numItems, weight, ssp, dt);
+			init(numItems, weight, ssp, dt, hybflag, rate, ssize);
 		}
 
 		// computes the paxos parameters based the parameters.
-		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128);
+		void init(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.8, double ssize = 0.0);
+
+
+		void initTest(u64 numItems, u64 weight = 3, u64 ssp = 40, DenseType dt = DenseType::GF128, bool hybflag = 1, double rate = 0.8, double ssize = 0.0);
 
 		// the size of the paxos data structure.
 		u64 size() const
@@ -70,9 +80,15 @@ namespace volePSI
 	class Paxos : public PaxosParam, public oc::TimerAdapter
 	{
 	public:
+		// For hybrid
+		
+
 
 		// the number of items to be encoded.
 		IdxType mNumItems = 0;
+
+		
+		u64 Count = 0;
 
 		// the encoding/decoding seed.
 		block mSeed;
@@ -123,6 +139,30 @@ namespace volePSI
 		// initialize the paxos with the given parameters.
 		void init(u64 numItems, PaxosParam p, block seed);
 
+		// For test e and g
+		template<typename ValueType>
+		void solveTest(span<const block> inputs, span<const ValueType> values, span<ValueType> output, oc::PRNG* prng = nullptr)
+		{
+			setInput(inputs);
+			PxVector<const ValueType> V(values);
+			PxVector<ValueType> P(output);
+			auto h = P.defaultHelper();
+			encodeTest(V, P, h, prng);
+		}
+
+		template<typename ValueType>
+		void solveTest(span<const block> inputs, MatrixView<const ValueType> values, MatrixView<ValueType> output, oc::PRNG* prng = nullptr)
+		{
+			setInput(inputs);
+			PxVector<const ValueType> V(values);
+			PxVector<ValueType> P(output);
+			auto h = P.defaultHelper();
+			encodeTest(V, P, h, prng);
+		}
+
+		template<typename Vec, typename ConstVec, typename Helper>
+		void encodeTest(ConstVec& values, Vec& output, Helper& h, oc::PRNG* prng = nullptr);
+		//////////////////////////////////////////////////////////
 		// solve/encode the given inputs,value pair. The paxos data 
 		// structure is written to output. input,value should be numItems 
 		// in size, output should be Paxos::size() in size. If the paxos
@@ -144,14 +184,12 @@ namespace volePSI
 		{
 			setInput(inputs);
 			encode<ValueType>(values, output, prng);
-
-			if(mDebug)
-				check(inputs, values, output);
 		}
 
 		// set the input keys which define the paxos matrix. After that,
 		// encode can be called more than once.
 		void setInput(span<const block> inputs);
+
 
 		// encode the given inputs,value pair based on the already set input. The paxos data 
 		// structure is written to output. input,value should be numItems 
@@ -252,6 +290,8 @@ namespace volePSI
 		// private functions
 		////////////////////////////////////////
 
+		
+		void peeling(const span<IdxType> colWeights);
 
 		// allocate the memory needed to triangulate.
 		void allocate();
@@ -271,6 +311,16 @@ namespace volePSI
 		// part. values is where the values are written to. p is the Paxos, h is the value op. helper.
 		template<typename ValueType, typename Helper, typename Vec>
 		void decode1(
+			const IdxType* rows,
+			const block* dense,
+			ValueType* values,
+			Vec& p,
+			Helper& h);
+
+		// decodes one instances. rows should contain the row indicies, dense the dense 
+		// part. values is where the values are written to. p is the Paxos, h is the value op. helper.
+		template<typename ValueType, typename Helper, typename Vec>
+		void decodeHybrid(
 			const IdxType* rows,
 			const block* dense,
 			ValueType* values,
@@ -389,31 +439,6 @@ namespace volePSI
 		template<typename Vec, typename Helper>
 		void randomizeDenseCols(Vec&, Helper&, span<u64> gapCols, oc::PRNG* prng);
 
-
-
-		template<typename ValueType>
-		void check(span<const block> inputs, MatrixView<const ValueType> values, MatrixView<const ValueType> output)
-		{
-			oc::Matrix<ValueType> v2(values.rows(), values.cols());
-			decode<ValueType>(inputs, v2, output);
-
-			for (u64 i = 0; i < values.rows(); ++i)
-			{
-				for(u64 j =0; j < values.cols(); ++j)
-					if (v2(i, j) != values(i, j))
-					{
-						std::cout << "paxos failed to encode. \n"
-							<< "inputs["<< i << "]" << inputs[i] << "\n"
-							<< "seed " << mSeed  <<"\n"
-							<< "n " << size() << "\n"
-							<< "m " << inputs.size() << "\n"
-							<< std::endl;
-						throw RTE_LOC;
-					}
-			}
-		}
-
-
 	};
 
 	// a binned version of paxos. Internally calls paxos.
@@ -426,14 +451,12 @@ namespace volePSI
 		PaxosParam mPaxosParam;
 		block mSeed;
 
-		bool mDebug = false;
-
 		// when decoding, add the decoded value to the 
 		// output, as opposed to overwriting.
 		bool mAddToDecode = false;
 
 		// initialize the paxos with the given parameter.
-		void init(u64 numItems, u64 binSize, u64 weight, u64 ssp, PaxosParam::DenseType dt, block seed)
+		void init(u64 numItems, u64 binSize, u64 weight, u64 ssp, PaxosParam::DenseType dt, block seed, bool hybflag=0, double rate=1)
 		{
 			mNumItems = numItems;
 			mWeight = weight;
@@ -441,7 +464,7 @@ namespace volePSI
 			mItemsPerBin = getBinSize(mNumBins, mNumItems, ssp + std::log2(mNumBins));
 			mSsp = ssp;
 			mSeed = seed;
-			mPaxosParam.init(mItemsPerBin, weight, ssp, dt);
+			mPaxosParam.init(mItemsPerBin, weight, ssp, dt, hybflag, rate);
 		}
 
 		// solve the system for the given input vectors.
@@ -576,29 +599,6 @@ namespace volePSI
 		u64 modNumBins(const block& h)
 		{
 			return binIdxCompress(h) % mNumBins;
-		}
-
-
-		template<typename Vec, typename Vec2>
-		void check(span<const block> inputs, Vec values, Vec2 output)
-		{
-			auto h = values.defaultHelper();
-			auto v2 = h.newVec(values.size());
-			decode(inputs, v2, output, h, 1);
-
-			for (u64 i = 0; i < values.size(); ++i)
-			{
-				if (h.eq(v2[i],values[i]) == false)
-				{
-					std::cout << "paxos failed to encode. \n"
-						<< "inputs[" << i << "]" << inputs[i] << "\n"
-						<< "seed " << mSeed << "\n"
-						<< "n " << size() << "\n"
-						<< "m " << inputs.size() << "\n"
-						<< std::endl;
-					throw RTE_LOC;
-				}
-			}
 		}
 
 	};

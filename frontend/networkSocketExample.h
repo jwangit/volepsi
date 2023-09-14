@@ -11,25 +11,22 @@ void networkSocketExampleRun(const oc::CLP& cmd)
         bool client = !cmd.getOr("server", recver);
         auto ip = cmd.getOr<std::string>("ip", "localhost:1212");
 
-        auto ns = cmd.getOr("senderSize", 100ull);
-        auto nr = cmd.getOr("receiverSize", 100ull);
+        auto ns = cmd.getOr("senderSize", 100);
+        auto nr = cmd.getOr("receiverSize", 100);
+        auto verbose = cmd.isSet("v");
 
         // The statistical security parameter.
-        auto ssp = cmd.getOr("ssp", 40ull);
+        auto ssp = cmd.getOr("ssp", 40);
 
         // Malicious Security.
         auto mal = cmd.isSet("malicious");
 
-        // The vole type, default to expand accumulate.
-        auto type = oc::DefaultMultType;
-        type = cmd.isSet("useSilver") ? oc::MultType::slv5 : type;
+        // The vole type.
 #ifdef ENABLE_BITPOLYMUL
-        type = cmd.isSet("useQC") ? oc::MultType::QuasiCyclic : type;
+        auto useSilver = cmd.isSet("useSilver");
+#else
+        auto useSilver = true;
 #endif
-
-        // use fewer rounds of communication but more computation.
-        auto useReducedRounds = cmd.isSet("reducedRounds");
-
 
         std::cout << "connecting as " << (client ? "client" : "server") << " at ip " << ip << std::endl;
 
@@ -101,8 +98,8 @@ void networkSocketExampleRun(const oc::CLP& cmd)
 
             // configure
             volePSI::RsPsiSender sender;
-            sender.setMultType(type);
-            sender.init(ns, nr, ssp, oc::sysRandomSeed(), mal, 1, useReducedRounds);
+            sender.setMultType(useSilver ? oc::MultType::slv5 : oc::MultType::QuasiCyclic);
+            sender.init(ns, nr, ssp, oc::sysRandomSeed(), mal, 1, true);
 
             std::cout << "sender start\n";
             auto start = std::chrono::system_clock::now();
@@ -116,14 +113,14 @@ void networkSocketExampleRun(const oc::CLP& cmd)
         else
         {
             // Use dummy set {0,1,...}
-            set.resize(nr);
-            for (oc::u64 i = 0; i < nr; ++i)
+            set.resize(ns);
+            for (oc::u64 i = 0; i < ns; ++i)
                 set[i] = oc::block(0, i);
 
             // Configure.
             volePSI::RsPsiReceiver recevier;
-            recevier.setMultType(type);
-            recevier.init(ns, nr, ssp, oc::sysRandomSeed(), mal, 1, useReducedRounds);
+            recevier.setMultType(useSilver ? oc::MultType::slv5 : oc::MultType::QuasiCyclic);
+            recevier.init(ns, nr, ssp, oc::sysRandomSeed(), mal, 1, true);
 
             std::cout << "recver start\n";
             auto start = std::chrono::system_clock::now();

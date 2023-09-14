@@ -27,7 +27,7 @@ namespace volePSI
         );
 
         setTimePoint("RsCpsiSender::send begin");
-        if (mSenderSize != Y.size() || mValueByteLength != values.cols())
+        if (mRecverSize != Y.size() || mValueByteLength != values.cols())
             throw RTE_LOC;
 
         MC_AWAIT(chl.recv(cuckooSeed));

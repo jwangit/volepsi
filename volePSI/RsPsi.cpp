@@ -26,6 +26,7 @@ namespace volePSI
         block seed,
         bool malicious,
         u64 numThreads, 
+        bool hybrid,
         bool useReducedRounds)
     {
         mSenderSize = senderSize;
@@ -41,11 +42,12 @@ namespace volePSI
 
         mNumThreads = numThreads;
         mUseReducedRounds = useReducedRounds;
+        mHybrid = hybrid;
     }
 
     Proto RsPsiSender::run(span<block> inputs, Socket& chl)
     {
-
+        std::cout << "This is sender.run." << std::endl;
         MC_BEGIN(Proto,this, inputs, &chl,
             hashes = std::move(Buffer<u8>{})
         );
@@ -56,16 +58,17 @@ namespace volePSI
 
         mSender.mMalicious = mMalicious;
         mSender.mSsp = mSsp;
-        mSender.mDebug = mDebug;
-
+        mSender.mHybrid = mHybrid;
         MC_AWAIT(mSender.send(mRecverSize, mPrng, chl, mNumThreads, mUseReducedRounds));
 
         setTimePoint("RsPsiSender::run-opprf");
 
         hashes.resize(inputs.size() * sizeof(block));
+        std::cout << "RsPsiSender::run-opprf" << std::endl;
         mSender.eval(inputs, span<block>((block*)hashes.data(), inputs.size()), mNumThreads);
 
         setTimePoint("RsPsiSender::run-eval");
+        std::cout << "RsPsiSender::run-eval" << std::endl;
         if (mCompress)
         {
             auto src = (block*)hashes.data();
@@ -89,6 +92,7 @@ namespace volePSI
 
         MC_AWAIT(chl.send(std::move(hashes)));
         setTimePoint("RsPsiSender::run-sendHash");
+        std::cout << "RsPsiSender::run-sendHash" << std::endl;
 
         MC_END();
     }
@@ -105,6 +109,7 @@ namespace volePSI
 
     Proto RsPsiReceiver::run(span<block> inputs, Socket& chl)
     {
+        std::cout << "This is receiver.run." << std::endl;
         setTimePoint("RsPsiReceiver::run-enter");
         static const u64 batchSize = 128;
 
@@ -153,11 +158,12 @@ namespace volePSI
 
         mRecver.mMalicious = mMalicious;
         mRecver.mSsp = mSsp;
-        mRecver.mDebug = mDebug;
+        mRecver.mHybrid = mHybrid;
 
         // todo, parallelize these two
         MC_AWAIT(mRecver.receive(inputs, myHashes, mPrng, chl, mNumThreads, mUseReducedRounds));
         setTimePoint("RsPsiReceiver::run-opprf");
+        std::cout << "RsPsiReceiver::run-opprf" << std::endl;
 
         mask = oc::ZeroBlock;
         for (i = 0; i < mMaskSize; ++i)

@@ -4,7 +4,8 @@ namespace volePSI
 {
     Proto RsOprfSender::send(u64 n, PRNG& prng, Socket& chl, u64 numThreads, bool reducedRounds)
     {
-        MC_BEGIN(Proto, this, n, &prng, &chl, numThreads, reducedRounds,
+        std::cout << "Call send function!" << std::endl;
+        MC_BEGIN(Proto,this, n, &prng, &chl, numThreads, reducedRounds,
             ws = block{},
             hBuff = std::array<u8, 32> {},
             ro = oc::RandomOracle(32),
@@ -21,7 +22,8 @@ namespace volePSI
         setTimePoint("RsOprfSender::send-begin");
         ws = prng.get();
 
-        mPaxos.init(n, mBinSize, 3, mSsp, PaxosParam::GF128, oc::ZeroBlock);
+        //mPaxos.init(n, mBinSize, 3, mSsp, PaxosParam::GF128, oc::ZeroBlock, 0, 1);
+        mPaxos.init(n, mBinSize, 4, mSsp, PaxosParam::GF128, oc::ZeroBlock, mHybrid, 0.8);
 
         mD = prng.get();
 
@@ -45,9 +47,11 @@ namespace volePSI
 
         MC_AWAIT(chl.recv(mPaxos.mSeed));
         setTimePoint("RsOprfSender::recv-seed");
+        std::cout << "RsOprfSender::recv-seed" << std::endl;
         MC_AWAIT(fu);
         mB = mVoleSender.mB;
         setTimePoint("RsOprfSender::send-vole");
+        std::cout << "RsOprfSender::send-vole" << std::endl;
 
 
 
@@ -58,6 +62,7 @@ namespace volePSI
             MC_AWAIT(chl.send(std::move(ws)));
             mW = mW ^ ws;
             setTimePoint("RsOprfSender::recv-mal");
+            std::cout << "RsOprfSender::recv-mal" << std::endl;
         }
 
         pPtr.reset(new block[mPaxos.size()]);
@@ -68,6 +73,7 @@ namespace volePSI
         if (0)
         {
             MC_AWAIT(chl.recv(pp));
+            std::cout << "RsOprfSender::send-recv" << std::endl;
 
             setTimePoint("RsOprfSender::send-recv");
             {
@@ -113,6 +119,7 @@ namespace volePSI
                 setTimePoint("RsOprfSender::pre*-" + std::to_string(recvIdx));
                 MC_AWAIT(chl.recv(subPp));
                 setTimePoint("RsOprfSender::recv-" + std::to_string(recvIdx));
+                std::cout << "RsOprfSender::recv-" + std::to_string(recvIdx) << std::endl;
 
                 {
 
@@ -140,6 +147,7 @@ namespace volePSI
                     }
                 }
                 setTimePoint("RsOprfSender::gf128Mul-" + std::to_string(recvIdx));
+                std::cout << "RsOprfSender::gf128Mul-" + std::to_string(recvIdx) << std::endl;
 
                 ++recvIdx;
 
@@ -253,9 +261,17 @@ namespace volePSI
     Proto RsOprfSender::genVole(PRNG& prng, Socket& chl, bool reduceRounds)
     {
         if (reduceRounds)
+        {
+            MC_BEGIN(Proto, this, &prng, &chl);
             mVoleSender.configure(mPaxos.size(), oc::SilentBaseType::Base);
-
-        return mVoleSender.silentSendInplace(mD, mPaxos.size(), prng, chl);
+            MC_AWAIT(mVoleSender.genSilentBaseOts(prng, chl));
+            MC_AWAIT(mVoleSender.silentSendInplace(mD, mPaxos.size(), prng, chl));
+            MC_END();
+        }
+        else
+        {
+            return mVoleSender.silentSendInplace(mD, mPaxos.size(), prng, chl);
+        }
     }
 
     struct UninitVec : span<block>
@@ -271,8 +287,8 @@ namespace volePSI
 
     Proto RsOprfReceiver::receive(span<const block> values, span<block> outputs, PRNG& prng, Socket& chl, u64 numThreads, bool reducedRounds)
     {
-
-        MC_BEGIN(Proto, this, values, outputs, &prng, &chl, numThreads, reducedRounds,
+        std::cout << "call this RsOprfReceiver.receive function!" << std::endl;
+        MC_BEGIN(Proto,this, values, outputs, &prng, &chl, numThreads, reducedRounds,
             hashingSeed = block{},
             wr = block{},
             ws = block{},
@@ -296,10 +312,13 @@ namespace volePSI
             throw RTE_LOC;
 
         hashingSeed = prng.get(), wr = prng.get();
-        paxos.mDebug = mDebug;
-        paxos.init(values.size(), mBinSize, 3, mSsp, PaxosParam::GF128, hashingSeed);
+        //paxos.init(values.size(), mBinSize, 3, mSsp, PaxosParam::GF128, hashingSeed, 0, 1);
+        // hybrid mode
+        paxos.init(values.size(), mBinSize, 4, mSsp, PaxosParam::GF128, hashingSeed, mHybrid, 0.8);
+        std::cout << "receiver paxos init done!"  << std::endl;
 
         MC_AWAIT(chl.send(std::move(hashingSeed)));
+        std::cout << "receiver sends hashingSeed!"  << std::endl;
 
         if (mMalicious)
         {
@@ -307,17 +326,18 @@ namespace volePSI
             MC_AWAIT(chl.recv(Hws));
         }
 
-        if (mTimer)
+        if (mTimer){
             mVoleRecver.setTimer(*mTimer);
+        }
 
         fork = chl.fork();
-        fu = genVole(paxos.size(), prng, fork, reducedRounds)
-            | macoro::make_eager();
+        fu = genVole(paxos.size(), prng, fork, reducedRounds) | macoro::make_eager();
 
 
 
         hPtr.reset(new block[values.size()]);
         h = span<block>(hPtr.get(), values.size());
+        // std::cout << "hPtr.get(): " << hPtr.get() <<std::endl;
 
         oc::mAesFixedKey.hashBlocks(values, h);
         setTimePoint("RsOprfReceiver::receive-hash");
@@ -328,9 +348,15 @@ namespace volePSI
         p.resize(paxos.size());
 
         setTimePoint("RsOprfReceiver::receive-alloc");
-
+        // auto solve_start_time = setTimePoint("");
         paxos.solve<block>(values, h, p, nullptr, numThreads);
+        // chrono::high_resolution_clock::time_point solve_end = std::chrono::high_resolution_clock::now();
+        // chrono::microseconds solve_time = std::chrono::duration_cast<std::chrono::milliseconds>(solve_end - solve_start);
+        // std::cout << "Solve time:" << solve_time.count() << "ms" << std::endl;
+        std::cout << "numThreads:" << numThreads << std::endl;
+        std::cout << "Paxos size:" << int(paxos.size()) << std::endl;
         setTimePoint("RsOprfReceiver::receive-solve");
+        std::cout << "receiver call paxos.solve done!"  << std::endl;
         MC_AWAIT(fu);
 
         // a + b  = c * d
@@ -431,6 +457,7 @@ namespace volePSI
         paxos.decode<block>(values, outputs, a, numThreads);
 
         setTimePoint("RsOprfReceiver::receive-decode");
+        std::cout << "receiver cal paxos.decode done!"  << std::endl;
 
         if (mMalicious)
         {
@@ -501,8 +528,17 @@ namespace volePSI
     Proto RsOprfReceiver::genVole(u64 n, PRNG& prng, Socket& chl, bool reducedRounds)
     {
         if (reducedRounds)
+        {
+            MC_BEGIN(Proto, this, n, &prng, &chl);
             mVoleRecver.configure(n, oc::SilentBaseType::Base);
-        return mVoleRecver.silentReceiveInplace(n, prng, chl);
+            MC_AWAIT(mVoleRecver.genSilentBaseOts(prng, chl));
+            MC_AWAIT(mVoleRecver.silentReceiveInplace(n, prng, chl));
+            MC_END();
+        }
+        else
+        {
+            return mVoleRecver.silentReceiveInplace(n, prng, chl);
+        }
     }
 
 }

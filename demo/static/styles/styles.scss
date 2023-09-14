@@ -1,0 +1,353 @@
+html,
+body {
+    min-height: 100%;
+    /* background-image: url({{ url_for('static',filename='img/bg.png') }}); */
+    background-image: url('../img/bg.png');
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+body,
+div,
+form,
+input,
+select,
+textarea,
+p {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    /* font-family: Roboto, Arial, sans-serif; */
+    font-family: cursive, sans-serif;
+    /* font-family: Proxima Nova,Verdana,Avenir Next;*/
+    font-size: 16px;
+    color: #666;
+    line-height: 22px;
+}
+
+
+
+
+h1 {
+    position: absolute;
+    margin: 0;
+    line-height: 42px;
+    font-family: verdana, sans-serif;
+    font-size: 38px;
+    color: #f7f7f7;
+    z-index: 2;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.testbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+form {
+    width: 45%;
+    padding: 40px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 0 25px 0 #d6e0f5;
+}
+
+.banner {
+    position: relative;
+    height: 200px;
+    background-image: url('../img/bg_icon.png');
+    background-color: #7e3f3f;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.banner-bg {
+    background-image: url('../img/banner_bg.png');
+    opacity: 0.5;
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+}
+.banner::after {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+input,
+select,
+textarea {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+input {
+    width: calc(100% - 10px);
+    padding: 5px;
+}
+
+input[type="date"] {
+    padding: 4px 5px;
+}
+
+select {
+    width: 100%;
+    padding: 7px 0;
+    background: transparent;
+}
+
+textarea {
+    width: calc(100% - 12px);
+    padding: 5px;
+}
+
+.item input:hover,
+.item select:hover,
+.item textarea:hover {
+    border: 1px solid transparent;
+    box-shadow: 0 0 6px 0 #d6e0f5;
+    color: #d6e0f5;
+}
+
+.id-type {
+    position: relative;
+    margin-bottom: 15px;
+    margin-top: 0;
+    line-height: 22px;
+    padding: 5px;
+    /* float: right; */
+}
+
+input[type=radio] {
+    display: none;
+}
+
+label#icon {
+    margin: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+label.radio {
+    position: relative;
+    display: inline-block;
+    padding-top: 4px;
+    margin-right: 20px;
+    text-indent: 30px;
+    overflow: visible;
+    cursor: pointer;
+}
+
+label.radio:before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #7e3f3f;
+}
+
+label.radio:after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 4px;
+    top: 8px;
+    left: 4px;
+    border: 3px solid #fff;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    opacity: 0;
+}
+
+input[type=radio]:checked+label:after {
+    opacity: 1;
+}
+
+.item {
+    position: relative;
+    margin: 10px 0;
+    /* float: left; */
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+.item i,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    font-size: 20px;
+    color: #a9a9a9;
+}
+
+.item i {
+    right: 2%;
+    top: 28px;
+    z-index: 1;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    right: 1%;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.btn-block {
+    margin-top: 10px;
+    text-align: center;
+}
+
+button {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #7e3f3f;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    font-family: cursive, sans-serif;
+}
+
+button:hover {
+    background: #7e3f3f;
+}
+
+@media (min-width: 568px) {
+
+    .name-item,
+    .city-item {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin: auto;
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #dddddd;
+}
+
+.styled-table tbody tr:first-of-type {
+    border-top: 2px solid #dddddd;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+
+
+/* input::file-selector-button {
+    background-image: linear-gradient(
+      to right,
+      #ff7a18,
+      #af002d,
+      #319197 100%,
+      #319197 200%
+    );
+    background-position-x: 0%;
+    background-size: 200%;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    padding: 1rem 1.25rem;
+    text-shadow: 0 1px 1px #333;
+    transition: all 0.25s;
+  }
+  input::file-selector-button:hover {
+    background-position-x: 100%;
+    transform: scale(1.1);
+  } */
+
+  *{
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+  }
+  {{colors}}: (
+    slide-right: #e75480
+  );
+  
+  @each $colorName, $color in $colors {
+    ::file-selector-button{
+      --color: #{$color};
+      --hover: #{adjust-hue($color, 45deg)};
+    }
+  }
+  
+  
+  ::file-selector-button{
+    font-size: 1.5rem;
+    border: none;
+    background: white;
+    border: 1px solid var(--color);
+    color: var(--color);
+    transition: 1.3s;
+    padding: 1rem 2rem;
+    &:hover,
+    &:focus { 
+      border-color: var(--hover);
+      color: white;
+    }
+    font-size: 1.5rem; 
+    width: 13.5rem;
+    height: 5rem;
+    border-radius: 2rem;
+  }
+  
+  ::file-selector-button:hover,
+  ::file-selector-button:focus {
+    box-shadow: inset 15rem 0 0 0 var(--hover);
+  }

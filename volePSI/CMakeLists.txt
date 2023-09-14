@@ -30,11 +30,12 @@ if(VOLE_PSI_ENABLE_OPPRF)
 endif()
 
 add_library(volePSI STATIC ${SRCS})
-target_link_libraries(volePSI oc::libOTe sparsehash libdivide)
+
+target_link_libraries(volePSI oc::libOTe sparsehash libdivide) #xxhash
 
 if(APPLE)
-    target_compile_options(volePSI PRIVATE
-        "-std=c++${VOLE_PSI_STD_VER}"
+    target_compile_options(volePSI PUBLIC
+        "-std=c++${VOLE_PSI_CPP_VER}"
     )    
     target_compile_options(volePSI PRIVATE
         "-Wno-pessimizing-move"
@@ -43,24 +44,24 @@ if(APPLE)
 elseif(MSVC)
     set_target_properties(volePSI
         PROPERTIES
-            CXX_STANDARD ${VOLE_PSI_STD_VER}
+            CXX_STANDARD ${VOLE_PSI_CPP_VER}
             CXX_STANDARD_REQUIRED YES
             CXX_EXTENSIONS NO
     )
 
     if(VOLE_PSI_ENABLE_ASAN)
-        message(WARNING "volepsi has ASAN enabled")
+        message("\n\nasan\n\n")
         target_compile_options(volePSI PUBLIC "/fsanitize=address")
         target_link_options(volePSI PUBLIC "/fsanitize=address")
 
     endif()
 else()
     target_compile_options(volePSI PUBLIC
-        "-std=c++${VOLE_PSI_STD_VER}"
+        "-std=c++17${VOLE_PSI_CPP_VER}"
     )    
 
     if(VOLE_PSI_ENABLE_ASAN)
-        message(WARNING "volepsi has ASAN enabled")
+        message("\n\nasan\n\n")
         target_compile_options(volePSI PUBLIC "-fsanitize=address")# "-ftime-report")
         target_link_options(volePSI PUBLIC "-fsanitize=address")
     endif()
@@ -69,14 +70,7 @@ endif()
 if(MSVC)
     target_compile_definitions(volePSI PUBLIC "_ENABLE_EXTENDED_ALIGNED_STORAGE")
 else()
-
-    if(VOLE_PSI_ENABLE_SSE)
-        target_compile_options(volePSI PUBLIC -mavx)
-    endif()
-
-    if(VOLE_PSI_ENABLE_PIC)
-        target_compile_options(volePSI PUBLIC "-fPIC")
-    endif()
+    target_compile_options(volePSI PUBLIC -mavx)
 endif()
 
 #target_compile_features(volePSI PUBLIC cxx_std_17)
@@ -88,3 +82,14 @@ target_include_directories(volePSI PUBLIC
                     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
                     $<INSTALL_INTERFACE:include>) 
 
+include_directories(/usr/local/include)
+
+# include_directories("../thirdparty/xxHash")
+# target_link_directories(volePSI PUBLIC  "../thirdparty/xxHash")
+# target_link_libraries(volePSI xxhash)
+# Hasher test
+# include_directories(./xxHash)
+# target_link_directories(volePSI
+# 	PUBLIC	xxHash
+# )
+# Hasher test end

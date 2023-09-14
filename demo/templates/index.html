@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SCRiPTS PSI</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+</head>
+
+<body>
+
+  <div class="testbox">
+    <form action="{{ url_for('run') }}" method="post" enctype="multipart/form-data">
+      <!-- <div class="banner-bg"></div> -->
+      <div class="banner">
+        <!-- <div class="banner-bg"></div> -->
+        <h1>PRIVATE SET INTERSECTION DEMO</h1>
+        <!-- <h2>SCRIPTS @ NTU</h2> -->
+      </div>
+      <br>
+      <div class="item" type="selection">
+        <p>You Are A</p>
+        <div class="id-type">
+          <input type="radio" name="id" id="radioOne" value="sender" checked />
+          <label for="radioOne" class="radio"> Sender </label>
+          <input type="radio" name="id" id="radioTwo" value="receiver" />
+          <label for="radioTwo" class="radio"> Receiver </label>
+        </div>
+      </div>
+      <div class="item" type="selection">
+        <p>PSI Mode</p>
+        <div class="id-type">
+          <input type="radio" name="mode" id="modeOne" value="hybrid" checked />
+          <label for="modeOne" class="radio"> Our PSI </label>
+          <input type="radio" name="mode" id="modeTwo" value="pure" />
+          <label for="modeTwo" class="radio"> State-of-the-Art PSI</label>
+        </div>
+      </div>
+      <div class="item" >
+        <p>Partner IP</p>
+        <input type="text" name="ip" placeholder="e.g., 127.0.0.1:3000"/>
+      </div>
+      <div class="item">
+        <p>File</p>
+        <input type="file" name="file"  accept="csv/*"/>
+      </div>
+      <div class="btn-block">
+        <button type="submit">Send</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
