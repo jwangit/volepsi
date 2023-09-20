@@ -56,18 +56,25 @@ def run():
     file.save("files/"+ file.filename)
     # print(id, ip)
     if id == "sender":
-        main = "/home/user/volepsi/out/build/linux/frontend/frontend"
-        args = " -in files/" + file.filename + " -r 0 -csv -hybrid " + str(mode)
+        main = "../out/build/linux/frontend/frontend"
+        args = " -in files/" + file.filename + " -r 0 -ip " + str(ip) + "-csv -hybrid " + str(mode)
         command = main + args
-        r_v = os.system(command)
-        return redirect(url_for('sender_success'))
+        try:
+            r_v = os.system(command)
+            return redirect(url_for('sender_success'))
+        except:
+            print("Error!")
+            return jsonify(status='Error', message='Error!')
     elif id == "receiver":
-        main = "/home/user/volepsi/out/build/linux/frontend/frontend"
-        args = " -in files/" + file.filename + " -r 1 -out res.csv -csv -hybrid " + str(mode)
+        main = "../out/build/linux/frontend/frontend"
+        args = " -in files/" + file.filename + " -r 1 -ip 0.0.0.0:3001 -out res.csv -csv -hybrid " + str(mode)
         command = main + args
-        os.system(command)
-        return redirect(url_for('receiver_success'))
-
+        try:
+            os.system(command)
+            return redirect(url_for('receiver_success'))
+        except:
+            print("Error!")
+            return jsonify(status='Error', message='Error!')	
 
 @app.route("/sender_success")
 def sender_success():
